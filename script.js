@@ -7,6 +7,8 @@ const catalogContents = []
 
 const cartContents = []
 
+let cartOpen = false
+
 function displayProducts() {
     fetch('catalog.json')
         .then((response) => response.json())
@@ -16,6 +18,22 @@ function displayProducts() {
                 catalogContents.push(entry)
             })
         })
+}
+
+function displayShoppingCart() {
+    if (cartOpen === false) {
+        const cartContainer = document.createElement('div')
+        cartContainer.id = 'cartContainer'
+
+        cartContents.forEach(item => {
+            cartContainer.appendChild(cartItem(item))
+        })
+        document.getElementById('nav').appendChild(cartContainer)
+        cartOpen = true
+    } else {
+        document.getElementById('cartContainer').remove()
+        cartOpen = false
+    }
 }
 
 function productCard(deetz) {
@@ -43,7 +61,6 @@ function productCard(deetz) {
     const addButton = document.createElement('button')
     addButton.className = 'btn btn-primary'
     addButton.innerHTML = 'Add to cart'
-    // addButton.onclick = addItemToCart(deetz)
     addButton.addEventListener('click', () => {
         addItemToCart(deetz)
     })
@@ -57,7 +74,14 @@ function productCard(deetz) {
     document.getElementById('catalog').appendChild(card)
 }
 
-function addItemToCart (deetz) {
+function cartItem (deetz) {
+    const title = document.createElement('h6')
+    title.innerHTML = deetz.title
+
+    return title
+}
+
+function addItemToCart(deetz) {
     cartContents.push(deetz)
 }
 
