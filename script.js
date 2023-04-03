@@ -21,17 +21,19 @@ function displayProducts() {
 }
 
 function displayShoppingCart() {
+    // when i click outside the cart, if it is open, it closes
+
     if (cartOpen === false) {
-        const cartContainer = document.createElement('div')
-        cartContainer.id = 'cartContainer'
+        const cart = document.createElement('div')
+        cart.id = 'cart'
 
         cartContents.forEach(item => {
-            cartContainer.appendChild(cartItem(item))
+            cart.appendChild(cartItem(item))
         })
-        document.getElementById('nav').appendChild(cartContainer)
+        document.body.appendChild(cart)
         cartOpen = true
     } else {
-        document.getElementById('cartContainer').remove()
+        document.getElementById('cart').remove()
         cartOpen = false
     }
 }
@@ -75,6 +77,7 @@ function productCard(deetz) {
 }
 
 function cartItem (deetz) {
+    // show all details
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
 
