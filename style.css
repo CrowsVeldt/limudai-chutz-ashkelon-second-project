@@ -4,3 +4,7 @@ body {
     align-items: center;
     font-family: 'Quicksand', sans-serif;
 }
+
+#nav {
+    background-color: lightgray;
+}
