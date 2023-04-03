@@ -2,7 +2,6 @@
     {
         "author": "Chinua Achebe",
         "imageLink": "images/things-fall-apart.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart\n",
         "pages": 209,
         "title": "Things Fall Apart",
@@ -11,7 +10,6 @@
     {
         "author": "Hans Christian Andersen",
         "imageLink": "images/fairy-tales.jpg",
-        "language": "Danish",
         "link": "https://en.wikipedia.org/wiki/Fairy_Tales_Told_for_Children._First_Collection.\n",
         "pages": 784,
         "title": "Fairy tales",
@@ -20,7 +18,6 @@
     {
         "author": "Dante Alighieri",
         "imageLink": "images/the-divine-comedy.jpg",
-        "language": "Italian",
         "link": "https://en.wikipedia.org/wiki/Divine_Comedy\n",
         "pages": 928,
         "title": "The Divine Comedy",
@@ -29,7 +26,6 @@
     {
         "author": "Unknown",
         "imageLink": "images/the-epic-of-gilgamesh.jpg",
-        "language": "Akkadian",
         "link": "https://en.wikipedia.org/wiki/Epic_of_Gilgamesh\n",
         "pages": 160,
         "title": "The Epic Of Gilgamesh",
@@ -38,7 +34,6 @@
     {
         "author": "Unknown",
         "imageLink": "images/the-book-of-job.jpg",
-        "language": "Hebrew",
         "link": "https://en.wikipedia.org/wiki/Book_of_Job\n",
         "pages": 176,
         "title": "The Book Of Job",
@@ -47,7 +42,6 @@
     {
         "author": "Unknown",
         "imageLink": "images/one-thousand-and-one-nights.jpg",
-        "language": "Arabic",
         "link": "https://en.wikipedia.org/wiki/One_Thousand_and_One_Nights\n",
         "pages": 288,
         "title": "One Thousand and One Nights",
@@ -56,7 +50,6 @@
     {
         "author": "Unknown",
         "imageLink": "images/njals-saga.jpg",
-        "language": "Old Norse",
         "link": "https://en.wikipedia.org/wiki/Nj%C3%A1ls_saga\n",
         "pages": 384,
         "title": "Nj\u00e1l's Saga",
@@ -65,7 +58,6 @@
     {
         "author": "Jane Austen",
         "imageLink": "images/pride-and-prejudice.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Pride_and_Prejudice\n",
         "pages": 226,
         "title": "Pride and Prejudice",
@@ -74,7 +66,6 @@
     {
         "author": "Honor\u00e9 de Balzac",
         "imageLink": "images/le-pere-goriot.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Le_P%C3%A8re_Goriot\n",
         "pages": 443,
         "title": "Le P\u00e8re Goriot",
@@ -83,7 +74,6 @@
     {
         "author": "Samuel Beckett",
         "imageLink": "images/molloy-malone-dies-the-unnamable.jpg",
-        "language": "French, English",
         "link": "https://en.wikipedia.org/wiki/Molloy_(novel)\n",
         "pages": 256,
         "title": "Molloy, Malone Dies, The Unnamable, the trilogy",
@@ -92,7 +82,6 @@
     {
         "author": "Giovanni Boccaccio",
         "imageLink": "images/the-decameron.jpg",
-        "language": "Italian",
         "link": "https://en.wikipedia.org/wiki/The_Decameron\n",
         "pages": 1024,
         "title": "The Decameron",
@@ -101,7 +90,6 @@
     {
         "author": "Jorge Luis Borges",
         "imageLink": "images/ficciones.jpg",
-        "language": "Spanish",
         "link": "https://en.wikipedia.org/wiki/Ficciones\n",
         "pages": 224,
         "title": "Ficciones",
@@ -110,7 +98,6 @@
     {
         "author": "Emily Bront\u00eb",
         "imageLink": "images/wuthering-heights.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Wuthering_Heights\n",
         "pages": 342,
         "title": "Wuthering Heights",
@@ -119,7 +106,6 @@
     {
         "author": "Albert Camus",
         "imageLink": "images/l-etranger.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/The_Stranger_(novel)\n",
         "pages": 185,
         "title": "The Stranger",
@@ -128,7 +114,6 @@
     {
         "author": "Paul Celan",
         "imageLink": "images/poems-paul-celan.jpg",
-        "language": "German",
         "link": "\n",
         "pages": 320,
         "title": "Poems",
@@ -137,7 +122,6 @@
     {
         "author": "Louis-Ferdinand C\u00e9line",
         "imageLink": "images/voyage-au-bout-de-la-nuit.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Journey_to_the_End_of_the_Night\n",
         "pages": 505,
         "title": "Journey to the End of the Night",
@@ -146,7 +130,6 @@
     {
         "author": "Miguel de Cervantes",
         "imageLink": "images/don-quijote-de-la-mancha.jpg",
-        "language": "Spanish",
         "link": "https://en.wikipedia.org/wiki/Don_Quixote\n",
         "pages": 1056,
         "title": "Don Quijote De La Mancha",
@@ -155,7 +138,6 @@
     {
         "author": "Geoffrey Chaucer",
         "imageLink": "images/the-canterbury-tales.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/The_Canterbury_Tales\n",
         "pages": 544,
         "title": "The Canterbury Tales",
@@ -164,7 +146,6 @@
     {
         "author": "Anton Chekhov",
         "imageLink": "images/stories-of-anton-chekhov.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/List_of_short_stories_by_Anton_Chekhov\n",
         "pages": 194,
         "title": "Stories",
@@ -173,7 +154,6 @@
     {
         "author": "Joseph Conrad",
         "imageLink": "images/nostromo.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Nostromo\n",
         "pages": 320,
         "title": "Nostromo",
@@ -182,7 +162,6 @@
     {
         "author": "Charles Dickens",
         "imageLink": "images/great-expectations.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Great_Expectations\n",
         "pages": 194,
         "title": "Great Expectations",
@@ -191,7 +170,6 @@
     {
         "author": "Denis Diderot",
         "imageLink": "images/jacques-the-fatalist.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Jacques_the_Fatalist\n",
         "pages": 596,
         "title": "Jacques the Fatalist",
@@ -200,7 +178,6 @@
     {
         "author": "Alfred D\u00f6blin",
         "imageLink": "images/berlin-alexanderplatz.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/Berlin_Alexanderplatz\n",
         "pages": 600,
         "title": "Berlin Alexanderplatz",
@@ -209,7 +186,6 @@
     {
         "author": "Fyodor Dostoevsky",
         "imageLink": "images/crime-and-punishment.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/Crime_and_Punishment\n",
         "pages": 551,
         "title": "Crime and Punishment",
@@ -218,7 +194,6 @@
     {
         "author": "Fyodor Dostoevsky",
         "imageLink": "images/the-idiot.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/The_Idiot\n",
         "pages": 656,
         "title": "The Idiot",
@@ -227,7 +202,6 @@
     {
         "author": "Fyodor Dostoevsky",
         "imageLink": "images/the-possessed.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/Demons_(Dostoyevsky_novel)\n",
         "pages": 768,
         "title": "The Possessed",
@@ -236,7 +210,6 @@
     {
         "author": "Fyodor Dostoevsky",
         "imageLink": "images/the-brothers-karamazov.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/The_Brothers_Karamazov\n",
         "pages": 824,
         "title": "The Brothers Karamazov",
@@ -245,7 +218,6 @@
     {
         "author": "George Eliot",
         "imageLink": "images/middlemarch.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Middlemarch\n",
         "pages": 800,
         "title": "Middlemarch",
@@ -254,7 +226,6 @@
     {
         "author": "Ralph Ellison",
         "imageLink": "images/invisible-man.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Invisible_Man\n",
         "pages": 581,
         "title": "Invisible Man",
@@ -263,7 +234,6 @@
     {
         "author": "Euripides",
         "imageLink": "images/medea.jpg",
-        "language": "Greek",
         "link": "https://en.wikipedia.org/wiki/Medea_(play)\n",
         "pages": 104,
         "title": "Medea",
@@ -272,7 +242,6 @@
     {
         "author": "William Faulkner",
         "imageLink": "images/absalom-absalom.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Absalom,_Absalom!\n",
         "pages": 313,
         "title": "Absalom, Absalom!",
@@ -281,7 +250,6 @@
     {
         "author": "William Faulkner",
         "imageLink": "images/the-sound-and-the-fury.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/The_Sound_and_the_Fury\n",
         "pages": 326,
         "title": "The Sound and the Fury",
@@ -290,7 +258,6 @@
     {
         "author": "Gustave Flaubert",
         "imageLink": "images/madame-bovary.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Madame_Bovary\n",
         "pages": 528,
         "title": "Madame Bovary",
@@ -299,7 +266,6 @@
     {
         "author": "Gustave Flaubert",
         "imageLink": "images/l-education-sentimentale.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Sentimental_Education\n",
         "pages": 606,
         "title": "Sentimental Education",
@@ -308,7 +274,6 @@
     {
         "author": "Federico Garc\u00eda Lorca",
         "imageLink": "images/gypsy-ballads.jpg",
-        "language": "Spanish",
         "link": "https://en.wikipedia.org/wiki/Gypsy_Ballads\n",
         "pages": 218,
         "title": "Gypsy Ballads",
@@ -317,7 +282,6 @@
     {
         "author": "Gabriel Garc\u00eda M\u00e1rquez",
         "imageLink": "images/one-hundred-years-of-solitude.jpg",
-        "language": "Spanish",
         "link": "https://en.wikipedia.org/wiki/One_Hundred_Years_of_Solitude\n",
         "pages": 417,
         "title": "One Hundred Years of Solitude",
@@ -326,7 +290,6 @@
     {
         "author": "Gabriel Garc\u00eda M\u00e1rquez",
         "imageLink": "images/love-in-the-time-of-cholera.jpg",
-        "language": "Spanish",
         "link": "https://en.wikipedia.org/wiki/Love_in_the_Time_of_Cholera\n",
         "pages": 368,
         "title": "Love in the Time of Cholera",
@@ -335,7 +298,6 @@
     {
         "author": "Johann Wolfgang von Goethe",
         "imageLink": "images/faust.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/Goethe%27s_Faust\n",
         "pages": 158,
         "title": "Faust",
@@ -344,7 +306,6 @@
     {
         "author": "Nikolai Gogol",
         "imageLink": "images/dead-souls.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/Dead_Souls\n",
         "pages": 432,
         "title": "Dead Souls",
@@ -353,7 +314,6 @@
     {
         "author": "G\u00fcnter Grass",
         "imageLink": "images/the-tin-drum.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/The_Tin_Drum\n",
         "pages": 600,
         "title": "The Tin Drum",
@@ -362,7 +322,6 @@
     {
         "author": "Jo\u00e3o Guimar\u00e3es Rosa",
         "imageLink": "images/the-devil-to-pay-in-the-backlands.jpg",
-        "language": "Portuguese",
         "link": "https://en.wikipedia.org/wiki/The_Devil_to_Pay_in_the_Backlands\n",
         "pages": 494,
         "title": "The Devil to Pay in the Backlands",
@@ -371,7 +330,6 @@
     {
         "author": "Knut Hamsun",
         "imageLink": "images/hunger.jpg",
-        "language": "Norwegian",
         "link": "https://en.wikipedia.org/wiki/Hunger_(Hamsun_novel)\n",
         "pages": 176,
         "title": "Hunger",
@@ -380,7 +338,6 @@
     {
         "author": "Ernest Hemingway",
         "imageLink": "images/the-old-man-and-the-sea.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/The_Old_Man_and_the_Sea\n",
         "pages": 128,
         "title": "The Old Man and the Sea",
@@ -389,7 +346,6 @@
     {
         "author": "Homer",
         "imageLink": "images/the-iliad-of-homer.jpg",
-        "language": "Greek",
         "link": "https://en.wikipedia.org/wiki/Iliad\n",
         "pages": 608,
         "title": "Iliad",
@@ -398,7 +354,6 @@
     {
         "author": "Homer",
         "imageLink": "images/the-odyssey-of-homer.jpg",
-        "language": "Greek",
         "link": "https://en.wikipedia.org/wiki/Odyssey\n",
         "pages": 374,
         "title": "Odyssey",
@@ -407,7 +362,6 @@
     {
         "author": "Henrik Ibsen",
         "imageLink": "images/a-Dolls-house.jpg",
-        "language": "Norwegian",
         "link": "https://en.wikipedia.org/wiki/A_Doll%27s_House\n",
         "pages": 68,
         "title": "A Doll's House",
@@ -416,7 +370,6 @@
     {
         "author": "James Joyce",
         "imageLink": "images/ulysses.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Ulysses_(novel)\n",
         "pages": 228,
         "title": "Ulysses",
@@ -425,7 +378,6 @@
     {
         "author": "Franz Kafka",
         "imageLink": "images/stories-of-franz-kafka.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/Franz_Kafka_bibliography#Short_stories\n",
         "pages": 488,
         "title": "Stories",
@@ -434,7 +386,6 @@
     {
         "author": "Franz Kafka",
         "imageLink": "images/the-trial.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/The_Trial\n",
         "pages": 160,
         "title": "The Trial",
@@ -443,7 +394,6 @@
     {
         "author": "Franz Kafka",
         "imageLink": "images/the-castle.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/The_Castle_(novel)\n",
         "pages": 352,
         "title": "The Castle",
@@ -452,7 +402,6 @@
     {
         "author": "K\u0101lid\u0101sa",
         "imageLink": "images/the-recognition-of-shakuntala.jpg",
-        "language": "Sanskrit",
         "link": "https://en.wikipedia.org/wiki/Abhij%C3%B1%C4%81na%C5%9B%C4%81kuntalam\n",
         "pages": 147,
         "title": "The recognition of Shakuntala",
@@ -461,7 +410,6 @@
     {
         "author": "Yasunari Kawabata",
         "imageLink": "images/the-sound-of-the-mountain.jpg",
-        "language": "Japanese",
         "link": "https://en.wikipedia.org/wiki/The_Sound_of_the_Mountain\n",
         "pages": 288,
         "title": "The Sound of the Mountain",
@@ -470,7 +418,6 @@
     {
         "author": "Nikos Kazantzakis",
         "imageLink": "images/zorba-the-greek.jpg",
-        "language": "Greek",
         "link": "https://en.wikipedia.org/wiki/Zorba_the_Greek\n",
         "pages": 368,
         "title": "Zorba the Greek",
@@ -479,7 +426,6 @@
     {
         "author": "D. H. Lawrence",
         "imageLink": "images/sons-and-lovers.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Sons_and_Lovers\n",
         "pages": 432,
         "title": "Sons and Lovers",
@@ -488,7 +434,6 @@
     {
         "author": "Halld\u00f3r Laxness",
         "imageLink": "images/independent-people.jpg",
-        "language": "Icelandic",
         "link": "https://en.wikipedia.org/wiki/Independent_People\n",
         "pages": 470,
         "title": "Independent People",
@@ -497,7 +442,6 @@
     {
         "author": "Giacomo Leopardi",
         "imageLink": "images/poems-giacomo-leopardi.jpg",
-        "language": "Italian",
         "link": "\n",
         "pages": 184,
         "title": "Poems",
@@ -506,7 +450,6 @@
     {
         "author": "Doris Lessing",
         "imageLink": "images/the-golden-notebook.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/The_Golden_Notebook\n",
         "pages": 688,
         "title": "The Golden Notebook",
@@ -515,7 +458,6 @@
     {
         "author": "Astrid Lindgren",
         "imageLink": "images/pippi-longstocking.jpg",
-        "language": "Swedish",
         "link": "https://en.wikipedia.org/wiki/Pippi_Longstocking\n",
         "pages": 160,
         "title": "Pippi Longstocking",
@@ -524,7 +466,6 @@
     {
         "author": "Lu Xun",
         "imageLink": "images/diary-of-a-madman.jpg",
-        "language": "Chinese",
         "link": "https://en.wikipedia.org/wiki/A_Madman%27s_Diary\n",
         "pages": 389,
         "title": "Diary of a Madman",
@@ -533,7 +474,6 @@
     {
         "author": "Naguib Mahfouz",
         "imageLink": "images/children-of-gebelawi.jpg",
-        "language": "Arabic",
         "link": "https://en.wikipedia.org/wiki/Children_of_Gebelawi\n",
         "pages": 355,
         "title": "Children of Gebelawi",
@@ -542,7 +482,6 @@
     {
         "author": "Thomas Mann",
         "imageLink": "images/buddenbrooks.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/Buddenbrooks\n",
         "pages": 736,
         "title": "Buddenbrooks",
@@ -551,7 +490,6 @@
     {
         "author": "Thomas Mann",
         "imageLink": "images/the-magic-mountain.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/The_Magic_Mountain\n",
         "pages": 720,
         "title": "The Magic Mountain",
@@ -560,7 +498,6 @@
     {
         "author": "Herman Melville",
         "imageLink": "images/moby-dick.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Moby-Dick\n",
         "pages": 378,
         "title": "Moby Dick",
@@ -569,7 +506,6 @@
     {
         "author": "Michel de Montaigne",
         "imageLink": "images/essais.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Essays_(Montaigne)\n",
         "pages": 404,
         "title": "Essays",
@@ -578,7 +514,6 @@
     {
         "author": "Elsa Morante",
         "imageLink": "images/history.jpg",
-        "language": "Italian",
         "link": "https://en.wikipedia.org/wiki/History_(novel)\n",
         "pages": 600,
         "title": "History",
@@ -587,7 +522,6 @@
     {
         "author": "Toni Morrison",
         "imageLink": "images/beloved.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Beloved_(novel)\n",
         "pages": 321,
         "title": "Beloved",
@@ -596,7 +530,6 @@
     {
         "author": "Murasaki Shikibu",
         "imageLink": "images/the-tale-of-genji.jpg",
-        "language": "Japanese",
         "link": "https://en.wikipedia.org/wiki/The_Tale_of_Genji\n",
         "pages": 1360,
         "title": "The Tale of Genji",
@@ -605,7 +538,6 @@
     {
         "author": "Robert Musil",
         "imageLink": "images/the-man-without-qualities.jpg",
-        "language": "German",
         "link": "https://en.wikipedia.org/wiki/The_Man_Without_Qualities\n",
         "pages": 365,
         "title": "The Man Without Qualities",
@@ -614,7 +546,6 @@
     {
         "author": "Vladimir Nabokov",
         "imageLink": "images/lolita.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Lolita\n",
         "pages": 317,
         "title": "Lolita",
@@ -623,7 +554,6 @@
     {
         "author": "George Orwell",
         "imageLink": "images/nineteen-eighty-four.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four\n",
         "pages": 272,
         "title": "Nineteen Eighty-Four",
@@ -632,7 +562,6 @@
     {
         "author": "Ovid",
         "imageLink": "images/the-metamorphoses-of-ovid.jpg",
-        "language": "Classical Latin",
         "link": "https://en.wikipedia.org/wiki/Metamorphoses\n",
         "pages": 576,
         "title": "Metamorphoses",
@@ -641,7 +570,6 @@
     {
         "author": "Fernando Pessoa",
         "imageLink": "images/the-book-of-disquiet.jpg",
-        "language": "Portuguese",
         "link": "https://en.wikipedia.org/wiki/The_Book_of_Disquiet\n",
         "pages": 272,
         "title": "The Book of Disquiet",
@@ -650,7 +578,6 @@
     {
         "author": "Edgar Allan Poe",
         "imageLink": "images/tales-and-poems-of-edgar-allan-poe.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Edgar_Allan_Poe_bibliography#Tales\n",
         "pages": 842,
         "title": "Tales",
@@ -659,7 +586,6 @@
     {
         "author": "Marcel Proust",
         "imageLink": "images/a-la-recherche-du-temps-perdu.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/In_Search_of_Lost_Time\n",
         "pages": 2408,
         "title": "In Search of Lost Time",
@@ -668,7 +594,6 @@
     {
         "author": "Fran\u00e7ois Rabelais",
         "imageLink": "images/gargantua-and-pantagruel.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Gargantua_and_Pantagruel\n",
         "pages": 623,
         "title": "Gargantua and Pantagruel",
@@ -677,7 +602,6 @@
     {
         "author": "Juan Rulfo",
         "imageLink": "images/pedro-paramo.jpg",
-        "language": "Spanish",
         "link": "https://en.wikipedia.org/wiki/Pedro_P%C3%A1ramo\n",
         "pages": 124,
         "title": "Pedro P\u00e1ramo",
@@ -686,7 +610,6 @@
     {
         "author": "Rumi",
         "imageLink": "images/the-masnavi.jpg",
-        "language": "Persian",
         "link": "https://en.wikipedia.org/wiki/Masnavi\n",
         "pages": 438,
         "title": "The Masnavi",
@@ -695,7 +618,6 @@
     {
         "author": "Salman Rushdie",
         "imageLink": "images/midnights-children.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Midnight%27s_Children\n",
         "pages": 536,
         "title": "Midnight's Children",
@@ -704,7 +626,6 @@
     {
         "author": "Saadi",
         "imageLink": "images/bostan.jpg",
-        "language": "Persian",
         "link": "https://en.wikipedia.org/wiki/Bustan_(book)\n",
         "pages": 298,
         "title": "Bostan",
@@ -713,7 +634,6 @@
     {
         "author": "Tayeb Salih",
         "imageLink": "images/season-of-migration-to-the-north.jpg",
-        "language": "Arabic",
         "link": "https://en.wikipedia.org/wiki/Season_of_Migration_to_the_North\n",
         "pages": 139,
         "title": "Season of Migration to the North",
@@ -722,7 +642,6 @@
     {
         "author": "Jos\u00e9 Saramago",
         "imageLink": "images/blindness.jpg",
-        "language": "Portuguese",
         "link": "https://en.wikipedia.org/wiki/Blindness_(novel)\n",
         "pages": 352,
         "title": "Blindness",
@@ -731,7 +650,6 @@
     {
         "author": "William Shakespeare",
         "imageLink": "images/hamlet.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Hamlet\n",
         "pages": 432,
         "title": "Hamlet",
@@ -740,7 +658,6 @@
     {
         "author": "William Shakespeare",
         "imageLink": "images/king-lear.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/King_Lear\n",
         "pages": 384,
         "title": "King Lear",
@@ -749,7 +666,6 @@
     {
         "author": "William Shakespeare",
         "imageLink": "images/othello.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Othello\n",
         "pages": 314,
         "title": "Othello",
@@ -758,7 +674,6 @@
     {
         "author": "Sophocles",
         "imageLink": "images/oedipus-the-king.jpg",
-        "language": "Greek",
         "link": "https://en.wikipedia.org/wiki/Oedipus_the_King\n",
         "pages": 88,
         "title": "Oedipus the King",
@@ -767,7 +682,6 @@
     {
         "author": "Stendhal",
         "imageLink": "images/le-rouge-et-le-noir.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/The_Red_and_the_Black\n",
         "pages": 576,
         "title": "The Red and the Black",
@@ -776,7 +690,6 @@
     {
         "author": "Laurence Sterne",
         "imageLink": "images/the-life-and-opinions-of-tristram-shandy.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/The_Life_and_Opinions_of_Tristram_Shandy,_Gentleman\n",
         "pages": 640,
         "title": "The Life And Opinions of Tristram Shandy",
@@ -785,7 +698,6 @@
     {
         "author": "Italo Svevo",
         "imageLink": "images/confessions-of-zeno.jpg",
-        "language": "Italian",
         "link": "https://en.wikipedia.org/wiki/Zeno%27s_Conscience\n",
         "pages": 412,
         "title": "Confessions of Zeno",
@@ -794,7 +706,6 @@
     {
         "author": "Jonathan Swift",
         "imageLink": "images/gullivers-travels.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Gulliver%27s_Travels\n",
         "pages": 178,
         "title": "Gulliver's Travels",
@@ -803,7 +714,6 @@
     {
         "author": "Leo Tolstoy",
         "imageLink": "images/war-and-peace.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/War_and_Peace\n",
         "pages": 1296,
         "title": "War and Peace",
@@ -812,7 +722,6 @@
     {
         "author": "Leo Tolstoy",
         "imageLink": "images/anna-karenina.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/Anna_Karenina\n",
         "pages": 864,
         "title": "Anna Karenina",
@@ -821,7 +730,6 @@
     {
         "author": "Leo Tolstoy",
         "imageLink": "images/the-death-of-ivan-ilyich.jpg",
-        "language": "Russian",
         "link": "https://en.wikipedia.org/wiki/The_Death_of_Ivan_Ilyich\n",
         "pages": 92,
         "title": "The Death of Ivan Ilyich",
@@ -830,7 +738,6 @@
     {
         "author": "Mark Twain",
         "imageLink": "images/the-adventures-of-huckleberry-finn.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Adventures_of_Huckleberry_Finn\n",
         "pages": 224,
         "title": "The Adventures of Huckleberry Finn",
@@ -839,7 +746,6 @@
     {
         "author": "Valmiki",
         "imageLink": "images/ramayana.jpg",
-        "language": "Sanskrit",
         "link": "https://en.wikipedia.org/wiki/Ramayana\n",
         "pages": 152,
         "title": "Ramayana",
@@ -848,7 +754,6 @@
     {
         "author": "Virgil",
         "imageLink": "images/the-aeneid.jpg",
-        "language": "Classical Latin",
         "link": "https://en.wikipedia.org/wiki/Aeneid\n",
         "pages": 442,
         "title": "The Aeneid",
@@ -857,7 +762,6 @@
     {
         "author": "Vyasa",
         "imageLink": "images/the-mahab-harata.jpg",
-        "language": "Sanskrit",
         "link": "https://en.wikipedia.org/wiki/Mahabharata\n",
         "pages": 276,
         "title": "Mahabharata",
@@ -866,7 +770,6 @@
     {
         "author": "Walt Whitman",
         "imageLink": "images/leaves-of-grass.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Leaves_of_Grass\n",
         "pages": 152,
         "title": "Leaves of Grass",
@@ -875,7 +778,6 @@
     {
         "author": "Virginia Woolf",
         "imageLink": "images/mrs-dalloway.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/Mrs_Dalloway\n",
         "pages": 216,
         "title": "Mrs Dalloway",
@@ -884,7 +786,6 @@
     {
         "author": "Virginia Woolf",
         "imageLink": "images/to-the-lighthouse.jpg",
-        "language": "English",
         "link": "https://en.wikipedia.org/wiki/To_the_Lighthouse\n",
         "pages": 209,
         "title": "To the Lighthouse",
@@ -893,7 +794,6 @@
     {
         "author": "Marguerite Yourcenar",
         "imageLink": "images/memoirs-of-hadrian.jpg",
-        "language": "French",
         "link": "https://en.wikipedia.org/wiki/Memoirs_of_Hadrian\n",
         "pages": 408,
         "title": "Memoirs of Hadrian",
