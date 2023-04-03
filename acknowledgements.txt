@@ -1,0 +1,1 @@
+book list copied from: https://github.com/benoitvallon/100-best-books/blob/master/books.json
