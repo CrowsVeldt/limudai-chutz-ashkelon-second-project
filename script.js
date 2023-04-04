@@ -14,6 +14,7 @@ const cartContents = []
 
 let cartOpen = false
 
+//need to change display products so i can call it with filtered list
 function displayProducts() {
     fetch('catalog.json')
         .then((response) => response.json())
@@ -25,13 +26,13 @@ function displayProducts() {
         })
 }
 
-function displayShoppingCart(displayList) {
+function displayShoppingCart() {
     if (cartOpen === false) {
         const cart = document.createElement('div')
         cart.id = 'cart'
         cart.className = 'bg-primary'
 
-        displayList.forEach(item => {
+       cartContents.forEach(item => {
             cart.appendChild(cartItem(item))
         })
         document.body.appendChild(cart)
@@ -98,8 +99,7 @@ function addItemToCart(deetz) {
     }
 }
 
-function filterProducts () {
-    console.log('fuck')
-}
+// function filterProducts () {
+// }
 
 displayProducts()
