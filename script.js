@@ -1,3 +1,8 @@
+// when i click outside the cart, if it is open, it closes
+// if an item is already in the cart when i add it, i am asked if i want to add another copy
+// if i type a term into the filter box, it changes what products i see
+
+
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
@@ -20,14 +25,13 @@ function displayProducts() {
         })
 }
 
-function displayShoppingCart() {
-    // when i click outside the cart, if it is open, it closes
-
+function displayShoppingCart(displayList) {
     if (cartOpen === false) {
         const cart = document.createElement('div')
         cart.id = 'cart'
+        cart.className = 'bg-primary'
 
-        cartContents.forEach(item => {
+        displayList.forEach(item => {
             cart.appendChild(cartItem(item))
         })
         document.body.appendChild(cart)
@@ -56,6 +60,9 @@ function productCard(deetz) {
     title.className = "card-title"
     title.innerHTML = deetz.title
 
+    const author = document.createElement('p')
+    author.innerHTML = `by ${deetz.author}`
+
     const price = document.createElement('p')
     price.className = 'card-text'
     price.innerHTML = priceFormat.format(deetz.pages)
@@ -68,6 +75,7 @@ function productCard(deetz) {
     })
 
     body.appendChild(title)
+    body.appendChild(author)
     body.appendChild(price)
     body.appendChild(addButton)
     card.appendChild(img)
@@ -76,7 +84,7 @@ function productCard(deetz) {
     document.getElementById('catalog').appendChild(card)
 }
 
-function cartItem (deetz) {
+function cartItem(deetz) {
     // show all details
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
@@ -85,7 +93,13 @@ function cartItem (deetz) {
 }
 
 function addItemToCart(deetz) {
-    cartContents.push(deetz)
+    if (!cartContents.includes(deetz)) {
+        cartContents.push(deetz)
+    }
+}
+
+function filterProducts () {
+    console.log('fuck')
 }
 
 displayProducts()
