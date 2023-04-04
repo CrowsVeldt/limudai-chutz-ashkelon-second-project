@@ -1,6 +1,5 @@
 // when i click outside the cart, if it is open, it closes
 // if an item is already in the cart when i add it, i am asked if i want to add another copy
-// if i type a term into the filter box, it changes what products i see
 
 
 const priceFormat = new Intl.NumberFormat('en-US', {
@@ -32,7 +31,7 @@ function displayShoppingCart() {
         cart.id = 'cart'
         cart.className = 'bg-primary'
 
-       cartContents.forEach(item => {
+        cartContents.forEach(item => {
             cart.appendChild(cartItem(item))
         })
         document.body.appendChild(cart)
@@ -44,6 +43,11 @@ function displayShoppingCart() {
 }
 
 function displayCatalog(list) {
+    const cat = document.getElementById('catalog')
+    if (cat.hasChildNodes()) {
+        cat.innerHTML = ''
+    }
+
     list.forEach(item => productCard(item))
 }
 
@@ -103,8 +107,16 @@ function addItemToCart(deetz) {
     }
 }
 
-// call displayCatalog on a filtered subset of catalogContents
-// function filterProducts () {
-// }
+function filterProducts(input) {
+    // make it ignore punctuation
+    const term = input.toUpperCase()
+    displayCatalog(
+        catalogContents.filter(entry => {
+            if (entry.title.toUpperCase().includes(term)) {
+                return entry
+            }
+        })
+    )
+}
 
 fetchCatalog()
