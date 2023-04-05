@@ -27,17 +27,18 @@
     </nav>
 
     <!-- header -->
-    <header class="container-fluid d-flex">
+    <header class="container-fluid d-flex p-5">
         <div class="container" id="headLeft">
             <h1 id="main-title">Store</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
-        <div class="container" id="headRight">
-            <img src="res/images/bookshelf.jpg" alt="Bookshelf" id="heroImage">
-        </div>
+        <!-- <div class="container" id="headRight"> -->
+        <img src="res/images/bookshelf.jpg" alt="Bookshelf" id="heroImage">
+        <!-- </div> -->
     </header>
 
     <input type="text" name="filter" id="filter" oninput="filterProducts(this.value)" placeholder="filter" />
+
     <!-- product catalog -->
     <div class="container-fluid d-flex flex-wrap justify-content-center gap-3" id="catalog">
     </div>

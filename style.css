@@ -14,3 +14,9 @@ body {
     top: 70px;
     right: 10px;
 }
+
+#heroImage {
+    height: 100%;
+    width: 50vw;
+    object-fit: fill;
+}
