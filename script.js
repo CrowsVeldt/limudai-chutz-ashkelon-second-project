@@ -1,6 +1,7 @@
 // when i click outside the cart, if it is open, it closes
 // if an item is already in the cart when i add it, i am asked if i want to add another copy
-
+// if the cart is open when i hit Add to cart I see the new item added to the list
+// filter should ignore punctuation in titles
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -32,14 +33,16 @@ function displayShoppingCart() {
         cart.id = 'cart'
         cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1')
 
-        const total = document.createElement('p')
-        total.innerHTML = `Total: 00`
-
-        cart.appendChild(total)
+        const total = document.createElement('h5')
+        let amount = 0
 
         cartContents.forEach(item => {
+            amount += item.pages
+            total.innerHTML = `Total: ${priceFormat.format(amount)}`
             cart.appendChild(cartItem(item))
         })
+
+        cart.appendChild(total)
         document.body.appendChild(cart)
         cartOpen = true
     } else {
@@ -103,10 +106,10 @@ function cartItem(deetz) {
     const item = document.createElement('div')
     item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-dark')
 
-    const img = document.createElement('img')
-    img.src = 'res/images/default.jpeg'
-    img.alt = deetz.title
-    img.style.width = '60%'
+    // const img = document.createElement('img')
+    // img.src = 'res/images/default.jpeg'
+    // img.alt = deetz.title
+    // img.style.width = '60%'
 
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
@@ -114,7 +117,7 @@ function cartItem(deetz) {
     const price = document.createElement('p')
     price.innerHTML = priceFormat.format(deetz.pages)
 
-    item.appendChild(img)
+    // item.appendChild(img)
     item.appendChild(title)
     item.appendChild(price)
     return item
@@ -127,7 +130,6 @@ function addItemToCart(deetz) {
 }
 
 function filterProducts(input) {
-    // make it ignore punctuation
     const term = input.toUpperCase()
     displayCatalog(
         catalogContents.filter(entry => {
