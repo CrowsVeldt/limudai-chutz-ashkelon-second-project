@@ -4,6 +4,8 @@
 // filter should ignore punctuation in titles
 // when the cart is empty it shows a message (e.g. "Nothing here yet!")
 
+
+
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
@@ -27,12 +29,28 @@ function fetchCatalog() {
 
 }
 
-function displayShoppingCart() {
-    if (cartOpen === false) {
-        const cart = document.createElement('div')
-        cart.id = 'cart'
-        cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1')
+function toggleCart() {
+    if (document.getElementById('cart')) {
+        document.getElementById('cart').remove()
+    } else {
+        displayShoppingCart()
+    }
+}
 
+function displayShoppingCart() {
+    if (document.getElementById('cart')) {
+        document.getElementById('cart').remove()
+    }
+    const cart = document.createElement('div')
+    cart.id = 'cart'
+    cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1')
+
+    if (cartContents.length === 0) {
+        const message = document.createElement('h5')
+        message.innerHTML = "Nothing here yet!"
+
+        cart.appendChild(message)
+    } else {
         const total = document.createElement('h5')
         let amount = 0
 
@@ -43,12 +61,9 @@ function displayShoppingCart() {
         })
 
         cart.appendChild(total)
-        document.body.appendChild(cart)
-        cartOpen = true
-    } else {
-        document.getElementById('cart').remove()
-        cartOpen = false
     }
+
+    document.body.appendChild(cart)
 }
 
 function displayCatalog(list) {
