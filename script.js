@@ -1,8 +1,6 @@
 // when i click outside the cart, if it is open, it closes
 // if an item is already in the cart when i add it, i am asked if i want to add another copy
-// if the cart is open when i hit Add to cart I see the new item added to the list
 // filter should ignore punctuation in titles
-// when the cart is empty it shows a message (e.g. "Nothing here yet!")
 
 
 
@@ -43,7 +41,7 @@ function displayShoppingCart() {
     }
     const cart = document.createElement('div')
     cart.id = 'cart'
-    cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1')
+    cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1', 'text-light')
 
     if (cartContents.length === 0) {
         const message = document.createElement('h5')
