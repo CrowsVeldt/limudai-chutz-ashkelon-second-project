@@ -26,10 +26,16 @@ function fetchCatalog() {
 }
 
 function displayShoppingCart() {
+    // if cart is empty display "nothing yet"
     if (cartOpen === false) {
         const cart = document.createElement('div')
         cart.id = 'cart'
-        cart.className = 'bg-primary'
+        cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1')
+
+        const total = document.createElement('p')
+        total.innerHTML = `Total: 00`
+
+        cart.appendChild(total)
 
         cartContents.forEach(item => {
             cart.appendChild(cartItem(item))
@@ -95,11 +101,12 @@ function productCard(deetz) {
 
 function cartItem(deetz) {
     const item = document.createElement('div')
+    item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-dark')
 
     const img = document.createElement('img')
     img.src = 'res/images/default.jpeg'
     img.alt = deetz.title
-    img.style.width = '100%'
+    img.style.width = '60%'
 
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
