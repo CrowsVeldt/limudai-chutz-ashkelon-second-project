@@ -94,7 +94,6 @@ function productCard(deetz) {
 }
 
 function cartItem(deetz) {
-    // show all details
     const item = document.createElement('div')
 
     const img = document.createElement('img')
@@ -107,7 +106,6 @@ function cartItem(deetz) {
 
     const price = document.createElement('p')
     price.innerHTML = priceFormat.format(deetz.pages)
-
 
     item.appendChild(img)
     item.appendChild(title)
