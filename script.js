@@ -95,10 +95,24 @@ function productCard(deetz) {
 
 function cartItem(deetz) {
     // show all details
+    const item = document.createElement('div')
+
+    const img = document.createElement('img')
+    img.src = 'res/images/default.jpeg'
+    img.alt = deetz.title
+    img.style.width = '100%'
+
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
 
-    return title
+    const price = document.createElement('p')
+    price.innerHTML = priceFormat.format(deetz.pages)
+
+
+    item.appendChild(img)
+    item.appendChild(title)
+    item.appendChild(price)
+    return item
 }
 
 function addItemToCart(deetz) {
