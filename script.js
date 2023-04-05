@@ -2,6 +2,7 @@
 // if an item is already in the cart when i add it, i am asked if i want to add another copy
 // if the cart is open when i hit Add to cart I see the new item added to the list
 // filter should ignore punctuation in titles
+// when the cart is empty it shows a message (e.g. "Nothing here yet!")
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -27,7 +28,6 @@ function fetchCatalog() {
 }
 
 function displayShoppingCart() {
-    // if cart is empty display "nothing yet"
     if (cartOpen === false) {
         const cart = document.createElement('div')
         cart.id = 'cart'
@@ -106,20 +106,21 @@ function cartItem(deetz) {
     const item = document.createElement('div')
     item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-dark')
 
-    // const img = document.createElement('img')
-    // img.src = 'res/images/default.jpeg'
-    // img.alt = deetz.title
-    // img.style.width = '60%'
-
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
 
     const price = document.createElement('p')
     price.innerHTML = priceFormat.format(deetz.pages)
 
-    // item.appendChild(img)
+    const remove = document.createElement('button')
+    remove.innerHTML = 'X'
+    remove.addEventListener('click', () => {
+        removeItemFromCart(deetz)
+    })
+
     item.appendChild(title)
     item.appendChild(price)
+    item.appendChild(remove)
     return item
 }
 
@@ -127,6 +128,15 @@ function addItemToCart(deetz) {
     if (!cartContents.includes(deetz)) {
         cartContents.push(deetz)
     }
+    displayShoppingCart()
+}
+
+function removeItemFromCart(deetz) {
+    const index = cartContents.indexOf(deetz)
+    if (index >= 0) {
+        cartContents.splice(index, 1)
+    }
+    displayShoppingCart()
 }
 
 function filterProducts(input) {
