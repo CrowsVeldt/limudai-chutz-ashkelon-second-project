@@ -22,3 +22,7 @@ body {
     width: 50vw;
     object-fit: fill;
 }
+
+.socialIcon {
+    height: 35px;
+}
