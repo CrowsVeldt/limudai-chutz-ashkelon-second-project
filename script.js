@@ -138,8 +138,8 @@ function cartItem(deetz) {
 function addItemToCart(deetz) {
     if (!cartContents.includes(deetz)) {
         cartContents.push(deetz)
+        showToast(`Added ${deetz.title} to cart`)
     }
-    showToast(`Added ${deetz.title} to cart`)
     displayShoppingCart()
 }
 
@@ -147,6 +147,7 @@ function removeItemFromCart(deetz) {
     const index = cartContents.indexOf(deetz)
     if (index >= 0) {
         cartContents.splice(index, 1)
+        showToast(`Removed ${deetz.title} from cart`)
     }
     displayShoppingCart()
 }
@@ -164,7 +165,7 @@ function showToast (message) {
     setTimeout(() => {
         const target = document.getElementsByClassName('myToast')
         target[0].remove(target)
-    }, 2000)
+    }, 1250)
 }
 
 function filterProducts(input) {
