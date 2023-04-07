@@ -140,7 +140,9 @@ function addItemToCart(deetz) {
         cartContents.push(deetz)
         showToast(`Added ${deetz.title} to cart`)
     }
+    if (document.getElementById('cart')) {
     displayShoppingCart()
+    }
 }
 
 function removeItemFromCart(deetz) {
