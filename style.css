@@ -26,3 +26,10 @@ body {
 .socialIcon {
     height: 35px;
 }
+
+.myToast {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    background-color: white;
+}

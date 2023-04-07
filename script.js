@@ -2,8 +2,6 @@
 // if an item is already in the cart when i add it, i am asked if i want to add another copy
 // filter should ignore punctuation in titles
 
-
-
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
@@ -141,6 +139,7 @@ function addItemToCart(deetz) {
     if (!cartContents.includes(deetz)) {
         cartContents.push(deetz)
     }
+    showToast('added to cart')
     displayShoppingCart()
 }
 
@@ -150,6 +149,22 @@ function removeItemFromCart(deetz) {
         cartContents.splice(index, 1)
     }
     displayShoppingCart()
+}
+
+function showToast (message) {
+    const toast = document.createElement('div')
+    toast.className = 'myToast'
+
+    const toastMessage = document.createElement('p')
+    toastMessage.innerHTML = message
+
+    toast.appendChild(toastMessage)
+    document.body.appendChild(toast)
+    
+    setTimeout(() => {
+        const target = document.getElementsByClassName('myToast')
+        target[0].remove(target)
+    }, 2000)
 }
 
 function filterProducts(input) {
