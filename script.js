@@ -11,8 +11,6 @@ const catalogContents = []
 
 const cartContents = []
 
-let cartOpen = false
-
 function fetchCatalog() {
     fetch('catalog.json')
         .then((response) => response.json())
@@ -141,7 +139,7 @@ function addItemToCart(deetz) {
         showToast(`Added ${deetz.title} to cart`)
     }
     if (document.getElementById('cart')) {
-    displayShoppingCart()
+        displayShoppingCart()
     }
 }
 
@@ -150,20 +148,20 @@ function removeItemFromCart(deetz) {
     if (index >= 0) {
         cartContents.splice(index, 1)
         showToast(`Removed ${deetz.title} from cart`)
+        displayShoppingCart()
     }
-    displayShoppingCart()
 }
 
-function showToast (message) {
+function showToast(message) {
     const toast = document.createElement('div')
-    toast.classList.add('myToast', 'rounded-pill', 'p-2')
+    toast.classList.add('myToast', 'rounded-pill', 'p-2', 'bg-primary', 'text-light', 'border', 'border-dark')
 
     const toastMessage = document.createElement('p')
     toastMessage.innerHTML = message
 
     toast.appendChild(toastMessage)
     document.body.appendChild(toast)
-    
+
     setTimeout(() => {
         const target = document.getElementsByClassName('myToast')
         target[0].remove(target)
