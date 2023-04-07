@@ -139,7 +139,7 @@ function addItemToCart(deetz) {
     if (!cartContents.includes(deetz)) {
         cartContents.push(deetz)
     }
-    showToast('added to cart')
+    showToast(`Added ${deetz.title} to cart`)
     displayShoppingCart()
 }
 
@@ -153,7 +153,7 @@ function removeItemFromCart(deetz) {
 
 function showToast (message) {
     const toast = document.createElement('div')
-    toast.className = 'myToast'
+    toast.classList.add('myToast', 'rounded-pill', 'p-2')
 
     const toastMessage = document.createElement('p')
     toastMessage.innerHTML = message
