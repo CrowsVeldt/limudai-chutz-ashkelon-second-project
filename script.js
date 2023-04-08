@@ -37,15 +37,17 @@ function displayShoppingCart() {
     }
     const cart = document.createElement('div')
     cart.id = 'cart'
-    cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1', 'text-light')
+    cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1', 'text-light', 'cart-focus')
 
     if (cartContents.length === 0) {
         const message = document.createElement('h5')
+        message.className = 'cart-focus'
         message.innerHTML = "Nothing here yet!"
 
         cart.appendChild(message)
     } else {
         const total = document.createElement('h5')
+        total.className = 'cart-focus'
         let amount = 0
 
         cartContents.forEach(item => {
@@ -58,6 +60,7 @@ function displayShoppingCart() {
     }
 
     document.body.appendChild(cart)
+
 }
 
 function displayCatalog(list) {
@@ -95,7 +98,7 @@ function productCard(deetz) {
     price.innerHTML = priceFormat.format(deetz.pages)
 
     const addButton = document.createElement('button')
-    addButton.className = 'btn btn-primary'
+    addButton.classList.add('btn', 'btn-primary', 'cart-focus')
     addButton.innerHTML = 'Add to cart'
     addButton.addEventListener('click', () => {
         addItemToCart(deetz)
@@ -113,16 +116,19 @@ function productCard(deetz) {
 
 function cartItem(deetz) {
     const item = document.createElement('div')
-    item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-dark')
+    item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-dark', 'cart-focus')
 
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
+    title.className = 'cart-focus'
 
     const price = document.createElement('p')
     price.innerHTML = priceFormat.format(deetz.pages)
+    price.className = 'cart-focus'
 
     const remove = document.createElement('button')
     remove.innerHTML = 'X'
+    remove.className = 'cart-focus'
     remove.addEventListener('click', () => {
         removeItemFromCart(deetz)
     })
@@ -178,5 +184,13 @@ function filterProducts(input) {
         })
     )
 }
+
+document.addEventListener('click', (event) => {
+    if (document.getElementById('cart')) {
+        if (!event.target.classList.contains('cart-focus')) {
+            toggleCart()
+        }
+    }
+})
 
 fetchCatalog()
