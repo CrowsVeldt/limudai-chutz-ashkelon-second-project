@@ -1,6 +1,4 @@
-// when i click outside the cart, if it is open, it closes
 // if an item is already in the cart when i add it, i am asked if i want to add another copy
-// filter should ignore punctuation in titles
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -10,6 +8,14 @@ const priceFormat = new Intl.NumberFormat('en-US', {
 const catalogContents = []
 
 const cartContents = []
+
+document.addEventListener('click', (event) => {
+    if (document.getElementById('cart')) {
+        if (!event.target.classList.contains('cart-focus')) {
+            toggleCart()
+        }
+    }
+})
 
 function fetchCatalog() {
     fetch('catalog.json')
@@ -53,7 +59,7 @@ function displayShoppingCart() {
         cartContents.forEach(item => {
             amount += item.pages
             total.innerHTML = `Total: ${priceFormat.format(amount)}`
-            cart.appendChild(cartItem(item))
+            cart.appendChild(makeCartItem(item))
         })
 
         cart.appendChild(total)
@@ -69,10 +75,10 @@ function displayCatalog(list) {
         cat.innerHTML = ''
     }
 
-    list.forEach(item => productCard(item))
+    list.forEach(item => makeProductCard(item))
 }
 
-function productCard(deetz) {
+function makeProductCard(deetz) {
 
     const card = document.createElement('div')
     card.className = 'card'
@@ -114,7 +120,7 @@ function productCard(deetz) {
     document.getElementById('catalog').appendChild(card)
 }
 
-function cartItem(deetz) {
+function makeCartItem(deetz) {
     const item = document.createElement('div')
     item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-dark', 'cart-focus')
 
@@ -184,13 +190,5 @@ function filterProducts(input) {
         })
     )
 }
-
-document.addEventListener('click', (event) => {
-    if (document.getElementById('cart')) {
-        if (!event.target.classList.contains('cart-focus')) {
-            toggleCart()
-        }
-    }
-})
 
 fetchCatalog()
