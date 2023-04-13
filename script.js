@@ -48,7 +48,7 @@ function displayShoppingCart() {
     }
     const cart = document.createElement('div')
     cart.id = 'cart'
-    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1', 'text-dark', 'cart-focus')
+    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2','d-flex', 'flex-column', 'justify-content-center', 'px-1', 'text-dark', 'cart-focus')
 
     if (cartContents.length === 0) {
         const message = document.createElement('h5')
@@ -58,7 +58,7 @@ function displayShoppingCart() {
         cart.appendChild(message)
     } else {
         const total = document.createElement('h5')
-        total.classList.add('cart-focus', 'text-decoration-underline')
+        total.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
         let amount = 0
 
         cartContents.forEach(item => {
@@ -127,7 +127,7 @@ function makeProductCard(deetz) {
 
 function makeCartItem(deetz) {
     const item = document.createElement('div')
-    item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-secondary', 'cart-focus')
+    item.classList.add('d-flex', 'flex-column', 'align-items-start', 'shadow-sm', 'cart-focus', 'p-2')
 
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
@@ -138,8 +138,8 @@ function makeCartItem(deetz) {
     price.className = 'cart-focus'
 
     const remove = document.createElement('button')
-    remove.innerHTML = 'X'
-    remove.className = 'cart-focus'
+    remove.innerHTML = 'Remove from cart'
+    remove.classList.add('cart-focus', 'btn', 'btn-secondary')
     remove.addEventListener('click', () => {
         removeItemFromCart(deetz)
     })
