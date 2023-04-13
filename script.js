@@ -48,27 +48,24 @@ function displayShoppingCart() {
     }
     const cart = document.createElement('div')
     cart.id = 'cart'
-    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2','d-flex', 'flex-column', 'justify-content-center', 'px-1', 'text-dark', 'cart-focus')
+    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'justify-content-center', 'px-1', 'text-dark', 'cart-focus')
+
+    const message = document.createElement('h5')
+    message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
 
     if (cartContents.length === 0) {
-        const message = document.createElement('h5')
-        message.classList.add('cart-focus', 'text-decoration-underline')
         message.innerHTML = "Nothing here yet!"
-
-        cart.appendChild(message)
     } else {
-        const total = document.createElement('h5')
-        total.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
         let amount = 0
 
         cartContents.forEach(item => {
             amount += item.pages
-            total.innerHTML = `Total: ${priceFormat.format(amount)}`
+            message.innerHTML = `Total: ${priceFormat.format(amount)}`
             cart.appendChild(makeCartItem(item))
         })
-
-        cart.appendChild(total)
     }
+
+    cart.appendChild(message)
 
     document.body.appendChild(cart)
 
