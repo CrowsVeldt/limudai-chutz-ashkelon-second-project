@@ -1,4 +1,7 @@
-// if an item is already in the cart when i add it, i am asked if i want to add another copy
+// show ten items at a time?
+// with buttons to show next/previous ten?
+
+
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -24,7 +27,9 @@ function fetchCatalog() {
             data.forEach(entry => {
                 catalogContents.push(entry)
             })
-            displayCatalog(catalogContents.slice(0, 10))
+            // showing only ten items for ease of development
+            // displayCatalog(catalogContents.slice(0, 10))
+            displayCatalog(catalogContents)
         })
 
 }
@@ -43,17 +48,17 @@ function displayShoppingCart() {
     }
     const cart = document.createElement('div')
     cart.id = 'cart'
-    cart.classList.add('bg-primary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1', 'text-light', 'cart-focus')
+    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'd-flex', 'flex-column', 'justify-content-center', 'p-1', 'text-dark', 'cart-focus')
 
     if (cartContents.length === 0) {
         const message = document.createElement('h5')
-        message.className = 'cart-focus'
+        message.classList.add('cart-focus', 'text-decoration-underline')
         message.innerHTML = "Nothing here yet!"
 
         cart.appendChild(message)
     } else {
         const total = document.createElement('h5')
-        total.className = 'cart-focus'
+        total.classList.add('cart-focus', 'text-decoration-underline')
         let amount = 0
 
         cartContents.forEach(item => {
@@ -81,7 +86,7 @@ function displayCatalog(list) {
 function makeProductCard(deetz) {
 
     const card = document.createElement('div')
-    card.className = 'card'
+    card.classList.add('card', 'border-secondary')
     card.style.width = '18rem'
 
     const img = document.createElement('img')
@@ -122,7 +127,7 @@ function makeProductCard(deetz) {
 
 function makeCartItem(deetz) {
     const item = document.createElement('div')
-    item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-dark', 'cart-focus')
+    item.classList.add('d-flex', 'flex-column', 'align-items-center', 'border', 'border-secondary', 'cart-focus')
 
     const title = document.createElement('h6')
     title.innerHTML = deetz.title
