@@ -1,5 +1,6 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
+// filter list by word and not by any substring (i.e. 'he' should not return 'The')
 
 
 
