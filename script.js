@@ -28,8 +28,8 @@ function fetchCatalog() {
                 catalogContents.push(entry)
             })
             // showing only ten items for ease of development
-            // displayCatalog(catalogContents.slice(0, 10))
-            displayCatalog(catalogContents)
+            displayCatalog(catalogContents.slice(0, 10))
+            // displayCatalog(catalogContents)
         })
 
 }

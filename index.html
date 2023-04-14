@@ -36,7 +36,8 @@
     </header>
 
     <!-- product catalog -->
-    <input type="text" name="filter" id="filter" oninput="filterProducts(this.value)" placeholder="Filter list" size="50" class="m-4 rounded"/>
+    <input type="text" name="filter" id="filter" oninput="filterProducts(this.value)" placeholder="Filter list"
+        size="50" class="m-4 rounded" />
     <div class="container-fluid d-flex flex-wrap justify-content-center gap-3" id="catalog">
     </div>
 
@@ -56,13 +57,25 @@
         </div>
     </footer>
 
-    <div class="container-fluid py-2 bg-primary d-flex justify-content-around" id="socials-container">
-        <img src="res/icons/facebook - by freepik.png" alt="facebook logo" class="socialIcon bg-light rounded-circle" />
-        <img src="res/icons/whatsapp - by freepik.png" alt="whatsapp logo" class="socialIcon bg-light rounded-circle" />
-        <img src="res/icons/twitter - by bogdan rosu.png" alt="twitter logo"
-            class="socialIcon bg-light rounded-circle" />
-        <img src="res/icons/instagram - by freepik.png" alt="instagram logo"
-            class="socialIcon bg-light rounded-circle" />
+    <div class="container-fluid py-2 bg-primary" id="bottom">
+        <div class="container d-flex justify-content-around w-50" id="socialsContainer">
+            <a href="https://www.facebook.com">
+                <img src="res/icons/facebook - by freepik.png" alt="facebook logo"
+                    class="socialIcon bg-light rounded-circle" />
+            </a>
+            <a href="https://www.whatsapp.com">
+                <img src="res/icons/whatsapp - by freepik.png" alt="whatsapp logo"
+                    class="socialIcon bg-light rounded-circle" />
+            </a>
+            <a href="https://www.twitter.com">
+                <img src="res/icons/twitter - by bogdan rosu.png" alt="twitter logo"
+                    class="socialIcon bg-light rounded-circle" />
+            </a>
+            <a href="https://www.instagram.com">
+                <img src="res/icons/instagram - by freepik.png" alt="instagram logo"
+                    class="socialIcon bg-light rounded-circle" />
+            </a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
