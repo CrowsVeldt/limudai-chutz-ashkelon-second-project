@@ -1,16 +1,11 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
 // filter list by word and not by any substring (i.e. 'he' should not return 'The')
-// save cart to localstorage
-
-
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
 })
-
-const cartContents = []
 
 document.addEventListener('click', (event) => {
     if (document.getElementById('cart')) {
@@ -38,8 +33,7 @@ function fetchCatalog() {
             if (key != null) {
                 catalog.push(key)
             }
-        }
-        )
+        })
         displayCatalog(catalog.slice(0, 10))
     }
 
@@ -63,17 +57,15 @@ function displayShoppingCart() {
 
     const message = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
-
-    if (cartContents.length === 0) {
-        message.innerHTML = "Nothing here yet!"
-    } else {
+    if (localStorage.getItem('cart') != null) {
         let amount = 0
-
-        cartContents.forEach(item => {
+        JSON.parse(localStorage.getItem('cart')).forEach(item => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
             cart.appendChild(makeCartItem(item))
         })
+    } else {
+        message.innerHTML = "Nothing here yet!"
     }
 
     cart.appendChild(message)
@@ -159,22 +151,39 @@ function makeCartItem(deetz) {
 }
 
 function addItemToCart(deetz) {
-    if (!cartContents.includes(deetz)) {
-        cartContents.push(deetz)
+    let cart = JSON.parse(localStorage.getItem('cart'))
+
+    if (cart != null) {
+        if (!cart.some(e => e.title === deetz.title)) {
+            cart.push(deetz)
+            localStorage.setItem('cart', JSON.stringify(cart))
+            showToast(`Added ${deetz.title} to cart`)
+        }
+
+    } else {
+        localStorage.setItem('cart', JSON.stringify([deetz]))
         showToast(`Added ${deetz.title} to cart`)
     }
+
     if (document.getElementById('cart')) {
         displayShoppingCart()
     }
 }
 
 function removeItemFromCart(deetz) {
-    const index = cartContents.indexOf(deetz)
+    let cart = JSON.parse(localStorage.getItem('cart'))
+    const index = cart.findIndex(e => e.title === deetz.title)
+
     if (index >= 0) {
-        cartContents.splice(index, 1)
+        cart.splice(index, 1)
         showToast(`Removed ${deetz.title} from cart`)
-        displayShoppingCart()
+        localStorage.setItem('cart', JSON.stringify(cart))
     }
+    
+    if (JSON.parse(localStorage.getItem('cart')).length === 0) {
+        localStorage.removeItem('cart')
+    }
+    displayShoppingCart()
 }
 
 function showToast(message) {
