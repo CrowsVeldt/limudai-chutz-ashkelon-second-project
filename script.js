@@ -1,7 +1,7 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
 // filter list by word and not by any substring (i.e. 'he' should not return 'The')
-// save catalog and cart to localstorage
+// save cart to localstorage
 
 
 
@@ -9,8 +9,6 @@ const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
 })
-
-const catalogContents = []
 
 const cartContents = []
 
@@ -23,16 +21,25 @@ document.addEventListener('click', (event) => {
 })
 
 function fetchCatalog() {
-    fetch('catalog.json')
-        .then((response) => response.json())
-        .then(data => {
-            let catalog = []
-            data.forEach((entry, index) => {
-                localStorage.setItem(index, JSON.stringify(entry))
-                catalog.push(entry)
+    let catalog = []
+    if (localStorage.length === 0) {
+        fetch('catalog.json')
+            .then((response) => response.json())
+            .then(data => {
+                data.forEach((entry, index) => {
+                    localStorage.setItem(index, JSON.stringify(entry))
+                    catalog.push(entry)
+                })
+                displayCatalog(catalog.slice(0, 10))
             })
-            displayCatalog(catalog.slice(0, 10))
-        })
+    } else {
+        for (let key in localStorage) {
+            if (key != null) {
+                catalog.push(JSON.parse(localStorage.getItem(key)))
+            }
+        }
+        displayCatalog(catalog.slice(0, 10))
+    }
 
 }
 
@@ -192,7 +199,7 @@ function filterProducts(input) {
         let value = JSON.parse(localStorage.getItem(key))
 
         if (value != null && value.title.toUpperCase().includes(term)) {
-                toDisplay.push(value)
+            toDisplay.push(value)
         }
     }
 
