@@ -1,6 +1,7 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
 // filter list by word and not by any substring (i.e. 'he' should not return 'The')
+// save catalog and cart to localstorage
 
 
 
@@ -24,13 +25,13 @@ document.addEventListener('click', (event) => {
 function fetchCatalog() {
     fetch('catalog.json')
         .then((response) => response.json())
-        .then((data) => {
-            data.forEach(entry => {
-                catalogContents.push(entry)
+        .then(data => {
+            let catalog = []
+            data.forEach((entry, index) => {
+                localStorage.setItem(index, JSON.stringify(entry))
+                catalog.push(entry)
             })
-            // showing only ten items for ease of development
-            displayCatalog(catalogContents.slice(0, 10))
-            // displayCatalog(catalogContents)
+            displayCatalog(catalog.slice(0, 10))
         })
 
 }
@@ -185,13 +186,17 @@ function showToast(message) {
 
 function filterProducts(input) {
     const term = input.toUpperCase()
-    displayCatalog(
-        catalogContents.filter(entry => {
-            if (entry.title.toUpperCase().includes(term)) {
-                return entry
-            }
-        })
-    )
+    const toDisplay = []
+
+    for (let key in localStorage) {
+        let value = JSON.parse(localStorage.getItem(key))
+
+        if (value != null && value.title.toUpperCase().includes(term)) {
+                toDisplay.push(value)
+        }
+    }
+
+    displayCatalog(toDisplay)
 }
 
 fetchCatalog()
