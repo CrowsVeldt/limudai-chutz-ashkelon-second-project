@@ -27,17 +27,19 @@ function fetchCatalog() {
             .then((response) => response.json())
             .then(data => {
                 data.forEach((entry, index) => {
-                    localStorage.setItem(index, JSON.stringify(entry))
                     catalog.push(entry)
                 })
+                localStorage.setItem('catalog', JSON.stringify(catalog))
                 displayCatalog(catalog.slice(0, 10))
             })
     } else {
-        for (let key in localStorage) {
+        const storedCat = JSON.parse(localStorage.getItem('catalog'))
+        storedCat.forEach(key => {
             if (key != null) {
-                catalog.push(JSON.parse(localStorage.getItem(key)))
+                catalog.push(key)
             }
         }
+        )
         displayCatalog(catalog.slice(0, 10))
     }
 
@@ -193,15 +195,14 @@ function showToast(message) {
 
 function filterProducts(input) {
     const term = input.toUpperCase()
+    const catalog = JSON.parse(localStorage.getItem('catalog'))
     const toDisplay = []
 
-    for (let key in localStorage) {
-        let value = JSON.parse(localStorage.getItem(key))
-
-        if (value != null && value.title.toUpperCase().includes(term)) {
-            toDisplay.push(value)
+    catalog.forEach(key => {
+        if (key != null && key.title.toUpperCase().includes(term)) {
+            toDisplay.push(key)
         }
-    }
+    })
 
     displayCatalog(toDisplay)
 }
