@@ -19,7 +19,7 @@ function fetchCatalog() {
     let catalog = []
     if (localStorage.length === 0) {
         fetch('catalog.json')
-            .then((response) => response.json())
+            .then(response => response.json())
             .then(data => {
                 data.forEach((entry, index) => {
                     catalog.push(entry)
@@ -150,6 +150,19 @@ function makeCartItem(deetz) {
     return item
 }
 
+function updateCartNumber () {
+    const cartNum = document.getElementById('cartNumber')
+    const cart = JSON.parse(localStorage.getItem('cart'))
+    if (cart != null) {
+        const cartLength = cart.length
+        cartNum.className = 'white-border'
+        cartNum.innerHTML = cartLength
+    } else {
+        cartNum.className = ''
+        cartNum.innerHTML = ''
+    }
+}
+
 function addItemToCart(deetz) {
     let cart = JSON.parse(localStorage.getItem('cart'))
 
@@ -168,6 +181,7 @@ function addItemToCart(deetz) {
     if (document.getElementById('cart')) {
         displayShoppingCart()
     }
+    updateCartNumber()
 }
 
 function removeItemFromCart(deetz) {
@@ -183,6 +197,7 @@ function removeItemFromCart(deetz) {
     if (JSON.parse(localStorage.getItem('cart')).length === 0) {
         localStorage.removeItem('cart')
     }
+    updateCartNumber()
     displayShoppingCart()
 }
 
@@ -216,4 +231,5 @@ function filterProducts(input) {
     displayCatalog(toDisplay)
 }
 
+updateCartNumber()
 fetchCatalog()
