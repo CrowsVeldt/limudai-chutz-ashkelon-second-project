@@ -1,6 +1,7 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
-// filter list by word and not by any substring (i.e. 'he' should not return 'The')
+// filter list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
+// add sort buttons to sort by price, author, title, etc.
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -74,13 +75,42 @@ function displayShoppingCart() {
 
 }
 
-function displayCatalog(list) {
-    const cat = document.getElementById('catalog')
-    if (cat.hasChildNodes()) {
-        cat.innerHTML = ''
+function displayCatalog(list, sortMethod = 'titleFirst') {
+    const catalog = document.getElementById('catalog')
+    if (catalog.hasChildNodes()) {
+        catalog.innerHTML = ''
     }
 
-    list.forEach(item => makeProductCard(item))
+    sortCatalog(list, sortMethod).forEach(item => makeProductCard(item))
+}
+
+function sortCatalog(catalog, method) {
+    let sortFunction = () => {}
+
+    switch (method) {
+        case 'priceHigh':
+            sortFunction = (a, b) => b.pages - a.pages
+            break
+        case 'priceLow':
+            sortFunction = (a, b) => a.pages - b.pages
+            break
+        case 'authorFirst':
+            sortFunction = (a, b) => a.author.localeCompare(b.author)
+            break
+        case 'authorLast':
+            sortFunction = (a, b) => b.author.localeCompare(a.author)
+            break
+        case 'titleFirst':
+            sortFunction = (a, b) => a.title.localeCompare(b.title)
+            break
+        case 'titleLast':
+            sortFunction = (a, b) => b.title.localeCompare(a.title)
+        break
+        default:
+            console.error('no sort method supplied')
+    }
+
+    return catalog.sort(sortFunction)
 }
 
 function makeProductCard(deetz) {
@@ -94,8 +124,8 @@ function makeProductCard(deetz) {
     img.src = 'res/images/default.jpeg'
     img.alt = 'book'
 
-    const body = document.createElement('div')
-    body.className = 'card-body'
+    const cardBody = document.createElement('div')
+    cardBody.className = 'card-body'
 
     const title = document.createElement('h5')
     title.className = "card-title"
@@ -115,12 +145,12 @@ function makeProductCard(deetz) {
         addItemToCart(deetz)
     })
 
-    body.appendChild(title)
-    body.appendChild(author)
-    body.appendChild(price)
-    body.appendChild(addButton)
+    cardBody.appendChild(title)
+    cardBody.appendChild(author)
+    cardBody.appendChild(price)
+    cardBody.appendChild(addButton)
     card.appendChild(img)
-    card.appendChild(body)
+    card.appendChild(cardBody)
 
     document.getElementById('catalog').appendChild(card)
 }
@@ -150,7 +180,7 @@ function makeCartItem(deetz) {
     return item
 }
 
-function updateCartNumber () {
+function updateCartNumber() {
     const cartNum = document.getElementById('cartNumber')
     const cart = JSON.parse(localStorage.getItem('cart'))
     if (cart != null) {
@@ -193,7 +223,7 @@ function removeItemFromCart(deetz) {
         showToast(`Removed ${deetz.title} from cart`)
         localStorage.setItem('cart', JSON.stringify(cart))
     }
-    
+
     if (JSON.parse(localStorage.getItem('cart')).length === 0) {
         localStorage.removeItem('cart')
     }
@@ -230,6 +260,8 @@ function filterProducts(input) {
 
     displayCatalog(toDisplay)
 }
+
+// console.log(localStorage)
 
 updateCartNumber()
 fetchCatalog()
