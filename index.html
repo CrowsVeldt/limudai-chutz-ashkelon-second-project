@@ -28,7 +28,8 @@
     </nav>
 
     <!-- header -->
-    <header class="container-fluid d-flex flex-column flex-sm-row text-center align-items-center align-items-sm-start p-5">
+    <header
+        class="container-fluid d-flex flex-column flex-sm-row text-center align-items-center align-items-sm-start p-5">
         <div class="container" id="headLeft">
             <h1 id="main-title">Store</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -37,8 +38,23 @@
     </header>
 
     <!-- product catalog -->
-    <input type="text" name="filter" id="filter" oninput="filterProducts(this.value)" placeholder="Filter list" class="m-4 w-50 rounded" />
+    <div class="container d-flex align-items-center justify-content-center">
+        <input type="text" name="filter" id="filter" oninput="filterProducts(this.value)" placeholder="Search by title"
+            class="m-4 w-50 rounded" />
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Filter
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceHigh')">Price: Highest to Lowest</button></li>
+                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceLow')">Price: Lowest to Highest</button></li>
+            </ul>
+        </div>
+    </div>
     <div class="container-fluid d-flex flex-wrap justify-content-center gap-3" id="catalog">
+        <!-- catalog displayed here -->
     </div>
 
     <footer class="container d-flex flex-column flex-sm-row align-items-center py-5">

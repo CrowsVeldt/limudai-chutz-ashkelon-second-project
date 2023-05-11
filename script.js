@@ -35,7 +35,8 @@ function fetchCatalog() {
                 catalog.push(key)
             }
         })
-        displayCatalog(catalog.slice(0, 10))
+        // displayCatalog(catalog.slice(0, 10))
+        displayCatalog(catalog)
     }
 
 }
@@ -75,16 +76,16 @@ function displayShoppingCart() {
 
 }
 
-function displayCatalog(list, sortMethod = 'titleFirst') {
+function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sortMethod) {
     const catalog = document.getElementById('catalog')
     if (catalog.hasChildNodes()) {
         catalog.innerHTML = ''
     }
 
-    sortCatalog(list, sortMethod).forEach(item => makeProductCard(item))
+    list.sort(sortCatalog(sortMethod)).forEach(item => makeProductCard(item))
 }
 
-function sortCatalog(catalog, method) {
+function sortCatalog(method = 'titleFirst') {
     let sortFunction = () => {}
 
     switch (method) {
@@ -110,7 +111,8 @@ function sortCatalog(catalog, method) {
             console.error('no sort method supplied')
     }
 
-    return catalog.sort(sortFunction)
+    console.log(sortFunction)
+    return sortFunction
 }
 
 function makeProductCard(deetz) {
@@ -261,7 +263,6 @@ function filterProducts(input) {
     displayCatalog(toDisplay)
 }
 
-// console.log(localStorage)
 
 updateCartNumber()
 fetchCatalog()
