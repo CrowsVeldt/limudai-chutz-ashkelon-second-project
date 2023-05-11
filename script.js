@@ -1,7 +1,8 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
 // filter list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
-// add sort buttons to sort by price, author, title, etc.
+// show translation of lorem ipsum on hover
+// fix cartNumber so it'll open the cart just like the icon
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -55,7 +56,9 @@ function displayShoppingCart() {
     }
     const cart = document.createElement('div')
     cart.id = 'cart'
-    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'justify-content-center', 'px-1', 'text-dark', 'cart-focus')
+    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus')
+    cart.style.overflow = 'scroll'
+    cart.style.maxHeight = '90%'
 
     const message = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
@@ -82,11 +85,11 @@ function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sort
         catalog.innerHTML = ''
     }
 
-    list.sort(sortCatalog(sortMethod)).forEach(item => makeProductCard(item))
+    list.sort(sortCatalogBy(sortMethod)).forEach(item => makeProductCard(item))
 }
 
-function sortCatalog(method = 'titleFirst') {
-    let sortFunction = () => {}
+function sortCatalogBy(method = 'titleFirst') {
+    let sortFunction = () => { }
 
     switch (method) {
         case 'priceHigh':
@@ -106,12 +109,11 @@ function sortCatalog(method = 'titleFirst') {
             break
         case 'titleLast':
             sortFunction = (a, b) => b.title.localeCompare(a.title)
-        break
+            break
         default:
             console.error('no sort method supplied')
     }
 
-    console.log(sortFunction)
     return sortFunction
 }
 
