@@ -99,11 +99,19 @@ function sortCatalogBy(method = 'titleFirst') {
             sortFunction = (a, b) => a.pages - b.pages
             break
         case 'authorFirst':
-        // currently sorting by first name. have encountered unexpected difficulties sorting by last name
-            sortFunction = (a, b) => a.author.localeCompare(b.author)
+            sortFunction = (a, b) => {
+                const aLast = a.author.split(' ').slice(-1)[0]
+                const bLast = b.author.split(' ').slice(-1)[0]
+                return aLast.localeCompare(bLast)
+            }
             break
         case 'authorLast':
-            sortFunction = (a, b) => b.author.localeCompare(a.author)
+            sortFunction = (a, b) => {
+                const aLast = a.author.split(' ').slice(-1)[0]
+                const bLast = b.author.split(' ').slice(-1)[0]
+                return Math.sign(bLast.localeCompare(aLast))
+
+            }
             break
         case 'titleFirst':
             sortFunction = (a, b) => a.title.localeCompare(b.title)
