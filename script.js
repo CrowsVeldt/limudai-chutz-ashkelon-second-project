@@ -2,7 +2,7 @@
 // with buttons to show next/previous ten?
 // search list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
 // fix cartNumber so it'll open the cart just like the icon
-// show translation of lorem ipsum on hover
+// show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -102,16 +102,13 @@ function sortCatalogBy(method = 'titleFirst') {
             sortFunction = (a, b) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
-                return aLast.localeCompare(bLast)
-            }
+                return aLast.localeCompare(bLast)}
             break
         case 'authorLast':
             sortFunction = (a, b) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
-                return Math.sign(bLast.localeCompare(aLast))
-
-            }
+                return bLast.localeCompare(aLast)}
             break
         case 'titleFirst':
             sortFunction = (a, b) => a.title.localeCompare(b.title)
