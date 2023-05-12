@@ -1,8 +1,8 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
-// filter list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
-// show translation of lorem ipsum on hover
+// search list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
 // fix cartNumber so it'll open the cart just like the icon
+// show translation of lorem ipsum on hover
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -99,6 +99,7 @@ function sortCatalogBy(method = 'titleFirst') {
             sortFunction = (a, b) => a.pages - b.pages
             break
         case 'authorFirst':
+        // currently sorting by first name. have encountered unexpected difficulties sorting by last name
             sortFunction = (a, b) => a.author.localeCompare(b.author)
             break
         case 'authorLast':
@@ -136,7 +137,10 @@ function makeProductCard(deetz) {
     title.innerHTML = deetz.title
 
     const author = document.createElement('p')
-    author.innerHTML = `by ${deetz.author}`
+    const authorSplit = deetz.author.split(' ')
+    const lastName = authorSplit.pop()
+    const firstName = authorSplit.length > 0 ? ', '.concat(authorSplit.join(' ')) : ''
+    author.innerHTML = `Author: ${lastName}${firstName}`
 
     const price = document.createElement('p')
     price.className = 'card-text'
