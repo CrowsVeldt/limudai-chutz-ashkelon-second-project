@@ -246,7 +246,7 @@ function removeItemFromCart(deetz) {
 
 function showToast(message) {
     const toast = document.createElement('div')
-    toast.classList.add('myToast', 'rounded-pill', 'p-2', 'bg-primary', 'text-light', 'border', 'border-dark')
+    toast.classList.add('myToast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
 
     const toastMessage = document.createElement('p')
     toastMessage.innerHTML = message
