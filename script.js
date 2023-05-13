@@ -1,6 +1,3 @@
-// show ten items at a time?
-// with buttons to show next/previous ten?
-// search list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 
 const priceFormat = new Intl.NumberFormat('en-US', {
@@ -19,9 +16,9 @@ document.addEventListener('click', (event) => {
             toggleCart()
         }
     }
-
+    const dropButton = document.getElementById('dropdown-button')
     const cards = document.getElementsByClassName('card')
-    if (document.getElementById('dropdown-button').ariaExpanded === 'true') {
+    if (dropButton.ariaExpanded === 'true') {
 
         for (let i = 0; i < cards.length; i++) {
             cards[i].style.opacity = '0.5'
@@ -43,6 +40,7 @@ function fetchCatalog() {
                     catalog.push(entry)
                 })
                 localStorage.setItem('catalog', JSON.stringify(catalog))
+                // For developement:
                 // displayCatalog(catalog.slice(0, 10))
                 displayCatalog(catalog)
             })
@@ -53,6 +51,7 @@ function fetchCatalog() {
                 catalog.push(key)
             }
         })
+        // For developement:
         // displayCatalog(catalog.slice(0, 10))
         displayCatalog(catalog)
     }
@@ -284,14 +283,41 @@ function showToast(message) {
 
 function searchProducts(input) {
     const term = input.toUpperCase()
+    const regex = new RegExp(`^${term}`)
+
     const catalog = JSON.parse(localStorage.getItem('catalog'))
-    const toDisplay = []
+    const itemsToDisplay = []
+
 
     catalog.forEach(key => {
-        if (key != null && key.title.toUpperCase().includes(term)) {
-            toDisplay.push(key)
-        }
+        // ===================
+        // Check if whole search term matches title from beginning
+        // ===================
+        // if (key.title.toUpperCase().match(regex)) {
+        //     itemsToDisplay.push(key)
+        // }
+
+        // =================
+        // Check if any word in title contains search term from the beginning of the word
+        // =================
+        const keyWords = key.title.split(' ')
+
+        keyWords.forEach(word => {
+            if (word.toUpperCase().match(regex)) {
+                console.log(key.title)
+                if (!itemsToDisplay.includes(key)) {
+                    itemsToDisplay.push(key)
+                }
+            }
+        })
+
+        // ===================
+        // Check if search term is contained anywhere in the title
+        // ===================
+        // if (key != null && key.title.toUpperCase().includes(term)) {
+        //     itemsToDisplay.push(key)
+        // }
     })
 
-    displayCatalog(toDisplay)
+    displayCatalog(itemsToDisplay)
 }
