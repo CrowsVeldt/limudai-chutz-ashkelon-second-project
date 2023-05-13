@@ -40,14 +40,13 @@
         <img src="res/images/bookshelf.jpg" alt="Bookshelf" id="hero-image">
     </header>
 
-    <!-- product catalog -->
+    <!-- catalog container -->
     <div class="container d-flex align-items-center justify-content-center">
         <input type="text" name="search" id="search" oninput="searchProducts(this.value)" placeholder="Search by title"
             class="m-4 w-50 rounded" />
-
         <div class="dropdown" id="filter-dropdown">
-            <button onclick="dropdownOpen()" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" id="dropdown-button"
-                aria-expanded="false"></button>
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                id="dropdown-button" aria-expanded="false"></button>
             <ul class="dropdown-menu">
                 <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleFirst')">Title:
                         A to Z</button></li>
@@ -67,7 +66,6 @@
     <div class="container-fluid d-flex flex-wrap justify-content-center gap-3" id="catalog">
         <!-- catalog displayed here -->
     </div>
-
     <footer class="container d-flex flex-column flex-sm-row align-items-center py-5">
         <div>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio doloremque delectus nisi, est
