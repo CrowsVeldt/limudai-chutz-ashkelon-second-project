@@ -198,7 +198,7 @@ function updateCartNumber() {
     const cart = JSON.parse(localStorage.getItem('cart'))
     if (cart != null) {
         const cartLength = cart.length
-        cartNum.className = 'white-border'
+        cartNum.className = 'round-white-border'
         cartNum.innerHTML = cartLength
     } else {
         cartNum.className = ''

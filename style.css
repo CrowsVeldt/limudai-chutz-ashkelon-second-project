@@ -5,8 +5,8 @@ body {
     font-family: 'Mukta', sans-serif;
 }
 
-#cartIcon {
-    cursor: pointer;
+#cart-button {
+    user-select: none;
 }
 
 #cartNumber {
@@ -17,12 +17,13 @@ body {
 
     position: absolute;
     right: 48px;
-    top: 30px;
+    top: 27px;
     width: 20px;
     height: 20px;
+    z-index: -1;
 }
 
-.white-border {
+.round-white-border {
     border: 1px solid white;
     border-radius: 50%;
 }

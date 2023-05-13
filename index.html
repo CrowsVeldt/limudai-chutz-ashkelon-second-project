@@ -22,10 +22,12 @@
     <nav id="nav" class="navbar container-fluid bg-primary fixed-top">
         <span class="navbar-brand mx-4 text-light">Bookstore</span>
         <!-- shopping cart here -->
-        <span onclick="toggleCart()" id="cartIcon" class="material-symbols-outlined mx-4 text-light cart-focus">
-            shopping_cart
-            <p id="cartNumber"></p>
-        </span>
+        <div id="cart-button" onclick="toggleCart()" class="cart-focus pe-1 py-1" role="button">
+            <span id="cartIcon" class="material-symbols-outlined mx-4 text-light cart-focus">
+                shopping_cart
+                <span id="cartNumber" class="cart-focus"></span>
+            </span>
+        </div>
     </nav>
 
     <!-- header -->
@@ -49,12 +51,18 @@
                 Filter
             </button>
             <ul class="dropdown-menu">
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceHigh')">Price: Highest to Lowest</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceLow')">Price: Lowest to Highest</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'authorFirst')">Author's name: A to Z</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'authorLast')">Author's name: Z to A</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleFirst')">Title: A to Z</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleLast')">Title: Z to A</button></li>
+                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceHigh')">Price:
+                        Highest to Lowest</button></li>
+                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceLow')">Price:
+                        Lowest to Highest</button></li>
+                <li><button class="dropdown-item" type="button"
+                        onclick="displayCatalog(undefined, 'authorFirst')">Author's name: A to Z</button></li>
+                <li><button class="dropdown-item" type="button"
+                        onclick="displayCatalog(undefined, 'authorLast')">Author's name: Z to A</button></li>
+                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleFirst')">Title:
+                        A to Z</button></li>
+                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleLast')">Title:
+                        Z to A</button></li>
             </ul>
         </div>
     </div>
