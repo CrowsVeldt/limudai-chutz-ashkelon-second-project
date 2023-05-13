@@ -9,6 +9,12 @@ const priceFormat = new Intl.NumberFormat('en-US', {
     currency: 'ILS'
 })
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    updateCartNumber()
+    fetchCatalog()
+    debugger
+})
+
 document.addEventListener('click', (event) => {
     if (document.getElementById('cart')) {
         if (!event.target.classList.contains('cart-focus')) {
@@ -27,7 +33,8 @@ function fetchCatalog() {
                     catalog.push(entry)
                 })
                 localStorage.setItem('catalog', JSON.stringify(catalog))
-                displayCatalog(catalog.slice(0, 10))
+                // displayCatalog(catalog.slice(0, 10))
+                displayCatalog(catalog)
             })
     } else {
         const storedCat = JSON.parse(localStorage.getItem('catalog'))
@@ -39,7 +46,6 @@ function fetchCatalog() {
         // displayCatalog(catalog.slice(0, 10))
         displayCatalog(catalog)
     }
-
 }
 
 function toggleCart() {
@@ -76,7 +82,6 @@ function displayShoppingCart() {
     cart.appendChild(message)
 
     document.body.appendChild(cart)
-
 }
 
 function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sortMethod) {
@@ -84,7 +89,6 @@ function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sort
     if (catalog.hasChildNodes()) {
         catalog.innerHTML = ''
     }
-
     list.sort(sortCatalogBy(sortMethod)).forEach(item => makeProductCard(item))
 }
 
@@ -106,14 +110,16 @@ function sortCatalogBy(method = 'titleFirst') {
             sortFunction = (a, b) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
-                return aLast.localeCompare(bLast)}
+                return aLast.localeCompare(bLast)
+            }
             break
         case 'authorLast':
             dropdownButton.innerHTML = 'Author: Z to A'
             sortFunction = (a, b) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
-                return bLast.localeCompare(aLast)}
+                return bLast.localeCompare(aLast)
+            }
             break
         case 'titleFirst':
             dropdownButton.innerHTML = 'Title: A to Z'
@@ -131,7 +137,6 @@ function sortCatalogBy(method = 'titleFirst') {
 }
 
 function makeProductCard(deetz) {
-
     const card = document.createElement('div')
     card.classList.add('card', 'border-secondary')
     card.style.width = '18rem'
@@ -222,7 +227,6 @@ function addItemToCart(deetz) {
             localStorage.setItem('cart', JSON.stringify(cart))
             showToast(`Added ${deetz.title} to cart`)
         }
-
     } else {
         localStorage.setItem('cart', JSON.stringify([deetz]))
         showToast(`Added ${deetz.title} to cart`)
@@ -247,6 +251,7 @@ function removeItemFromCart(deetz) {
     if (JSON.parse(localStorage.getItem('cart')).length === 0) {
         localStorage.removeItem('cart')
     }
+
     updateCartNumber()
     displayShoppingCart()
 }
@@ -281,6 +286,3 @@ function searchProducts(input) {
     displayCatalog(toDisplay)
 }
 
-
-updateCartNumber()
-fetchCatalog()
