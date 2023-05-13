@@ -23,9 +23,9 @@
         <span class="navbar-brand mx-4 text-light">Bookstore</span>
         <!-- shopping cart here -->
         <div id="cart-button" onclick="toggleCart()" class="cart-focus pe-1 py-1" role="button">
-            <span id="cartIcon" class="material-symbols-outlined mx-4 text-light cart-focus">
+            <span id="cart-icon" class="material-symbols-outlined mx-4 text-light cart-focus">
                 shopping_cart
-                <span id="cartNumber" class="cart-focus"></span>
+                <span id="cart-number" class="cart-focus"></span>
             </span>
         </div>
     </nav>
@@ -33,11 +33,11 @@
     <!-- header -->
     <header
         class="container-fluid d-flex flex-column flex-sm-row text-center align-items-center align-items-sm-start p-5">
-        <div class="container" id="headLeft">
+        <div class="container" id="head-left">
             <h1 id="main-title">Bookstore</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
         </div>
-        <img src="res/images/bookshelf.jpg" alt="Bookshelf" id="heroImage">
+        <img src="res/images/bookshelf.jpg" alt="Bookshelf" id="hero-image">
     </header>
 
     <!-- product catalog -->
@@ -45,8 +45,8 @@
         <input type="text" name="search" id="search" oninput="searchProducts(this.value)" placeholder="Search by title"
             class="m-4 w-50 rounded" />
 
-        <div class="dropdown" id="filterDropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+        <div class="dropdown" id="filter-dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" id="dropdown-button"
                 aria-expanded="false">
                 Filter
             </button>
@@ -87,22 +87,22 @@
     </footer>
 
     <div class="container-fluid py-2 bg-primary" id="bottom">
-        <div class="container d-flex justify-content-around w-50" id="socialsContainer">
+        <div class="container d-flex justify-content-around w-50" id="socials-container">
             <a href="https://www.facebook.com">
                 <img src="res/icons/facebook - by freepik.png" alt="facebook logo"
-                    class="socialIcon bg-light rounded-circle" />
+                    class="social-icon bg-light rounded-circle" />
             </a>
             <a href="https://www.whatsapp.com">
                 <img src="res/icons/whatsapp - by freepik.png" alt="whatsapp logo"
-                    class="socialIcon bg-light rounded-circle" />
+                    class="social-icon bg-light rounded-circle" />
             </a>
             <a href="https://www.twitter.com">
                 <img src="res/icons/twitter - by bogdan rosu.png" alt="twitter logo"
-                    class="socialIcon bg-light rounded-circle" />
+                    class="social-icon bg-light rounded-circle" />
             </a>
             <a href="https://www.instagram.com">
                 <img src="res/icons/instagram - by freepik.png" alt="instagram logo"
-                    class="socialIcon bg-light rounded-circle" />
+                    class="social-icon bg-light rounded-circle" />
             </a>
         </div>
     </div>

@@ -9,7 +9,7 @@ body {
     user-select: none;
 }
 
-#cartNumber {
+#cart-number {
     font-family: 'Mukta', sans-serif;
     font-size: small;
     text-align: center;
@@ -36,17 +36,17 @@ body {
     width: 33vw;
 }
 
-#heroImage {
+#hero-image {
     height: 100%;
     width: 50vw;
     object-fit: fill;
 }
 
-.socialIcon {
+.social-icon {
     height: 35px;
 }
 
-.myToast {
+.my-toast {
     position: fixed;
     bottom: 20px;
     right: 20px;

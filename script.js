@@ -1,8 +1,8 @@
 // show ten items at a time?
 // with buttons to show next/previous ten?
 // search list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
-// fix cartNumber so it'll open the cart just like the icon
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
+// shade catalog when filter-dropdown is active
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -194,7 +194,7 @@ function makeCartItem(deetz) {
 }
 
 function updateCartNumber() {
-    const cartNum = document.getElementById('cartNumber')
+    const cartNum = document.getElementById('cart-number')
     const cart = JSON.parse(localStorage.getItem('cart'))
     if (cart != null) {
         const cartLength = cart.length
@@ -246,7 +246,7 @@ function removeItemFromCart(deetz) {
 
 function showToast(message) {
     const toast = document.createElement('div')
-    toast.classList.add('myToast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
+    toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
 
     const toastMessage = document.createElement('p')
     toastMessage.innerHTML = message
@@ -255,7 +255,7 @@ function showToast(message) {
     document.body.appendChild(toast)
 
     setTimeout(() => {
-        const target = document.getElementsByClassName('myToast')
+        const target = document.getElementsByClassName('my-toast')
         target[0].remove(target)
     }, 1250)
 }
