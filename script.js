@@ -260,7 +260,7 @@ function showToast(message) {
     }, 1250)
 }
 
-function filterProducts(input) {
+function searchProducts(input) {
     const term = input.toUpperCase()
     const catalog = JSON.parse(localStorage.getItem('catalog'))
     const toDisplay = []
