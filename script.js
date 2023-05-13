@@ -2,7 +2,7 @@
 // with buttons to show next/previous ten?
 // search list by word and not by any substring (i.e. 'he' should not return 'The'), use regex?
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
-// shade catalog when filter-dropdown is active
+// make elment to shade catalog when dropdown is open, partially opaque
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -12,7 +12,6 @@ const priceFormat = new Intl.NumberFormat('en-US', {
 document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber()
     fetchCatalog()
-    debugger
 })
 
 document.addEventListener('click', (event) => {
@@ -286,3 +285,13 @@ function searchProducts(input) {
     displayCatalog(toDisplay)
 }
 
+function dropdownOpen () {
+    const dropdownButton = document.getElementById('dropdown-button')
+    const dropdownOpen = dropdownButton.ariaExpanded
+    const catalog = document.getElementById('catalog')
+    if (dropdownOpen === 'true') {
+        catalog.style.backgroundColor = 'darkGray'
+    } else {
+        catalog.style.backgroundColor = ''
+    }
+}
