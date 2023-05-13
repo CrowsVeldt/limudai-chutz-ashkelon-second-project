@@ -90,30 +90,37 @@ function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sort
 
 function sortCatalogBy(method = 'titleFirst') {
     let sortFunction = () => { }
+    const dropdownButton = document.getElementById('dropdown-button')
 
     switch (method) {
         case 'priceHigh':
+            dropdownButton.innerHTML = 'Highest to Lowest'
             sortFunction = (a, b) => b.pages - a.pages
             break
         case 'priceLow':
+            dropdownButton.innerHTML = 'Lowest to Highest'
             sortFunction = (a, b) => a.pages - b.pages
             break
         case 'authorFirst':
+            dropdownButton.innerHTML = 'Author: A to Z'
             sortFunction = (a, b) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
                 return aLast.localeCompare(bLast)}
             break
         case 'authorLast':
+            dropdownButton.innerHTML = 'Author: Z to A'
             sortFunction = (a, b) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
                 return bLast.localeCompare(aLast)}
             break
         case 'titleFirst':
+            dropdownButton.innerHTML = 'Title: A to Z'
             sortFunction = (a, b) => a.title.localeCompare(b.title)
             break
         case 'titleLast':
+            dropdownButton.innerHTML = 'Title: Z to A'
             sortFunction = (a, b) => b.title.localeCompare(a.title)
             break
         default:

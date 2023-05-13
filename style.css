@@ -42,6 +42,10 @@ body {
     object-fit: fill;
 }
 
+#dropdown-button {
+    width: 155px;
+}
+
 .social-icon {
     height: 35px;
 }
