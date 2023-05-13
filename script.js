@@ -290,16 +290,6 @@ function searchProducts(input) {
 
 
     catalog.forEach(key => {
-        // ===================
-        // Check if whole search term matches title from beginning
-        // ===================
-        // if (key.title.toUpperCase().match(regex)) {
-        //     itemsToDisplay.push(key)
-        // }
-
-        // =================
-        // Check if any word in title contains search term from the beginning of the word
-        // =================
         const keyWords = key.title.split(' ')
 
         keyWords.forEach(word => {
@@ -310,13 +300,6 @@ function searchProducts(input) {
                 }
             }
         })
-
-        // ===================
-        // Check if search term is contained anywhere in the title
-        // ===================
-        // if (key != null && key.title.toUpperCase().includes(term)) {
-        //     itemsToDisplay.push(key)
-        // }
     })
 
     displayCatalog(itemsToDisplay)
