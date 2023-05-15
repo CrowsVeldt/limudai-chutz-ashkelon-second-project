@@ -77,21 +77,24 @@ function displayShoppingCart() {
     cart.style.overflow = 'scroll'
     cart.style.maxHeight = '90%'
 
+    const checkout = document.createElement('span')
+    const checkoutButton = `<button class="btn btn-danger mb-3" onclick="">Go to Checkout</button>`
+
     const message = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
     if (localStorage.getItem('cart') != null) {
         let amount = 0
+        checkout.style.display = 'inline-block'
         JSON.parse(localStorage.getItem('cart')).forEach(item => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
             cart.appendChild(makeCartItem(item))
+
         })
     } else {
         message.innerHTML = "Nothing here yet!"
+        checkout.style.display = 'none'
     }
-
-    const checkout = document.createElement('span')
-    const checkoutButton = `<button class="btn btn-info" onclick="">Go to Checkout</button>`
 
     cart.appendChild(message)
     checkout.innerHTML = checkoutButton
