@@ -78,7 +78,7 @@ function displayShoppingCart() {
     cart.style.maxHeight = '90%'
 
     const checkout = document.createElement('span')
-    const checkoutButton = `<button class="btn btn-danger mb-3" onclick="">Go to Checkout</button>`
+    const checkoutButton = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`
 
     const message = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
@@ -101,3 +101,33 @@ function displayShoppingCart() {
     cart.appendChild(checkout)
     document.body.appendChild(cart)
 }
+
+function showToast(message) {
+    const toast = document.createElement('div')
+    toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
+
+    const toastMessage = document.createElement('p')
+    toastMessage.innerHTML = message
+
+    toast.appendChild(toastMessage)
+    document.body.appendChild(toast)
+
+    setTimeout(() => {
+        const target = document.getElementsByClassName('my-toast')
+        target[0].remove(target)
+    }, 1250)
+}
+
+function makeCheckoutPage () {
+    const checkout = document.createElement('div')
+    checkout.id = 'checkout-page'
+    checkout.style.display = 'block'
+    checkout.classList.add('rounded', 'checkout-focus')
+    const message = document.createElement('h2')
+
+    message.innerHTML = 'Nothing here yet'
+
+    checkout.appendChild(message)
+    document.body.appendChild(checkout)
+}
+

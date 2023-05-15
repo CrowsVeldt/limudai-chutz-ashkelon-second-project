@@ -16,6 +16,13 @@ document.addEventListener('click', (event) => {
             toggleCart()
         }
     }
+
+    if (document.getElementById('checkout-page')) {
+        if (!event.target.classList.contains('checkout-focus')) {
+            toggleCheckout()
+        }
+    }
+
     const dropButton = document.getElementById('dropdown-button')
     const cards = document.getElementsByClassName('card')
     if (dropButton.ariaExpanded === 'true') {
@@ -62,6 +69,14 @@ function toggleCart() {
         document.getElementById('cart').remove()
     } else {
         displayShoppingCart()
+    }
+}
+
+function toggleCheckout() {
+    if (document.getElementById('checkout-page')) {
+        document.getElementById('checkout-page').remove()
+    } else {
+        makeCheckoutPage()
     }
 }
 
@@ -166,22 +181,6 @@ function removeItemFromCart(deetz) {
 
     updateCartNumber()
     displayShoppingCart()
-}
-
-function showToast(message) {
-    const toast = document.createElement('div')
-    toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
-
-    const toastMessage = document.createElement('p')
-    toastMessage.innerHTML = message
-
-    toast.appendChild(toastMessage)
-    document.body.appendChild(toast)
-
-    setTimeout(() => {
-        const target = document.getElementsByClassName('my-toast')
-        target[0].remove(target)
-    }, 1250)
 }
 
 function searchProducts(input) {
