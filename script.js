@@ -1,4 +1,6 @@
+// use cart items to populate the checkout page
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
+// toggle 
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -29,10 +31,12 @@ document.addEventListener('click', (event) => {
 
         for (let i = 0; i < cards.length; i++) {
             cards[i].style.opacity = '0.5'
+            // cards[i].style.filter = 'blur(3px)'
         }
     } else {
         for (let i = 0; i < cards.length; i++) {
             cards[i].style.opacity = '1'
+            // cards[i].style.filter = ''
         }
     }
 })
@@ -75,7 +79,17 @@ function toggleCart() {
 function toggleCheckout() {
     if (document.getElementById('checkout-page')) {
         document.getElementById('checkout-page').remove()
+        for (let child in document.body.children) {
+            if (typeof document.body.children[child] === 'object') {
+                    document.body.children[child].style.filter = ''
+            }
+        }
     } else {
+        for (let child in document.body.children) {
+            if (typeof document.body.children[child] === 'object') {
+                    document.body.children[child].style.filter = 'blur(5px)'
+            }
+        }
         makeCheckoutPage()
     }
 }
