@@ -214,13 +214,13 @@ function addItemToCart(deetz) {
     updateCartNumber()
 }
 
-function removeItemFromCart(deetz) {
+function removeItemFromCart(title) {
     let cart = JSON.parse(localStorage.getItem('cart'))
-    const index = cart.findIndex(e => e.title === deetz.title)
+    const index = cart.findIndex(i => i.title === title)
 
     if (index >= 0) {
         cart.splice(index, 1)
-        showToast(`Removed ${deetz.title} from cart`)
+        showToast(`Removed ${title} from cart`)
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 

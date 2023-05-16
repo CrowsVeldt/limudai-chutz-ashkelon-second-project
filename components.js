@@ -46,23 +46,26 @@ function makeCartItem(deetz) {
     const item = document.createElement('div')
     item.classList.add('d-flex', 'flex-column', 'align-items-start', 'shadow-sm', 'cart-focus', 'p-2')
 
-    const title = document.createElement('h6')
-    title.innerHTML = deetz.title
-    title.className = 'cart-focus'
+    item.innerHTML = `<h6 class="cart-focus">${deetz.title}</h6>
+                    <p class="cart-focus">${priceFormat.format(deetz.pages)}</p>`
 
-    const price = document.createElement('p')
-    price.innerHTML = priceFormat.format(deetz.pages)
-    price.className = 'cart-focus'
+    // const title = document.createElement('h6')
+    // title.innerHTML = deetz.title
+    // title.className = 'cart-focus'
+
+    // const price = document.createElement('p')
+    // price.innerHTML = priceFormat.format(deetz.pages)
+    // price.className = 'cart-focus'
 
     const remove = document.createElement('button')
     remove.innerHTML = 'Remove from cart'
     remove.classList.add('cart-focus', 'btn', 'btn-secondary')
     remove.addEventListener('click', () => {
-        removeItemFromCart(deetz)
+        removeItemFromCart(deetz.title)
     })
 
-    item.appendChild(title)
-    item.appendChild(price)
+    // item.appendChild(title)
+    // item.appendChild(price)
     item.appendChild(remove)
     return item
 }
