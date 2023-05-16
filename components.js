@@ -77,11 +77,7 @@ function showToast(message) {
 }
 
 function makeCheckoutPage () {
-    const checkout = document.createElement('div')
-    checkout.id = 'checkout-page'
-    checkout.style.display = 'block'
-    checkout.classList.add('rounded', 'checkout-focus')
-
+    const checkout = document.getElementById('checkout-page')
     const message = document.createElement('h2')
 
     if (localStorage.getItem('cart') != null) {
@@ -89,13 +85,11 @@ function makeCheckoutPage () {
         JSON.parse(localStorage.getItem('cart')).forEach(item => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
-            // checkout.appendChild(makeCartItem(item))
         })
     } else {
         message.innerHTML = "Nothing here yet!"
     }
 
     checkout.appendChild(message)
-    document.body.appendChild(checkout)
 }
 

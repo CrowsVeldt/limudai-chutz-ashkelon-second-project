@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     fetchCatalog()
 })
 
+// Close shopping cart if click outside of it
 document.addEventListener('click', (event) => {
     if (document.getElementById('cart')) {
         if (!event.target.classList.contains('cart-focus')) {
@@ -19,12 +20,14 @@ document.addEventListener('click', (event) => {
         }
     }
 
-    if (document.getElementById('checkout-page')) {
+    // close checkout page if click outside of it
+    if (document.getElementById('checkout-page').style.display === 'block') {
         if (!event.target.classList.contains('checkout-focus')) {
             toggleCheckout()
         }
     }
 
+    // if filter dropdown is open fade out catalog
     const dropButton = document.getElementById('dropdown-button')
     const cards = document.getElementsByClassName('card')
     if (dropButton.ariaExpanded === 'true') {
@@ -77,17 +80,21 @@ function toggleCart() {
 }
 
 function toggleCheckout() {
-    if (document.getElementById('checkout-page')) {
-        document.getElementById('checkout-page').remove()
-        for (let child in document.body.children) {
-            if (typeof document.body.children[child] === 'object') {
-                    document.body.children[child].style.filter = ''
+    const checkout = document.getElementById('checkout-page')
+    const children = document.body.children
+
+    if (checkout.style.display === 'block') {
+        checkout.style.display = 'none'
+        for (let child in children) {
+            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
+                children[child].style.filter = ''
             }
         }
     } else {
-        for (let child in document.body.children) {
-            if (typeof document.body.children[child] === 'object') {
-                    document.body.children[child].style.filter = 'blur(5px)'
+        checkout.style.display = 'block'
+        for (let child in children) {
+            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
+                children[child].style.filter = 'blur(5px)'
             }
         }
         makeCheckoutPage()
