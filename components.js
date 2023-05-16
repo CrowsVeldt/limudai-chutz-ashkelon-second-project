@@ -49,14 +49,6 @@ function makeCartItem(deetz) {
     item.innerHTML = `<h6 class="cart-focus">${deetz.title}</h6>
                     <p class="cart-focus">${priceFormat.format(deetz.pages)}</p>`
 
-    // const title = document.createElement('h6')
-    // title.innerHTML = deetz.title
-    // title.className = 'cart-focus'
-
-    // const price = document.createElement('p')
-    // price.innerHTML = priceFormat.format(deetz.pages)
-    // price.className = 'cart-focus'
-
     const remove = document.createElement('button')
     remove.innerHTML = 'Remove from cart'
     remove.classList.add('cart-focus', 'btn', 'btn-secondary')
@@ -64,8 +56,6 @@ function makeCartItem(deetz) {
         removeItemFromCart(deetz.title)
     })
 
-    // item.appendChild(title)
-    // item.appendChild(price)
     item.appendChild(remove)
     return item
 }
@@ -91,19 +81,19 @@ function makeCheckoutPage () {
     checkout.id = 'checkout-page'
     checkout.style.display = 'block'
     checkout.classList.add('rounded', 'checkout-focus')
+
     const message = document.createElement('h2')
 
-    // if (localStorage.getItem('cart') != null) {
-    //     let amount = 0
-    //     JSON.parse(localStorage.getItem('cart')).forEach(item => {
-    //         amount += item.pages
-    //         message.innerHTML = `Total: ${priceFormat.format(amount)}`
-    //         checkout.appendChild(makeCartItem(item))
-
-    //     })
-    // } else {
-    //     message.innerHTML = "Nothing here yet!"
-    // }
+    if (localStorage.getItem('cart') != null) {
+        let amount = 0
+        JSON.parse(localStorage.getItem('cart')).forEach(item => {
+            amount += item.pages
+            message.innerHTML = `Total: ${priceFormat.format(amount)}`
+            // checkout.appendChild(makeCartItem(item))
+        })
+    } else {
+        message.innerHTML = "Nothing here yet!"
+    }
 
     checkout.appendChild(message)
     document.body.appendChild(checkout)

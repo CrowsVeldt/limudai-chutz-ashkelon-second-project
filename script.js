@@ -1,6 +1,6 @@
-// use cart items to populate the checkout page
+// make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
-// toggle 
+// refactor checkout to be in html, switch display between none/block when button pressed
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -118,10 +118,10 @@ function displayShoppingCart() {
     const message = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
     if (localStorage.getItem('cart') != null) {
-        let amount = 0
+        let price = 0
         JSON.parse(localStorage.getItem('cart')).forEach(item => {
-            amount += item.pages
-            message.innerHTML = `Total: ${priceFormat.format(amount)}`
+            price += item.pages
+            message.innerHTML = `Total: ${priceFormat.format(price)}`
             cart.appendChild(makeCartItem(item))
 
         })
@@ -214,13 +214,13 @@ function addItemToCart(deetz) {
     updateCartNumber()
 }
 
-function removeItemFromCart(title) {
+function removeItemFromCart(deetz) {
     let cart = JSON.parse(localStorage.getItem('cart'))
-    const index = cart.findIndex(i => i.title === title)
+    const index = cart.findIndex(e => e.title === deetz.title)
 
     if (index >= 0) {
         cart.splice(index, 1)
-        showToast(`Removed ${title} from cart`)
+        showToast(`Removed ${deetz.title} from cart`)
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
