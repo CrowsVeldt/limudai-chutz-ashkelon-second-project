@@ -102,6 +102,41 @@ function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sort
     list.sort(sortCatalogBy(sortMethod)).forEach(item => makeProductCard(item))
 }
 
+function displayShoppingCart() {
+    if (document.getElementById('cart')) {
+        document.getElementById('cart').remove()
+    }
+    const cart = document.createElement('div')
+    cart.id = 'cart'
+    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus')
+    cart.style.overflow = 'scroll'
+    cart.style.maxHeight = '90%'
+
+    const checkout = document.createElement('span')
+    const checkoutButton = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`
+
+    const message = document.createElement('h5')
+    message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
+    if (localStorage.getItem('cart') != null) {
+        let amount = 0
+        JSON.parse(localStorage.getItem('cart')).forEach(item => {
+            amount += item.pages
+            message.innerHTML = `Total: ${priceFormat.format(amount)}`
+            cart.appendChild(makeCartItem(item))
+
+        })
+        checkout.style.display = 'inline-block'
+    } else {
+        message.innerHTML = "Nothing here yet!"
+        checkout.style.display = 'none'
+    }
+
+    cart.appendChild(message)
+    checkout.innerHTML = checkoutButton
+    cart.appendChild(checkout)
+    document.body.appendChild(cart)
+}
+
 function sortCatalogBy(method = 'titleFirst') {
     let sortFunction = () => { }
     const dropdownButton = document.getElementById('dropdown-button')
