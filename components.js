@@ -77,7 +77,7 @@ function showToast(message) {
 }
 
 function makeCheckoutPage () {
-    const rightPanel = document.getElementById('checkout-right-panel')
+    const checkout = document.getElementById('checkout-page')
     const message = document.createElement('h2')
 
     if (localStorage.getItem('cart') != null) {
@@ -90,6 +90,6 @@ function makeCheckoutPage () {
         message.innerHTML = "Nothing here yet!"
     }
 
-    rightPanel.appendChild(message)
+    checkout.appendChild(message)
 }
 

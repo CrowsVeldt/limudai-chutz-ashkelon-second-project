@@ -21,7 +21,7 @@ document.addEventListener('click', (event) => {
     }
 
     // close checkout page if click outside of it
-    if (document.getElementById('checkout-page').style.display === 'block') {
+    if (document.getElementById('checkout-page').style.display !== 'none') {
         if (!event.target.classList.contains('checkout-focus')) {
             toggleCheckout()
         }
@@ -83,15 +83,16 @@ function toggleCheckout() {
     const checkout = document.getElementById('checkout-page')
     const children = document.body.children
 
-    if (checkout.style.display === 'block') {
+    if (checkout.style.display !== 'none') {
         checkout.style.display = 'none'
+        checkout.innerHTML = ''
         for (let child in children) {
             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
                 children[child].style.filter = ''
             }
         }
     } else {
-        checkout.style.display = 'block'
+        checkout.style.display = 'flex'
         for (let child in children) {
             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
                 children[child].style.filter = 'blur(5px)'
