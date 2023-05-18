@@ -60,6 +60,21 @@ function makeCartItem(deetz) {
     return item
 }
 
+function makeCheckoutItem(deetz) {
+    const item = document.createElement('div')
+    item.classList.add('d-flex', 'justify-content-around', 'text-start')
+
+    const title = document.createElement('p')
+    title.innerHTML = deetz.title
+
+    const price = document.createElement('p')
+    price.innerHTML = priceFormat.format(deetz.pages)
+
+    item.appendChild(title)
+    item.appendChild(price)
+    return item
+}
+
 function showToast(message) {
     const toast = document.createElement('div')
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
@@ -78,6 +93,13 @@ function showToast(message) {
 
 function makeCheckoutPage () {
     const checkout = document.getElementById('checkout-page')
+
+    const leftPanel = document.createElement('div')
+    const rightPanel = document.createElement('div')
+    leftPanel.classList.add('col')
+    rightPanel.classList.add('col')
+
+    const purchaseList = document.createElement('div')
     const message = document.createElement('h2')
 
     if (localStorage.getItem('cart') != null) {
@@ -85,11 +107,15 @@ function makeCheckoutPage () {
         JSON.parse(localStorage.getItem('cart')).forEach(item => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
+            purchaseList.append(makeCheckoutItem(item))
         })
     } else {
         message.innerHTML = "Nothing here yet!"
     }
 
-    checkout.appendChild(message)
+    leftPanel.appendChild(purchaseList)
+    rightPanel.appendChild(message)
+    checkout.appendChild(leftPanel)
+    checkout.appendChild(rightPanel)
 }
 
