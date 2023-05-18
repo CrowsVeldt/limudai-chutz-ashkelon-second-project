@@ -60,21 +60,6 @@ function makeCartItem(deetz) {
     return item
 }
 
-function makeCheckoutItem(deetz) {
-    const item = document.createElement('div')
-    item.classList.add('d-flex', 'justify-content-around', 'text-start')
-
-    const title = document.createElement('p')
-    title.innerHTML = deetz.title
-
-    const price = document.createElement('p')
-    price.innerHTML = priceFormat.format(deetz.pages)
-
-    item.appendChild(title)
-    item.appendChild(price)
-    return item
-}
-
 function showToast(message) {
     const toast = document.createElement('div')
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
@@ -91,16 +76,34 @@ function showToast(message) {
     }, 1250)
 }
 
+function makeCheckoutItem(deetz) {
+    const item = document.createElement('div')
+    item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus')
+
+    const title = document.createElement('p')
+    title.innerHTML = deetz.title
+    title.classList.add('checkout-focus')
+
+    const price = document.createElement('p')
+    price.innerHTML = priceFormat.format(deetz.pages)
+    price.classList.add('checkout-focus')
+
+    item.appendChild(title)
+    item.appendChild(price)
+    return item
+}
+
 function makeCheckoutPage () {
     const checkout = document.getElementById('checkout-page')
 
     const leftPanel = document.createElement('div')
     const rightPanel = document.createElement('div')
-    leftPanel.classList.add('col')
-    rightPanel.classList.add('col')
+    leftPanel.classList.add('col', 'checkout-focus')
+    rightPanel.classList.add('col', 'checkout-focus')
 
     const purchaseList = document.createElement('div')
     const message = document.createElement('h2')
+    message.classList.add('ms-5', 'checkout-focus')
 
     if (localStorage.getItem('cart') != null) {
         let amount = 0
@@ -114,7 +117,7 @@ function makeCheckoutPage () {
     }
 
     leftPanel.appendChild(purchaseList)
-    rightPanel.appendChild(message)
+    leftPanel.appendChild(message)
     checkout.appendChild(leftPanel)
     checkout.appendChild(rightPanel)
 }
