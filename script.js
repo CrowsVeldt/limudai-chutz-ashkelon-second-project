@@ -1,6 +1,5 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
-// refactor checkout to be in html, switch display between none/block when button pressed
 
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
