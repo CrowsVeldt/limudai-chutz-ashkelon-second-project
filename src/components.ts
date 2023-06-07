@@ -5,7 +5,7 @@ function makeProductCard(deetz) {
 
     const img = document.createElement('img')
     img.className = 'card-img-top'
-    img.src = 'res/images/default.jpeg'
+    img.src = '../res/images/default.jpeg'
     img.alt = 'book'
 
     const cardBody = document.createElement('div')
