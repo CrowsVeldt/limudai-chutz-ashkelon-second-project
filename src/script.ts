@@ -27,8 +27,8 @@ document.addEventListener('click', (event) => {
     }
 
     // if filter dropdown is open fade out catalog
-    const dropButton = document.getElementById('dropdown-button')
-    const cards = document.getElementsByClassName('card')
+    const dropButton: HTMLElement | null = document.getElementById('dropdown-button')
+    const cards: HTMLCollection = document.getElementsByClassName('card')
     if (dropButton.ariaExpanded === 'true') {
 
         for (let i = 0; i < cards.length; i++) {
@@ -58,7 +58,7 @@ function fetchCatalog(): void {
                 displayCatalog(catalog)
             })
     } else {
-        const storedCat = JSON.parse(localStorage.getItem('catalog'))
+        const storedCat: object[] = JSON.parse(localStorage.getItem('catalog'))
         storedCat.forEach(key => {
             if (key != null) {
                 catalog.push(key)
@@ -70,17 +70,18 @@ function fetchCatalog(): void {
     }
 }
 
-function toggleCart() {
-    if (document.getElementById('cart')) {
-        document.getElementById('cart').remove()
+function toggleCart(): void {
+    const cartElement: HTMLElement | null = document.getElementById('cart')
+    if (cartElement) {
+        cartElement.remove()
     } else {
         displayShoppingCart()
     }
 }
 
 function toggleCheckout() {
-    const checkout = document.getElementById('checkout-page')
-    const children = document.body.children
+    const checkout: HTMLElement | null = document.getElementById('checkout-page')
+    const children: HTMLCollection = document.body.children
 
     if (checkout.style.display !== 'none') {
         checkout.style.display = 'none'
@@ -101,28 +102,30 @@ function toggleCheckout() {
     }
 }
 
-function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sortMethod) {
+function displayCatalog(list: object[] = JSON.parse(localStorage.getItem('catalog')), 
+                        sortMethod? : string): void {
+                            console.log(list)
     const catalog = document.getElementById('catalog')
     if (catalog.hasChildNodes()) {
         catalog.innerHTML = ''
     }
-    list.sort(sortCatalogBy(sortMethod)).forEach(item => makeProductCard(item))
+    list.sort(sortCatalogBy(sortMethod)).forEach((item: object) => makeProductCard(item))
 }
 
 function displayShoppingCart() {
     if (document.getElementById('cart')) {
         document.getElementById('cart').remove()
     }
-    const cart = document.createElement('div')
+    const cart: HTMLDivElement = document.createElement('div')
     cart.id = 'cart'
     cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus')
     cart.style.overflow = 'scroll'
     cart.style.maxHeight = '90%'
 
-    const checkout = document.createElement('span')
-    const checkoutButton = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`
+    const checkout: HTMLSpanElement = document.createElement('span')
+    const checkoutButton: string = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`
 
-    const message = document.createElement('h5')
+    const message: HTMLHeadingElement = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
     if (localStorage.getItem('cart') != null) {
         let price = 0
@@ -144,9 +147,9 @@ function displayShoppingCart() {
     document.body.appendChild(cart)
 }
 
-function sortCatalogBy(method = 'titleFirst') {
+function sortCatalogBy(method: string = 'titleFirst'): () => void {
     let sortFunction = () => { }
-    const dropdownButton = document.getElementById('dropdown-button')
+    const dropdownButton: HTMLElement | null = document.getElementById('dropdown-button')
 
     switch (method) {
         case 'priceHigh':
@@ -188,8 +191,8 @@ function sortCatalogBy(method = 'titleFirst') {
     return sortFunction
 }
 
-function updateCartNumber() {
-    const cartNum = document.getElementById('cart-number')
+function updateCartNumber(): void {
+    const cartNum: HTMLElement| null = document.getElementById('cart-number')
     const cart = JSON.parse(localStorage.getItem('cart'))
     if (cart != null) {
         const cartLength = cart.length
@@ -201,7 +204,7 @@ function updateCartNumber() {
     }
 }
 
-function addItemToCart(deetz) {
+function addItemToCart(deetz: object): void {
     let cart = JSON.parse(localStorage.getItem('cart'))
 
     if (cart != null) {
@@ -221,9 +224,9 @@ function addItemToCart(deetz) {
     updateCartNumber()
 }
 
-function removeItemFromCart(title) {
+function removeItemFromCart(title: string): void {
     let cart = JSON.parse(localStorage.getItem('cart'))
-    const index = cart.findIndex(i => i.title === title)
+    const index = cart.findIndex((i) => i.title === title)
 
     if (index >= 0) {
         cart.splice(index, 1)
@@ -239,18 +242,18 @@ function removeItemFromCart(title) {
     displayShoppingCart()
 }
 
-function searchProducts(input) {
-    const term = input.toUpperCase()
-    const regex = new RegExp(`^${term}`)
+function searchProducts(input: string): void {
+    const term: string = input.toUpperCase()
+    const regex: RegExp = new RegExp(`^${term}`)
 
     const catalog = JSON.parse(localStorage.getItem('catalog'))
-    const itemsToDisplay = []
+    const itemsToDisplay: object[] = []
 
 
-    catalog.forEach(key => {
+    catalog.forEach((key: object) => {
         const keyWords = key.title.split(' ')
 
-        keyWords.forEach(word => {
+        keyWords.forEach((word: string) => {
             if (word.toUpperCase().match(regex)) {
                 console.log(key.title)
                 if (!itemsToDisplay.includes(key)) {

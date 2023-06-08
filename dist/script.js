@@ -66,8 +66,9 @@ function fetchCatalog() {
     }
 }
 function toggleCart() {
-    if (document.getElementById('cart')) {
-        document.getElementById('cart').remove();
+    const cartElement = document.getElementById('cart');
+    if (cartElement) {
+        cartElement.remove();
     }
     else {
         displayShoppingCart();
@@ -96,11 +97,12 @@ function toggleCheckout() {
     }
 }
 function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sortMethod) {
+    console.log(list);
     const catalog = document.getElementById('catalog');
     if (catalog.hasChildNodes()) {
         catalog.innerHTML = '';
     }
-    list.sort(sortCatalogBy(sortMethod)).forEach(item => makeProductCard(item));
+    list.sort(sortCatalogBy(sortMethod)).forEach((item) => makeProductCard(item));
 }
 function displayShoppingCart() {
     if (document.getElementById('cart')) {
@@ -207,7 +209,7 @@ function addItemToCart(deetz) {
 }
 function removeItemFromCart(title) {
     let cart = JSON.parse(localStorage.getItem('cart'));
-    const index = cart.findIndex(i => i.title === title);
+    const index = cart.findIndex((i) => i.title === title);
     if (index >= 0) {
         cart.splice(index, 1);
         showToast(`Removed ${title} from cart`);
@@ -224,9 +226,9 @@ function searchProducts(input) {
     const regex = new RegExp(`^${term}`);
     const catalog = JSON.parse(localStorage.getItem('catalog'));
     const itemsToDisplay = [];
-    catalog.forEach(key => {
+    catalog.forEach((key) => {
         const keyWords = key.title.split(' ');
-        keyWords.forEach(word => {
+        keyWords.forEach((word) => {
             if (word.toUpperCase().match(regex)) {
                 console.log(key.title);
                 if (!itemsToDisplay.includes(key)) {
