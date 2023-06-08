@@ -49,7 +49,7 @@ function fetchCatalog(): void {
         fetch('../catalog.json')
             .then(response => response.json())
             .then(data => {
-                data.forEach((entry, index) => {
+                data.forEach((entry: object) => {
                     catalog.push(entry)
                 })
                 localStorage.setItem('catalog', JSON.stringify(catalog))
@@ -146,22 +146,24 @@ function displayShoppingCart() {
     document.body.appendChild(cart)
 }
 
+type Sort = (a: BookDetails, b: BookDetails) => number;
+
 function sortCatalogBy(method: string = 'titleFirst'): () => void {
-    let sortFunction = () => { }
+    let sortFunction: Sort
     const dropdownButton: HTMLElement | null = document.getElementById('dropdown-button')
 
     switch (method) {
         case 'priceHigh':
             dropdownButton.innerHTML = 'Highest to Lowest'
-            sortFunction = (a, b) => b.pages - a.pages
+            sortFunction = (a: BookDetails, b: BookDetails) => b.pages - a.pages
             break
         case 'priceLow':
             dropdownButton.innerHTML = 'Lowest to Highest'
-            sortFunction = (a, b) => a.pages - b.pages
+            sortFunction = (a: BookDetails, b: BookDetails) => a.pages - b.pages
             break
         case 'authorFirst':
             dropdownButton.innerHTML = 'Author: A to Z'
-            sortFunction = (a, b) => {
+            sortFunction = (a: BookDetails, b: BookDetails) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
                 return aLast.localeCompare(bLast)
@@ -169,7 +171,7 @@ function sortCatalogBy(method: string = 'titleFirst'): () => void {
             break
         case 'authorLast':
             dropdownButton.innerHTML = 'Author: Z to A'
-            sortFunction = (a, b) => {
+            sortFunction = (a: BookDetails, b: BookDetails) => {
                 const aLast = a.author.split(' ').slice(-1)[0]
                 const bLast = b.author.split(' ').slice(-1)[0]
                 return bLast.localeCompare(aLast)
@@ -177,11 +179,11 @@ function sortCatalogBy(method: string = 'titleFirst'): () => void {
             break
         case 'titleFirst':
             dropdownButton.innerHTML = 'Title: A to Z'
-            sortFunction = (a, b) => a.title.localeCompare(b.title)
+            sortFunction = (a: BookDetails, b: BookDetails) => a.title.localeCompare(b.title)
             break
         case 'titleLast':
             dropdownButton.innerHTML = 'Title: Z to A'
-            sortFunction = (a, b) => b.title.localeCompare(a.title)
+            sortFunction = (a: BookDetails, b: BookDetails) => b.title.localeCompare(a.title)
             break
         default:
             console.error('no sort method supplied')
@@ -203,11 +205,11 @@ function updateCartNumber(): void {
     }
 }
 
-function addItemToCart(deetz: object): void {
+function addItemToCart(deetz: BookDetails): void {
     let cart = JSON.parse(localStorage.getItem('cart'))
 
     if (cart != null) {
-        if (!cart.some(e => e.title === deetz.title)) {
+        if (!cart.some((e: BookDetails) => e.title === deetz.title)) {
             cart.push(deetz)
             localStorage.setItem('cart', JSON.stringify(cart))
             showToast(`Added ${deetz.title} to cart`)
@@ -249,8 +251,8 @@ function searchProducts(input: string): void {
     const itemsToDisplay: object[] = []
 
 
-    catalog.forEach((key: object) => {
-        const keyWords = key.title.split(' ')
+    catalog.forEach((item: BookDetails) => {
+        const keyWords = item.title.split(' ')
 
         keyWords.forEach((word: string) => {
             if (word.toUpperCase().match(regex)) {
