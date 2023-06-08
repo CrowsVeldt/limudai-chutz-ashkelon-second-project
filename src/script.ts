@@ -1,7 +1,7 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 
-const priceFormat = new Intl.NumberFormat('en-US', {
+const priceFormat: Intl.NumberFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
 })
@@ -43,8 +43,8 @@ document.addEventListener('click', (event) => {
     }
 })
 
-function fetchCatalog() {
-    let catalog = []
+function fetchCatalog(): void {
+    let catalog: object[] = []
     if (localStorage.length === 0) {
         fetch('../catalog.json')
             .then(response => response.json())

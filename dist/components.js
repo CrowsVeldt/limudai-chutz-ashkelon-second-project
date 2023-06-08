@@ -1,4 +1,5 @@
 "use strict";
+// make type/interface for deetz
 function makeProductCard(deetz) {
     const card = document.createElement('div');
     card.classList.add('card', 'border-secondary');
@@ -56,8 +57,7 @@ function showToast(message) {
     toast.appendChild(toastMessage);
     document.body.appendChild(toast);
     setTimeout(() => {
-        const target = document.getElementsByClassName('my-toast');
-        target[0].remove(target);
+        document.getElementsByClassName('my-toast')[0].remove();
     }, 1250);
 }
 function makeCheckoutItem(deetz) {
@@ -84,7 +84,7 @@ function makeCheckoutPage() {
     message.classList.add('ms-5', 'checkout-focus');
     if (localStorage.getItem('cart') != null) {
         let amount = 0;
-        JSON.parse(localStorage.getItem('cart')).forEach(item => {
+        JSON.parse(localStorage.getItem('cart')).forEach((item) => {
             amount += item.pages;
             message.innerHTML = `Total: ${priceFormat.format(amount)}`;
             purchaseList.append(makeCheckoutItem(item));
@@ -95,6 +95,8 @@ function makeCheckoutPage() {
     }
     leftPanel.appendChild(purchaseList);
     leftPanel.appendChild(message);
-    checkout.appendChild(leftPanel);
-    checkout.appendChild(rightPanel);
+    if (checkout) {
+        checkout.appendChild(leftPanel);
+        checkout.appendChild(rightPanel);
+    }
 }

@@ -1,31 +1,33 @@
-function makeProductCard(deetz) {
-    const card = document.createElement('div')
+// make type/interface for deetz
+
+function makeProductCard(deetz: object): void {
+    const card: HTMLDivElement = document.createElement('div')
     card.classList.add('card', 'border-secondary')
     card.style.width = '18rem'
 
-    const img = document.createElement('img')
+    const img: HTMLImageElement = document.createElement('img')
     img.className = 'card-img-top'
     img.src = '../res/images/default.jpeg'
     img.alt = 'book'
 
-    const cardBody = document.createElement('div')
+    const cardBody: HTMLDivElement = document.createElement('div')
     cardBody.className = 'card-body'
 
-    const title = document.createElement('h5')
+    const title: HTMLHeadingElement = document.createElement('h5')
     title.className = "card-title"
     title.innerHTML = deetz.title
 
-    const author = document.createElement('p')
+    const author: HTMLParagraphElement = document.createElement('p')
     const authorSplit = deetz.author.split(' ')
     const lastName = authorSplit.pop()
     const firstName = authorSplit.length > 0 ? ', '.concat(authorSplit.join(' ')) : ''
     author.innerHTML = `Author: ${lastName}${firstName}`
 
-    const price = document.createElement('p')
+    const price: HTMLParagraphElement = document.createElement('p')
     price.className = 'card-text'
     price.innerHTML = priceFormat.format(deetz.pages)
 
-    const addButton = document.createElement('button')
+    const addButton: HTMLButtonElement = document.createElement('button')
     addButton.classList.add('btn', 'btn-primary', 'cart-focus')
     addButton.innerHTML = 'Add to cart'
     addButton.addEventListener('click', () => {
@@ -42,14 +44,14 @@ function makeProductCard(deetz) {
     document.getElementById('catalog').appendChild(card)
 }
 
-function makeCartItem(deetz) {
-    const item = document.createElement('div')
+function makeCartItem(deetz: object): HTMLDivElement {
+    const item: HTMLDivElement = document.createElement('div')
     item.classList.add('d-flex', 'flex-column', 'align-items-start', 'shadow-sm', 'cart-focus', 'p-2')
 
     item.innerHTML = `<h6 class="cart-focus">${deetz.title}</h6>
                     <p class="cart-focus">${priceFormat.format(deetz.pages)}</p>`
 
-    const remove = document.createElement('button')
+    const remove: HTMLButtonElement = document.createElement('button')
     remove.innerHTML = 'Remove from cart'
     remove.classList.add('cart-focus', 'btn', 'btn-secondary')
     remove.addEventListener('click', () => {
@@ -60,31 +62,30 @@ function makeCartItem(deetz) {
     return item
 }
 
-function showToast(message) {
-    const toast = document.createElement('div')
+function showToast(message: string): void {
+    const toast: HTMLDivElement = document.createElement('div')
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
 
-    const toastMessage = document.createElement('p')
+    const toastMessage: HTMLParagraphElement = document.createElement('p')
     toastMessage.innerHTML = message
 
     toast.appendChild(toastMessage)
     document.body.appendChild(toast)
 
     setTimeout(() => {
-        const target = document.getElementsByClassName('my-toast')
-        target[0].remove(target)
+        document.getElementsByClassName('my-toast')[0].remove()
     }, 1250)
 }
 
-function makeCheckoutItem(deetz) {
-    const item = document.createElement('div')
+function makeCheckoutItem(deetz: object): HTMLDivElement {
+    const item: HTMLDivElement = document.createElement('div')
     item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus')
 
-    const title = document.createElement('p')
+    const title: HTMLParagraphElement = document.createElement('p')
     title.innerHTML = deetz.title
     title.classList.add('checkout-focus')
 
-    const price = document.createElement('p')
+    const price: HTMLParagraphElement = document.createElement('p')
     price.innerHTML = priceFormat.format(deetz.pages)
     price.classList.add('checkout-focus')
 
@@ -93,21 +94,21 @@ function makeCheckoutItem(deetz) {
     return item
 }
 
-function makeCheckoutPage () {
-    const checkout = document.getElementById('checkout-page')
+function makeCheckoutPage(): void {
+    const checkout: HTMLElement | null = document.getElementById('checkout-page')
 
-    const leftPanel = document.createElement('div')
-    const rightPanel = document.createElement('div')
+    const leftPanel: HTMLDivElement = document.createElement('div')
+    const rightPanel: HTMLDivElement = document.createElement('div')
     leftPanel.classList.add('col', 'checkout-focus')
     rightPanel.classList.add('col', 'checkout-focus')
 
-    const purchaseList = document.createElement('div')
-    const message = document.createElement('h2')
+    const purchaseList: HTMLDivElement = document.createElement('div')
+    const message: HTMLHeadingElement = document.createElement('h2')
     message.classList.add('ms-5', 'checkout-focus')
 
     if (localStorage.getItem('cart') != null) {
         let amount = 0
-        JSON.parse(localStorage.getItem('cart')).forEach(item => {
+        JSON.parse(localStorage.getItem('cart')).forEach((item: object) => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
             purchaseList.append(makeCheckoutItem(item))
@@ -118,7 +119,9 @@ function makeCheckoutPage () {
 
     leftPanel.appendChild(purchaseList)
     leftPanel.appendChild(message)
-    checkout.appendChild(leftPanel)
-    checkout.appendChild(rightPanel)
+    if (checkout) {
+        checkout.appendChild(leftPanel)
+        checkout.appendChild(rightPanel)
+    }
 }
 
