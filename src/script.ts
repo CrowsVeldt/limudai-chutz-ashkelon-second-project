@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // Close shopping cart if click outside of it
 document.addEventListener('click', (event) => {
     if (document.getElementById('cart')) {
-        if (!event.target.classList.contains('cart-focus')) {
+        if (event.target && !event.target.classList.contains('cart-focus')) {
             toggleCart()
         }
     }
 
     // close checkout page if click outside of it
     if (document.getElementById('checkout-page').style.display !== 'none') {
-        if (!event.target.classList.contains('checkout-focus')) {
+        if (event.target && !event.target.classList.contains('checkout-focus')) {
             toggleCheckout()
         }
     }
@@ -148,8 +148,8 @@ function displayShoppingCart() {
 
 type Sort = (a: BookDetails, b: BookDetails) => number;
 
-function sortCatalogBy(method: string = 'titleFirst'): () => void {
-    let sortFunction: Sort
+function sortCatalogBy(method: string = 'titleFirst'): Sort {
+    let sortFunction: Sort = (a: BookDetails, b: BookDetails) => 1 // placeholder function for typescript 
     const dropdownButton: HTMLElement | null = document.getElementById('dropdown-button')
 
     switch (method) {
@@ -227,7 +227,7 @@ function addItemToCart(deetz: BookDetails): void {
 
 function removeItemFromCart(title: string): void {
     let cart = JSON.parse(localStorage.getItem('cart'))
-    const index = cart.findIndex((i) => i.title === title)
+    const index = cart.findIndex((i: BookDetails) => i.title === title)
 
     if (index >= 0) {
         cart.splice(index, 1)
@@ -256,8 +256,8 @@ function searchProducts(input: string): void {
 
         keyWords.forEach((word: string) => {
             if (word.toUpperCase().match(regex)) {
-                if (!itemsToDisplay.includes(key)) {
-                    itemsToDisplay.push(key)
+                if (!itemsToDisplay.includes(item)) {
+                    itemsToDisplay.push(item)
                 }
             }
         })
