@@ -104,7 +104,6 @@ function toggleCheckout() {
 
 function displayCatalog(list: object[] = JSON.parse(localStorage.getItem('catalog')), 
                         sortMethod? : string): void {
-                            console.log(list)
     const catalog = document.getElementById('catalog')
     if (catalog.hasChildNodes()) {
         catalog.innerHTML = ''
@@ -255,7 +254,6 @@ function searchProducts(input: string): void {
 
         keyWords.forEach((word: string) => {
             if (word.toUpperCase().match(regex)) {
-                console.log(key.title)
                 if (!itemsToDisplay.includes(key)) {
                     itemsToDisplay.push(key)
                 }

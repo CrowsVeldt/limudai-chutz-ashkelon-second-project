@@ -1,5 +1,4 @@
 "use strict";
-// make type/interface for deetz
 function makeProductCard(deetz) {
     const card = document.createElement('div');
     card.classList.add('card', 'border-secondary');

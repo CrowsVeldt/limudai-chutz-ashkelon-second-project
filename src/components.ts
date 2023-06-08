@@ -1,6 +1,13 @@
-// make type/interface for deetz
+type BookDetails = {
+    author: string;
+    imageLink: string;
+    link: string;
+    pages: number;
+    title: string;
+    year: number;
+}
 
-function makeProductCard(deetz: object): void {
+function makeProductCard(deetz: BookDetails): void {
     const card: HTMLDivElement = document.createElement('div')
     card.classList.add('card', 'border-secondary')
     card.style.width = '18rem'
@@ -44,7 +51,7 @@ function makeProductCard(deetz: object): void {
     document.getElementById('catalog').appendChild(card)
 }
 
-function makeCartItem(deetz: object): HTMLDivElement {
+function makeCartItem(deetz: BookDetails): HTMLDivElement {
     const item: HTMLDivElement = document.createElement('div')
     item.classList.add('d-flex', 'flex-column', 'align-items-start', 'shadow-sm', 'cart-focus', 'p-2')
 
@@ -77,7 +84,7 @@ function showToast(message: string): void {
     }, 1250)
 }
 
-function makeCheckoutItem(deetz: object): HTMLDivElement {
+function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     const item: HTMLDivElement = document.createElement('div')
     item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus')
 
@@ -108,7 +115,7 @@ function makeCheckoutPage(): void {
 
     if (localStorage.getItem('cart') != null) {
         let amount = 0
-        JSON.parse(localStorage.getItem('cart')).forEach((item: object) => {
+        JSON.parse(localStorage.getItem('cart')).forEach((item: BookDetails) => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
             purchaseList.append(makeCheckoutItem(item))

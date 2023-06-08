@@ -97,7 +97,6 @@ function toggleCheckout() {
     }
 }
 function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sortMethod) {
-    console.log(list);
     const catalog = document.getElementById('catalog');
     if (catalog.hasChildNodes()) {
         catalog.innerHTML = '';
@@ -230,7 +229,6 @@ function searchProducts(input) {
         const keyWords = key.title.split(' ');
         keyWords.forEach((word) => {
             if (word.toUpperCase().match(regex)) {
-                console.log(key.title);
                 if (!itemsToDisplay.includes(key)) {
                     itemsToDisplay.push(key);
                 }
