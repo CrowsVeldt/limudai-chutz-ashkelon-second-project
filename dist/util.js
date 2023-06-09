@@ -6,7 +6,6 @@ const priceFormat = new Intl.NumberFormat('en-US', {
 function getStoredData(key) {
     let data = [];
     const storedData = JSON.parse(localStorage.getItem(key));
-    console.log(storedData);
     if (storedData) {
         data = storedData;
     }

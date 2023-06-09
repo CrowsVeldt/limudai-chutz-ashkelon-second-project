@@ -32,6 +32,7 @@ function makeProductCard(deetz) {
     cardBody.appendChild(addButton);
     card.appendChild(img);
     card.appendChild(cardBody);
+    // TODO: seperate appending to catalog from making the card
     const catalog = document.getElementById('catalog');
     if (catalog)
         catalog.appendChild(card);
@@ -83,10 +84,10 @@ function makeCheckoutPage() {
     const purchaseList = document.createElement('div');
     const message = document.createElement('h2');
     message.classList.add('ms-5', 'checkout-focus');
-    const cart = localStorage.getItem('cart');
+    const cart = getStoredData('cart');
     if (cart) {
         let amount = 0;
-        JSON.parse(cart).forEach((item) => {
+        cart.forEach((item) => {
             amount += item.pages;
             message.innerHTML = `Total: ${priceFormat.format(amount)}`;
             purchaseList.append(makeCheckoutItem(item));
