@@ -1,6 +1,15 @@
 "use strict";
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
+function getStoredData(key) {
+    let data = [];
+    const storedData = JSON.parse(localStorage.getItem(key));
+    console.log(storedData);
+    if (storedData) {
+        data = storedData;
+    }
+    return data;
+}
 const priceFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
@@ -12,8 +21,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 document.addEventListener('click', (event) => {
     // Close shopping cart if click outside of it
     const target = event.target;
-    const cart = document.getElementById('cart');
-    if (cart) {
+    const cartElement = document.getElementById('cart');
+    if (cartElement) {
         if (target && !target.classList.contains('cart-focus')) {
             toggleCart();
         }
@@ -57,8 +66,7 @@ function fetchCatalog() {
         });
     }
     else {
-        const catString = localStorage.getItem('catalog');
-        const storedCat = JSON.parse(catString);
+        const storedCat = getStoredData('catalog');
         storedCat.forEach(key => {
             if (key != null) {
                 catalog.push(key);
@@ -100,7 +108,7 @@ function toggleCheckout() {
         makeCheckoutPage();
     }
 }
-function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sortMethod) {
+function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     const catalog = document.getElementById('catalog');
     if (catalog && catalog.hasChildNodes()) {
         catalog.innerHTML = '';
@@ -109,6 +117,7 @@ function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sort
 }
 function displayShoppingCart() {
     const cartRendered = document.getElementById('cart');
+    const storedCartData = getStoredData('cart');
     if (cartRendered) {
         cartRendered.remove();
     }
@@ -121,9 +130,9 @@ function displayShoppingCart() {
     const checkoutButton = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`;
     const message = document.createElement('h5');
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3');
-    if (localStorage.getItem('cart')) {
+    if ((storedCartData)) {
         let price = 0;
-        JSON.parse(localStorage.getItem('cart')).forEach((item) => {
+        storedCartData.forEach((item) => {
             price += item.pages;
             message.innerHTML = `Total: ${priceFormat.format(price)}`;
             cart.appendChild(makeCartItem(item));
@@ -140,7 +149,7 @@ function displayShoppingCart() {
     document.body.appendChild(cart);
 }
 function sortCatalogBy(method = 'titleFirst') {
-    let sortFunction = (a, b) => 1; // placeholder function for typescript 
+    let sortFunction = (a, b) => 1; // <- placeholder function for type checking
     const dropdownButton = document.getElementById('dropdown-button');
     if (dropdownButton) {
         switch (method) {
@@ -184,7 +193,7 @@ function sortCatalogBy(method = 'titleFirst') {
 }
 function updateCartNumber() {
     const cartNum = document.getElementById('cart-number');
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = getStoredData('cart');
     if (cart && cartNum) {
         const cartLength = cart.length;
         cartNum.className = 'round-white-border';
@@ -196,7 +205,7 @@ function updateCartNumber() {
     }
 }
 function addItemToCart(deetz) {
-    let cart = JSON.parse(localStorage.getItem('cart'));
+    let cart = getStoredData('cart');
     if (cart != null) {
         if (!cart.some((e) => e.title === deetz.title)) {
             cart.push(deetz);
@@ -214,14 +223,14 @@ function addItemToCart(deetz) {
     updateCartNumber();
 }
 function removeItemFromCart(title) {
-    let cart = JSON.parse(localStorage.getItem('cart'));
+    let cart = getStoredData('cart');
     const index = cart.findIndex((i) => i.title === title);
     if (index >= 0) {
         cart.splice(index, 1);
         showToast(`Removed ${title} from cart`);
         localStorage.setItem('cart', JSON.stringify(cart));
     }
-    if (JSON.parse(localStorage.getItem('cart')).length === 0) {
+    if (cart.length === 0) {
         localStorage.removeItem('cart');
     }
     updateCartNumber();
@@ -230,17 +239,20 @@ function removeItemFromCart(title) {
 function searchProducts(input) {
     const term = input.toUpperCase();
     const regex = new RegExp(`^${term}`);
-    const catalog = JSON.parse(localStorage.getItem('catalog'));
+    const storedCatalog = getStoredData('catalog');
+    //const catalog: BookDetails[] = storedCatalog
     const itemsToDisplay = [];
-    catalog.forEach((item) => {
-        const keyWords = item.title.split(' ');
-        keyWords.forEach((word) => {
-            if (word.toUpperCase().match(regex)) {
-                if (!itemsToDisplay.includes(item)) {
-                    itemsToDisplay.push(item);
+    if (storedCatalog) {
+        storedCatalog.forEach((item) => {
+            const keyWords = item.title.split(' ');
+            keyWords.forEach((word) => {
+                if (word.toUpperCase().match(regex)) {
+                    if (!itemsToDisplay.includes(item)) {
+                        itemsToDisplay.push(item);
+                    }
                 }
-            }
+            });
         });
-    });
+    }
     displayCatalog(itemsToDisplay);
 }

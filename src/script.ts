@@ -1,6 +1,16 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 
+function getStoredData(key: string): BookDetails[] {
+    let data: BookDetails[] = []
+    const storedData: BookDetails[] | null = JSON.parse(localStorage.getItem(key)!)
+    console.log(storedData)
+    if (storedData) {
+        data = storedData
+    } 
+    return data
+}
+
 const priceFormat: Intl.NumberFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'ILS'
@@ -15,8 +25,8 @@ document.addEventListener('click', (event) => {
     // Close shopping cart if click outside of it
     const target = event.target as HTMLElement
 
-    const cart: HTMLElement | null = document.getElementById('cart')
-    if (cart) {
+    const cartElement: HTMLElement | null = document.getElementById('cart')
+    if (cartElement) {
         if (target && !target.classList.contains('cart-focus')) {
             toggleCart()
         }
@@ -62,9 +72,7 @@ function fetchCatalog(): void {
                 displayCatalog(catalog)
             })
     } else {
-        const catString: string | null = localStorage.getItem('catalog')
-
-        const storedCat: BookDetails[] = JSON.parse(catString!)
+        const storedCat: BookDetails[] = getStoredData('catalog')
         storedCat.forEach(key => {
             if (key != null) {
                 catalog.push(key)
@@ -108,7 +116,7 @@ function toggleCheckout() {
     }
 }
 
-function displayCatalog(list: BookDetails[] = JSON.parse(localStorage.getItem('catalog')!),
+function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     sortMethod?: string): void {
     const catalog: HTMLElement | null = document.getElementById('catalog')
     if (catalog && catalog.hasChildNodes()) {
@@ -119,6 +127,7 @@ function displayCatalog(list: BookDetails[] = JSON.parse(localStorage.getItem('c
 
 function displayShoppingCart() {
     const cartRendered: HTMLElement | null = document.getElementById('cart')
+    const storedCartData: BookDetails[] = getStoredData('cart')
 
     if (cartRendered) {
         cartRendered.remove()
@@ -135,9 +144,9 @@ function displayShoppingCart() {
 
     const message: HTMLHeadingElement = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
-    if (localStorage.getItem('cart')) {
+    if ((storedCartData)) {
         let price = 0
-        JSON.parse(localStorage.getItem('cart')!).forEach((item: BookDetails) => {
+        storedCartData.forEach((item: BookDetails) => {
             price += item.pages
             message.innerHTML = `Total: ${priceFormat.format(price)}`
             cart.appendChild(makeCartItem(item))
@@ -156,9 +165,8 @@ function displayShoppingCart() {
 }
 
 type Sort = (a: BookDetails, b: BookDetails) => number;
-
 function sortCatalogBy(method: string = 'titleFirst'): Sort {
-    let sortFunction: Sort = (a: BookDetails, b: BookDetails) => 1 // placeholder function for typescript 
+    let sortFunction: Sort = (a: BookDetails, b: BookDetails) => 1 // <- placeholder function for type checking
     const dropdownButton: HTMLElement | null = document.getElementById('dropdown-button')
 
     if (dropdownButton) {
@@ -205,19 +213,19 @@ function sortCatalogBy(method: string = 'titleFirst'): Sort {
 
 function updateCartNumber(): void {
     const cartNum: HTMLElement | null = document.getElementById('cart-number')
-    const cart: BookDetails[] = JSON.parse(localStorage.getItem('cart')!)
+    const cart: BookDetails[] = getStoredData('cart')
     if (cart && cartNum) {
-        const cartLength = cart.length
+        const cartLength: number = cart.length
         cartNum.className = 'round-white-border'
         cartNum.innerHTML = cartLength.toString()
-    } else if (cartNum){
+    } else if (cartNum) {
         cartNum.className = ''
         cartNum.innerHTML = ''
     }
 }
 
 function addItemToCart(deetz: BookDetails): void {
-    let cart: BookDetails[] = JSON.parse(localStorage.getItem('cart')!)
+    let cart: BookDetails[] = getStoredData('cart')
 
     if (cart != null) {
         if (!cart.some((e: BookDetails) => e.title === deetz.title)) {
@@ -237,7 +245,7 @@ function addItemToCart(deetz: BookDetails): void {
 }
 
 function removeItemFromCart(title: string): void {
-    let cart: BookDetails[] = JSON.parse(localStorage.getItem('cart')!)
+    let cart: BookDetails[] = getStoredData('cart')
     const index: number = cart.findIndex((i: BookDetails) => i.title === title)
 
     if (index >= 0) {
@@ -246,7 +254,7 @@ function removeItemFromCart(title: string): void {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    if (JSON.parse(localStorage.getItem('cart')!).length === 0) {
+    if (cart.length === 0) {
         localStorage.removeItem('cart')
     }
 
@@ -257,22 +265,24 @@ function removeItemFromCart(title: string): void {
 function searchProducts(input: string): void {
     const term: string = input.toUpperCase()
     const regex: RegExp = new RegExp(`^${term}`)
+    const storedCatalog: BookDetails[] = getStoredData('catalog')
 
-    const catalog: BookDetails[] = JSON.parse(localStorage.getItem('catalog')!)
+    //const catalog: BookDetails[] = storedCatalog
     const itemsToDisplay: BookDetails[] = []
 
+    if (storedCatalog) {
+       storedCatalog.forEach((item: BookDetails) => {
+            const keyWords = item.title.split(' ')
 
-    catalog.forEach((item: BookDetails) => {
-        const keyWords = item.title.split(' ')
-
-        keyWords.forEach((word: string) => {
-            if (word.toUpperCase().match(regex)) {
-                if (!itemsToDisplay.includes(item)) {
-                    itemsToDisplay.push(item)
+            keyWords.forEach((word: string) => {
+                if (word.toUpperCase().match(regex)) {
+                    if (!itemsToDisplay.includes(item)) {
+                        itemsToDisplay.push(item)
+                    }
                 }
-            }
+            })
         })
-    })
+    }
 
     displayCatalog(itemsToDisplay)
 }
