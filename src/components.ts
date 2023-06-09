@@ -16,9 +16,9 @@ function makeProductCard(deetz: BookDetails): HTMLDivElement {
     title.innerHTML = deetz.title
 
     const author: HTMLParagraphElement = document.createElement('p')
-    const authorSplit = deetz.author.split(' ')
-    const lastName = authorSplit.pop()
-    const firstName = authorSplit.length > 0 ? ', '.concat(authorSplit.join(' ')) : ''
+    const authorSplit: string[] = deetz.author.split(' ')
+    const lastName: string | undefined = authorSplit.pop()
+    const firstName: string = authorSplit.length > 0 ? ', '.concat(authorSplit.join(' ')) : ''
     author.innerHTML = `Author: ${lastName}${firstName}`
 
     const price: HTMLParagraphElement = document.createElement('p')
