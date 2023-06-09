@@ -107,7 +107,11 @@ function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     if (catalog && catalog.hasChildNodes()) {
         catalog.innerHTML = ''
     }
-    list.sort(sortCatalogBy(sortMethod)).forEach((item: BookDetails) => makeProductCard(item))
+    list.sort(sortCatalogBy(sortMethod)).forEach((item: BookDetails) => {
+        if (catalog) {
+            catalog.appendChild(makeProductCard(item))
+        }
+    })
 }
 
 function displayShoppingCart() {
@@ -255,7 +259,7 @@ function searchProducts(input: string): void {
     const itemsToDisplay: BookDetails[] = []
 
     if (storedCatalog) {
-       storedCatalog.forEach((item: BookDetails) => {
+        storedCatalog.forEach((item: BookDetails) => {
             const keyWords = item.title.split(' ')
 
             keyWords.forEach((word: string) => {

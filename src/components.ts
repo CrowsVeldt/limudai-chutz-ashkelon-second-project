@@ -1,4 +1,4 @@
-function makeProductCard(deetz: BookDetails): void {
+function makeProductCard(deetz: BookDetails): HTMLDivElement {
     const card: HTMLDivElement = document.createElement('div')
     card.classList.add('card', 'border-secondary')
     card.style.width = '18rem'
@@ -39,9 +39,7 @@ function makeProductCard(deetz: BookDetails): void {
     card.appendChild(img)
     card.appendChild(cardBody)
     
-    // TODO: seperate appending to catalog from making the card
-    const catalog: HTMLElement | null = document.getElementById('catalog')
-    if (catalog) catalog.appendChild(card)
+    return card
 }
 
 function makeCartItem(deetz: BookDetails): HTMLDivElement {

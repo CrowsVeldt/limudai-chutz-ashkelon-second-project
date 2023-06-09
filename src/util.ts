@@ -13,12 +13,12 @@ function getStoredData(key: string): BookDetails[] {
 }
 
 type BookDetails = {
-    author: string;
-    imageLink: string;
-    link: string;
-    pages: number;
-    title: string;
-    year: number;
+    author: string
+    imageLink: string
+    link: string
+    pages: number
+    title: string
+    year: number
 }
 
-type Sort = (a: BookDetails, b: BookDetails) => number;
+type Sort = (a: BookDetails, b: BookDetails) => number

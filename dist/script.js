@@ -100,7 +100,11 @@ function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     if (catalog && catalog.hasChildNodes()) {
         catalog.innerHTML = '';
     }
-    list.sort(sortCatalogBy(sortMethod)).forEach((item) => makeProductCard(item));
+    list.sort(sortCatalogBy(sortMethod)).forEach((item) => {
+        if (catalog) {
+            catalog.appendChild(makeProductCard(item));
+        }
+    });
 }
 function displayShoppingCart() {
     const cartRendered = document.getElementById('cart');

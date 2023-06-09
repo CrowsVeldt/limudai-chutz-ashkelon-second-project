@@ -32,10 +32,7 @@ function makeProductCard(deetz) {
     cardBody.appendChild(addButton);
     card.appendChild(img);
     card.appendChild(cardBody);
-    // TODO: seperate appending to catalog from making the card
-    const catalog = document.getElementById('catalog');
-    if (catalog)
-        catalog.appendChild(card);
+    return card;
 }
 function makeCartItem(deetz) {
     const item = document.createElement('div');
