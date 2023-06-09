@@ -92,17 +92,25 @@ function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     return item
 }
 
-function makeCheckoutPage(): void {
-    const checkout: HTMLElement | null = document.getElementById('checkout-page')
+function makeCheckoutPage(): HTMLDivElement {
 
+    const checkout: HTMLDivElement = document.createElement('div')
+    // TODO: rename leftPanel
     const leftPanel: HTMLDivElement = document.createElement('div')
-    const rightPanel: HTMLDivElement = document.createElement('div')
-    leftPanel.classList.add('col', 'checkout-focus')
-    rightPanel.classList.add('col', 'checkout-focus')
+    leftPanel.classList.add('checkout-focus')
+    const bottomPanel: HTMLDivElement = document.createElement('div')
+    bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between')
+    //const rightPanel: HTMLDivElement = document.createElement('div')
+    //rightPanel.classList.add('col', 'checkout-focus')
 
     const purchaseList: HTMLDivElement = document.createElement('div')
+
     const message: HTMLHeadingElement = document.createElement('h2')
     message.classList.add('ms-5', 'checkout-focus')
+
+    const purchaseButton: HTMLButtonElement = document.createElement('button')
+    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success')
+    purchaseButton.innerText = 'Buy now!'
 
     const cart: BookDetails[] = getStoredData('cart')
     if (cart) {
@@ -117,10 +125,12 @@ function makeCheckoutPage(): void {
     }
 
     leftPanel.appendChild(purchaseList)
-    leftPanel.appendChild(message)
-    if (checkout) {
-        checkout.appendChild(leftPanel)
-        checkout.appendChild(rightPanel)
-    }
+    bottomPanel.appendChild(message)
+    bottomPanel.appendChild(purchaseButton)
+    checkout.appendChild(leftPanel)
+    checkout.appendChild(bottomPanel)
+    //checkout.appendChild(rightPanel)
+
+    return checkout
 }
 

@@ -92,7 +92,7 @@ function toggleCheckout() {
                 children[child].style.filter = 'blur(5px)';
             }
         }
-        makeCheckoutPage();
+        checkout.appendChild(makeCheckoutPage());
     }
 }
 function displayCatalog(list = getStoredData('catalog'), sortMethod) {

@@ -73,14 +73,20 @@ function makeCheckoutItem(deetz) {
     return item;
 }
 function makeCheckoutPage() {
-    const checkout = document.getElementById('checkout-page');
+    const checkout = document.createElement('div');
+    // TODO: rename leftPanel
     const leftPanel = document.createElement('div');
-    const rightPanel = document.createElement('div');
-    leftPanel.classList.add('col', 'checkout-focus');
-    rightPanel.classList.add('col', 'checkout-focus');
+    leftPanel.classList.add('checkout-focus');
+    const bottomPanel = document.createElement('div');
+    bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between');
+    //const rightPanel: HTMLDivElement = document.createElement('div')
+    //rightPanel.classList.add('col', 'checkout-focus')
     const purchaseList = document.createElement('div');
     const message = document.createElement('h2');
     message.classList.add('ms-5', 'checkout-focus');
+    const purchaseButton = document.createElement('button');
+    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success');
+    purchaseButton.innerText = 'Buy now!';
     const cart = getStoredData('cart');
     if (cart) {
         let amount = 0;
@@ -94,9 +100,10 @@ function makeCheckoutPage() {
         message.innerHTML = "Nothing here yet!";
     }
     leftPanel.appendChild(purchaseList);
-    leftPanel.appendChild(message);
-    if (checkout) {
-        checkout.appendChild(leftPanel);
-        checkout.appendChild(rightPanel);
-    }
+    bottomPanel.appendChild(message);
+    bottomPanel.appendChild(purchaseButton);
+    checkout.appendChild(leftPanel);
+    checkout.appendChild(bottomPanel);
+    //checkout.appendChild(rightPanel)
+    return checkout;
 }
