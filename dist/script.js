@@ -1,19 +1,6 @@
 "use strict";
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
-function getStoredData(key) {
-    let data = [];
-    const storedData = JSON.parse(localStorage.getItem(key));
-    console.log(storedData);
-    if (storedData) {
-        data = storedData;
-    }
-    return data;
-}
-const priceFormat = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'ILS'
-});
 document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber();
     fetchCatalog();

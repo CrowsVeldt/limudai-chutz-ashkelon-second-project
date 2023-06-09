@@ -1,21 +1,6 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 
-function getStoredData(key: string): BookDetails[] {
-    let data: BookDetails[] = []
-    const storedData: BookDetails[] | null = JSON.parse(localStorage.getItem(key)!)
-    console.log(storedData)
-    if (storedData) {
-        data = storedData
-    } 
-    return data
-}
-
-const priceFormat: Intl.NumberFormat = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'ILS'
-})
-
 document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber()
     fetchCatalog()
@@ -164,7 +149,6 @@ function displayShoppingCart() {
     document.body.appendChild(cart)
 }
 
-type Sort = (a: BookDetails, b: BookDetails) => number;
 function sortCatalogBy(method: string = 'titleFirst'): Sort {
     let sortFunction: Sort = (a: BookDetails, b: BookDetails) => 1 // <- placeholder function for type checking
     const dropdownButton: HTMLElement | null = document.getElementById('dropdown-button')

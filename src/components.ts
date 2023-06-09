@@ -1,12 +1,3 @@
-type BookDetails = {
-    author: string;
-    imageLink: string;
-    link: string;
-    pages: number;
-    title: string;
-    year: number;
-}
-
 function makeProductCard(deetz: BookDetails): void {
     const card: HTMLDivElement = document.createElement('div')
     card.classList.add('card', 'border-secondary')
