@@ -47,8 +47,9 @@ function makeProductCard(deetz: BookDetails): void {
     cardBody.appendChild(addButton)
     card.appendChild(img)
     card.appendChild(cardBody)
-
-    document.getElementById('catalog').appendChild(card)
+    
+    const catalog: HTMLElement | null = document.getElementById('catalog')
+    if (catalog) catalog.appendChild(card)
 }
 
 function makeCartItem(deetz: BookDetails): HTMLDivElement {
@@ -113,9 +114,10 @@ function makeCheckoutPage(): void {
     const message: HTMLHeadingElement = document.createElement('h2')
     message.classList.add('ms-5', 'checkout-focus')
 
-    if (localStorage.getItem('cart') != null) {
+    const cart: string | null = localStorage.getItem('cart')
+    if (cart) {
         let amount = 0
-        JSON.parse(localStorage.getItem('cart')).forEach((item: BookDetails) => {
+        JSON.parse(cart).forEach((item: BookDetails) => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
             purchaseList.append(makeCheckoutItem(item))

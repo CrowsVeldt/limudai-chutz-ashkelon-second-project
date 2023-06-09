@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // Close shopping cart if click outside of it
 document.addEventListener('click', (event) => {
     if (document.getElementById('cart')) {
-        if (!event.target.classList.contains('cart-focus')) {
+        if (event.target && !event.target.classList.contains('cart-focus')) {
             toggleCart();
         }
     }
     // close checkout page if click outside of it
     if (document.getElementById('checkout-page').style.display !== 'none') {
-        if (!event.target.classList.contains('checkout-focus')) {
+        if (event.target && !event.target.classList.contains('checkout-focus')) {
             toggleCheckout();
         }
     }
@@ -44,7 +44,7 @@ function fetchCatalog() {
         fetch('../catalog.json')
             .then(response => response.json())
             .then(data => {
-            data.forEach((entry, index) => {
+            data.forEach((entry) => {
                 catalog.push(entry);
             });
             localStorage.setItem('catalog', JSON.stringify(catalog));
@@ -135,7 +135,7 @@ function displayShoppingCart() {
     document.body.appendChild(cart);
 }
 function sortCatalogBy(method = 'titleFirst') {
-    let sortFunction = () => { };
+    let sortFunction = (a, b) => 1; // placeholder function for typescript 
     const dropdownButton = document.getElementById('dropdown-button');
     switch (method) {
         case 'priceHigh':
@@ -191,7 +191,7 @@ function updateCartNumber() {
 function addItemToCart(deetz) {
     let cart = JSON.parse(localStorage.getItem('cart'));
     if (cart != null) {
-        if (!cart.some(e => e.title === deetz.title)) {
+        if (!cart.some((e) => e.title === deetz.title)) {
             cart.push(deetz);
             localStorage.setItem('cart', JSON.stringify(cart));
             showToast(`Added ${deetz.title} to cart`);
@@ -225,12 +225,12 @@ function searchProducts(input) {
     const regex = new RegExp(`^${term}`);
     const catalog = JSON.parse(localStorage.getItem('catalog'));
     const itemsToDisplay = [];
-    catalog.forEach((key) => {
-        const keyWords = key.title.split(' ');
+    catalog.forEach((item) => {
+        const keyWords = item.title.split(' ');
         keyWords.forEach((word) => {
             if (word.toUpperCase().match(regex)) {
-                if (!itemsToDisplay.includes(key)) {
-                    itemsToDisplay.push(key);
+                if (!itemsToDisplay.includes(item)) {
+                    itemsToDisplay.push(item);
                 }
             }
         });

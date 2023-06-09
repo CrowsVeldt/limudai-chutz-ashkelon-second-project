@@ -32,7 +32,9 @@ function makeProductCard(deetz) {
     cardBody.appendChild(addButton);
     card.appendChild(img);
     card.appendChild(cardBody);
-    document.getElementById('catalog').appendChild(card);
+    const catalog = document.getElementById('catalog');
+    if (catalog)
+        catalog.appendChild(card);
 }
 function makeCartItem(deetz) {
     const item = document.createElement('div');
@@ -81,9 +83,10 @@ function makeCheckoutPage() {
     const purchaseList = document.createElement('div');
     const message = document.createElement('h2');
     message.classList.add('ms-5', 'checkout-focus');
-    if (localStorage.getItem('cart') != null) {
+    const cart = localStorage.getItem('cart');
+    if (cart) {
         let amount = 0;
-        JSON.parse(localStorage.getItem('cart')).forEach((item) => {
+        JSON.parse(cart).forEach((item) => {
             amount += item.pages;
             message.innerHTML = `Total: ${priceFormat.format(amount)}`;
             purchaseList.append(makeCheckoutItem(item));
