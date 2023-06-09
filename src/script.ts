@@ -11,25 +11,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     fetchCatalog()
 })
 
-// Close shopping cart if click outside of it
 document.addEventListener('click', (event) => {
-    if (document.getElementById('cart')) {
-        if (event.target && !event.target.classList.contains('cart-focus')) {
+    // Close shopping cart if click outside of it
+    const target = event.target as HTMLElement
+
+    const cart: HTMLElement | null = document.getElementById('cart')
+    if (cart) {
+        if (target && !target.classList.contains('cart-focus')) {
             toggleCart()
         }
     }
 
     // close checkout page if click outside of it
-    if (document.getElementById('checkout-page').style.display !== 'none') {
-        if (event.target && !event.target.classList.contains('checkout-focus')) {
+    const checkout: HTMLElement | null = document.getElementById('checkout-page')
+    if (checkout && checkout.style.display !== 'none') {
+        if (target && !target.classList.contains('checkout-focus')) {
             toggleCheckout()
         }
     }
 
     // if filter dropdown is open fade out catalog
     const dropButton: HTMLElement | null = document.getElementById('dropdown-button')
-    const cards: HTMLCollection = document.getElementsByClassName('card')
-    if (dropButton.ariaExpanded === 'true') {
+    const cards: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.card')
+    if (dropButton!.ariaExpanded === 'true') {
 
         for (let i = 0; i < cards.length; i++) {
             cards[i].style.opacity = '0.5'
@@ -44,12 +48,12 @@ document.addEventListener('click', (event) => {
 })
 
 function fetchCatalog(): void {
-    let catalog: object[] = []
+    let catalog: BookDetails[] = []
     if (localStorage.length === 0) {
         fetch('../catalog.json')
             .then(response => response.json())
             .then(data => {
-                data.forEach((entry: object) => {
+                data.forEach((entry: BookDetails) => {
                     catalog.push(entry)
                 })
                 localStorage.setItem('catalog', JSON.stringify(catalog))
@@ -58,7 +62,9 @@ function fetchCatalog(): void {
                 displayCatalog(catalog)
             })
     } else {
-        const storedCat: object[] = JSON.parse(localStorage.getItem('catalog'))
+        const catString: string | null = localStorage.getItem('catalog')
+
+        const storedCat: BookDetails[] = JSON.parse(catString!)
         storedCat.forEach(key => {
             if (key != null) {
                 catalog.push(key)
@@ -81,9 +87,9 @@ function toggleCart(): void {
 
 function toggleCheckout() {
     const checkout: HTMLElement | null = document.getElementById('checkout-page')
-    const children: HTMLCollection = document.body.children
+    const children = document.body.children as HTMLCollectionOf<HTMLElement>
 
-    if (checkout.style.display !== 'none') {
+    if (checkout && checkout.style.display !== 'none') {
         checkout.style.display = 'none'
         checkout.innerHTML = ''
         for (let child in children) {
@@ -92,7 +98,7 @@ function toggleCheckout() {
             }
         }
     } else {
-        checkout.style.display = 'flex'
+        checkout!.style.display = 'flex'
         for (let child in children) {
             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
                 children[child].style.filter = 'blur(5px)'
@@ -102,19 +108,22 @@ function toggleCheckout() {
     }
 }
 
-function displayCatalog(list: object[] = JSON.parse(localStorage.getItem('catalog')), 
-                        sortMethod? : string): void {
-    const catalog = document.getElementById('catalog')
-    if (catalog.hasChildNodes()) {
+function displayCatalog(list: BookDetails[] = JSON.parse(localStorage.getItem('catalog')!),
+    sortMethod?: string): void {
+    const catalog: HTMLElement | null = document.getElementById('catalog')
+    if (catalog && catalog.hasChildNodes()) {
         catalog.innerHTML = ''
     }
-    list.sort(sortCatalogBy(sortMethod)).forEach((item: object) => makeProductCard(item))
+    list.sort(sortCatalogBy(sortMethod)).forEach((item: BookDetails) => makeProductCard(item))
 }
 
 function displayShoppingCart() {
-    if (document.getElementById('cart')) {
-        document.getElementById('cart').remove()
+    const cartRendered: HTMLElement | null = document.getElementById('cart')
+
+    if (cartRendered) {
+        cartRendered.remove()
     }
+
     const cart: HTMLDivElement = document.createElement('div')
     cart.id = 'cart'
     cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus')
@@ -126,9 +135,9 @@ function displayShoppingCart() {
 
     const message: HTMLHeadingElement = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
-    if (localStorage.getItem('cart') != null) {
+    if (localStorage.getItem('cart')) {
         let price = 0
-        JSON.parse(localStorage.getItem('cart')).forEach(item => {
+        JSON.parse(localStorage.getItem('cart')!).forEach((item: BookDetails) => {
             price += item.pages
             message.innerHTML = `Total: ${priceFormat.format(price)}`
             cart.appendChild(makeCartItem(item))
@@ -152,61 +161,63 @@ function sortCatalogBy(method: string = 'titleFirst'): Sort {
     let sortFunction: Sort = (a: BookDetails, b: BookDetails) => 1 // placeholder function for typescript 
     const dropdownButton: HTMLElement | null = document.getElementById('dropdown-button')
 
-    switch (method) {
-        case 'priceHigh':
-            dropdownButton.innerHTML = 'Highest to Lowest'
-            sortFunction = (a: BookDetails, b: BookDetails) => b.pages - a.pages
-            break
-        case 'priceLow':
-            dropdownButton.innerHTML = 'Lowest to Highest'
-            sortFunction = (a: BookDetails, b: BookDetails) => a.pages - b.pages
-            break
-        case 'authorFirst':
-            dropdownButton.innerHTML = 'Author: A to Z'
-            sortFunction = (a: BookDetails, b: BookDetails) => {
-                const aLast = a.author.split(' ').slice(-1)[0]
-                const bLast = b.author.split(' ').slice(-1)[0]
-                return aLast.localeCompare(bLast)
-            }
-            break
-        case 'authorLast':
-            dropdownButton.innerHTML = 'Author: Z to A'
-            sortFunction = (a: BookDetails, b: BookDetails) => {
-                const aLast = a.author.split(' ').slice(-1)[0]
-                const bLast = b.author.split(' ').slice(-1)[0]
-                return bLast.localeCompare(aLast)
-            }
-            break
-        case 'titleFirst':
-            dropdownButton.innerHTML = 'Title: A to Z'
-            sortFunction = (a: BookDetails, b: BookDetails) => a.title.localeCompare(b.title)
-            break
-        case 'titleLast':
-            dropdownButton.innerHTML = 'Title: Z to A'
-            sortFunction = (a: BookDetails, b: BookDetails) => b.title.localeCompare(a.title)
-            break
-        default:
-            console.error('no sort method supplied')
+    if (dropdownButton) {
+        switch (method) {
+            case 'priceHigh':
+                dropdownButton.innerHTML = 'Highest to Lowest'
+                sortFunction = (a: BookDetails, b: BookDetails) => b.pages - a.pages
+                break
+            case 'priceLow':
+                dropdownButton.innerHTML = 'Lowest to Highest'
+                sortFunction = (a: BookDetails, b: BookDetails) => a.pages - b.pages
+                break
+            case 'authorFirst':
+                dropdownButton.innerHTML = 'Author: A to Z'
+                sortFunction = (a: BookDetails, b: BookDetails) => {
+                    const aLast = a.author.split(' ').slice(-1)[0]
+                    const bLast = b.author.split(' ').slice(-1)[0]
+                    return aLast.localeCompare(bLast)
+                }
+                break
+            case 'authorLast':
+                dropdownButton.innerHTML = 'Author: Z to A'
+                sortFunction = (a: BookDetails, b: BookDetails) => {
+                    const aLast = a.author.split(' ').slice(-1)[0]
+                    const bLast = b.author.split(' ').slice(-1)[0]
+                    return bLast.localeCompare(aLast)
+                }
+                break
+            case 'titleFirst':
+                dropdownButton.innerHTML = 'Title: A to Z'
+                sortFunction = (a: BookDetails, b: BookDetails) => a.title.localeCompare(b.title)
+                break
+            case 'titleLast':
+                dropdownButton.innerHTML = 'Title: Z to A'
+                sortFunction = (a: BookDetails, b: BookDetails) => b.title.localeCompare(a.title)
+                break
+            default:
+                console.error('no sort method supplied')
+        }
     }
 
     return sortFunction
 }
 
 function updateCartNumber(): void {
-    const cartNum: HTMLElement| null = document.getElementById('cart-number')
-    const cart = JSON.parse(localStorage.getItem('cart'))
-    if (cart != null) {
+    const cartNum: HTMLElement | null = document.getElementById('cart-number')
+    const cart: BookDetails[] = JSON.parse(localStorage.getItem('cart')!)
+    if (cart && cartNum) {
         const cartLength = cart.length
         cartNum.className = 'round-white-border'
-        cartNum.innerHTML = cartLength
-    } else {
+        cartNum.innerHTML = cartLength.toString()
+    } else if (cartNum){
         cartNum.className = ''
         cartNum.innerHTML = ''
     }
 }
 
 function addItemToCart(deetz: BookDetails): void {
-    let cart = JSON.parse(localStorage.getItem('cart'))
+    let cart: BookDetails[] = JSON.parse(localStorage.getItem('cart')!)
 
     if (cart != null) {
         if (!cart.some((e: BookDetails) => e.title === deetz.title)) {
@@ -226,8 +237,8 @@ function addItemToCart(deetz: BookDetails): void {
 }
 
 function removeItemFromCart(title: string): void {
-    let cart = JSON.parse(localStorage.getItem('cart'))
-    const index = cart.findIndex((i: BookDetails) => i.title === title)
+    let cart: BookDetails[] = JSON.parse(localStorage.getItem('cart')!)
+    const index: number = cart.findIndex((i: BookDetails) => i.title === title)
 
     if (index >= 0) {
         cart.splice(index, 1)
@@ -235,7 +246,7 @@ function removeItemFromCart(title: string): void {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    if (JSON.parse(localStorage.getItem('cart')).length === 0) {
+    if (JSON.parse(localStorage.getItem('cart')!).length === 0) {
         localStorage.removeItem('cart')
     }
 
@@ -247,8 +258,8 @@ function searchProducts(input: string): void {
     const term: string = input.toUpperCase()
     const regex: RegExp = new RegExp(`^${term}`)
 
-    const catalog = JSON.parse(localStorage.getItem('catalog'))
-    const itemsToDisplay: object[] = []
+    const catalog: BookDetails[] = JSON.parse(localStorage.getItem('catalog')!)
+    const itemsToDisplay: BookDetails[] = []
 
 
     catalog.forEach((item: BookDetails) => {

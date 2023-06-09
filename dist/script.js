@@ -9,22 +9,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber();
     fetchCatalog();
 });
-// Close shopping cart if click outside of it
 document.addEventListener('click', (event) => {
-    if (document.getElementById('cart')) {
-        if (event.target && !event.target.classList.contains('cart-focus')) {
+    // Close shopping cart if click outside of it
+    const target = event.target;
+    const cart = document.getElementById('cart');
+    if (cart) {
+        if (target && !target.classList.contains('cart-focus')) {
             toggleCart();
         }
     }
     // close checkout page if click outside of it
-    if (document.getElementById('checkout-page').style.display !== 'none') {
-        if (event.target && !event.target.classList.contains('checkout-focus')) {
+    const checkout = document.getElementById('checkout-page');
+    if (checkout && checkout.style.display !== 'none') {
+        if (target && !target.classList.contains('checkout-focus')) {
             toggleCheckout();
         }
     }
     // if filter dropdown is open fade out catalog
     const dropButton = document.getElementById('dropdown-button');
-    const cards = document.getElementsByClassName('card');
+    const cards = document.querySelectorAll('.card');
     if (dropButton.ariaExpanded === 'true') {
         for (let i = 0; i < cards.length; i++) {
             cards[i].style.opacity = '0.5';
@@ -54,7 +57,8 @@ function fetchCatalog() {
         });
     }
     else {
-        const storedCat = JSON.parse(localStorage.getItem('catalog'));
+        const catString = localStorage.getItem('catalog');
+        const storedCat = JSON.parse(catString);
         storedCat.forEach(key => {
             if (key != null) {
                 catalog.push(key);
@@ -77,7 +81,7 @@ function toggleCart() {
 function toggleCheckout() {
     const checkout = document.getElementById('checkout-page');
     const children = document.body.children;
-    if (checkout.style.display !== 'none') {
+    if (checkout && checkout.style.display !== 'none') {
         checkout.style.display = 'none';
         checkout.innerHTML = '';
         for (let child in children) {
@@ -98,14 +102,15 @@ function toggleCheckout() {
 }
 function displayCatalog(list = JSON.parse(localStorage.getItem('catalog')), sortMethod) {
     const catalog = document.getElementById('catalog');
-    if (catalog.hasChildNodes()) {
+    if (catalog && catalog.hasChildNodes()) {
         catalog.innerHTML = '';
     }
     list.sort(sortCatalogBy(sortMethod)).forEach((item) => makeProductCard(item));
 }
 function displayShoppingCart() {
-    if (document.getElementById('cart')) {
-        document.getElementById('cart').remove();
+    const cartRendered = document.getElementById('cart');
+    if (cartRendered) {
+        cartRendered.remove();
     }
     const cart = document.createElement('div');
     cart.id = 'cart';
@@ -116,9 +121,9 @@ function displayShoppingCart() {
     const checkoutButton = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`;
     const message = document.createElement('h5');
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3');
-    if (localStorage.getItem('cart') != null) {
+    if (localStorage.getItem('cart')) {
         let price = 0;
-        JSON.parse(localStorage.getItem('cart')).forEach(item => {
+        JSON.parse(localStorage.getItem('cart')).forEach((item) => {
             price += item.pages;
             message.innerHTML = `Total: ${priceFormat.format(price)}`;
             cart.appendChild(makeCartItem(item));
@@ -137,53 +142,55 @@ function displayShoppingCart() {
 function sortCatalogBy(method = 'titleFirst') {
     let sortFunction = (a, b) => 1; // placeholder function for typescript 
     const dropdownButton = document.getElementById('dropdown-button');
-    switch (method) {
-        case 'priceHigh':
-            dropdownButton.innerHTML = 'Highest to Lowest';
-            sortFunction = (a, b) => b.pages - a.pages;
-            break;
-        case 'priceLow':
-            dropdownButton.innerHTML = 'Lowest to Highest';
-            sortFunction = (a, b) => a.pages - b.pages;
-            break;
-        case 'authorFirst':
-            dropdownButton.innerHTML = 'Author: A to Z';
-            sortFunction = (a, b) => {
-                const aLast = a.author.split(' ').slice(-1)[0];
-                const bLast = b.author.split(' ').slice(-1)[0];
-                return aLast.localeCompare(bLast);
-            };
-            break;
-        case 'authorLast':
-            dropdownButton.innerHTML = 'Author: Z to A';
-            sortFunction = (a, b) => {
-                const aLast = a.author.split(' ').slice(-1)[0];
-                const bLast = b.author.split(' ').slice(-1)[0];
-                return bLast.localeCompare(aLast);
-            };
-            break;
-        case 'titleFirst':
-            dropdownButton.innerHTML = 'Title: A to Z';
-            sortFunction = (a, b) => a.title.localeCompare(b.title);
-            break;
-        case 'titleLast':
-            dropdownButton.innerHTML = 'Title: Z to A';
-            sortFunction = (a, b) => b.title.localeCompare(a.title);
-            break;
-        default:
-            console.error('no sort method supplied');
+    if (dropdownButton) {
+        switch (method) {
+            case 'priceHigh':
+                dropdownButton.innerHTML = 'Highest to Lowest';
+                sortFunction = (a, b) => b.pages - a.pages;
+                break;
+            case 'priceLow':
+                dropdownButton.innerHTML = 'Lowest to Highest';
+                sortFunction = (a, b) => a.pages - b.pages;
+                break;
+            case 'authorFirst':
+                dropdownButton.innerHTML = 'Author: A to Z';
+                sortFunction = (a, b) => {
+                    const aLast = a.author.split(' ').slice(-1)[0];
+                    const bLast = b.author.split(' ').slice(-1)[0];
+                    return aLast.localeCompare(bLast);
+                };
+                break;
+            case 'authorLast':
+                dropdownButton.innerHTML = 'Author: Z to A';
+                sortFunction = (a, b) => {
+                    const aLast = a.author.split(' ').slice(-1)[0];
+                    const bLast = b.author.split(' ').slice(-1)[0];
+                    return bLast.localeCompare(aLast);
+                };
+                break;
+            case 'titleFirst':
+                dropdownButton.innerHTML = 'Title: A to Z';
+                sortFunction = (a, b) => a.title.localeCompare(b.title);
+                break;
+            case 'titleLast':
+                dropdownButton.innerHTML = 'Title: Z to A';
+                sortFunction = (a, b) => b.title.localeCompare(a.title);
+                break;
+            default:
+                console.error('no sort method supplied');
+        }
     }
     return sortFunction;
 }
 function updateCartNumber() {
     const cartNum = document.getElementById('cart-number');
     const cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart != null) {
+    if (cart && cartNum) {
         const cartLength = cart.length;
         cartNum.className = 'round-white-border';
-        cartNum.innerHTML = cartLength;
+        cartNum.innerHTML = cartLength.toString();
     }
-    else {
+    else if (cartNum) {
         cartNum.className = '';
         cartNum.innerHTML = '';
     }
