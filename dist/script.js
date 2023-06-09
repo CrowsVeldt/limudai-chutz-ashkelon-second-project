@@ -24,7 +24,7 @@ document.addEventListener('click', (event) => {
     // if filter dropdown is open fade out catalog
     const dropButton = document.getElementById('dropdown-button');
     const cards = document.querySelectorAll('.card');
-    if (dropButton.ariaExpanded === 'true') {
+    if (dropButton && dropButton.ariaExpanded === 'true') {
         for (let i = 0; i < cards.length; i++) {
             cards[i].style.opacity = '0.5';
             // cards[i].style.filter = 'blur(3px)'
@@ -85,7 +85,7 @@ function toggleCheckout() {
             }
         }
     }
-    else {
+    else if (checkout) {
         checkout.style.display = 'flex';
         for (let child in children) {
             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
@@ -231,7 +231,6 @@ function searchProducts(input) {
     const term = input.toUpperCase();
     const regex = new RegExp(`^${term}`);
     const storedCatalog = getStoredData('catalog');
-    //const catalog: BookDetails[] = storedCatalog
     const itemsToDisplay = [];
     if (storedCatalog) {
         storedCatalog.forEach((item) => {

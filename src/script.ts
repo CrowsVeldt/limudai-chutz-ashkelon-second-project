@@ -28,14 +28,14 @@ document.addEventListener('click', (event) => {
     // if filter dropdown is open fade out catalog
     const dropButton: HTMLElement | null = document.getElementById('dropdown-button')
     const cards: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.card')
-    if (dropButton!.ariaExpanded === 'true') {
+    if (dropButton && dropButton.ariaExpanded === 'true') {
 
-        for (let i = 0; i < cards.length; i++) {
+        for (let i: number = 0; i < cards.length; i++) {
             cards[i].style.opacity = '0.5'
             // cards[i].style.filter = 'blur(3px)'
         }
     } else {
-        for (let i = 0; i < cards.length; i++) {
+        for (let i: number = 0; i < cards.length; i++) {
             cards[i].style.opacity = '1'
             // cards[i].style.filter = ''
         }
@@ -90,8 +90,8 @@ function toggleCheckout() {
                 children[child].style.filter = ''
             }
         }
-    } else {
-        checkout!.style.display = 'flex'
+    } else if (checkout) {
+        checkout.style.display = 'flex'
         for (let child in children) {
             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
                 children[child].style.filter = 'blur(5px)'
@@ -255,7 +255,6 @@ function searchProducts(input: string): void {
     const regex: RegExp = new RegExp(`^${term}`)
     const storedCatalog: BookDetails[] = getStoredData('catalog')
 
-    //const catalog: BookDetails[] = storedCatalog
     const itemsToDisplay: BookDetails[] = []
 
     if (storedCatalog) {

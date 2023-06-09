@@ -106,7 +106,7 @@ function makeCheckoutPage(): void {
 
     const cart: BookDetails[] = getStoredData('cart')
     if (cart) {
-        let amount = 0
+        let amount: number = 0
         cart.forEach((item: BookDetails) => {
             amount += item.pages
             message.innerHTML = `Total: ${priceFormat.format(amount)}`
