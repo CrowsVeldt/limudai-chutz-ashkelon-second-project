@@ -60,21 +60,6 @@ function makeCartItem(deetz: BookDetails): HTMLDivElement {
     return item
 }
 
-function showToast(message: string): void {
-    const toast: HTMLDivElement = document.createElement('div')
-    toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
-
-    const toastMessage: HTMLParagraphElement = document.createElement('p')
-    toastMessage.innerHTML = message
-
-    toast.appendChild(toastMessage)
-    document.body.appendChild(toast)
-
-    setTimeout(() => {
-        document.getElementsByClassName('my-toast')[0].remove()
-    }, 1250)
-}
-
 function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     const item: HTMLDivElement = document.createElement('div')
     item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus')
@@ -95,13 +80,10 @@ function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
 function makeCheckoutPage(): HTMLDivElement {
 
     const checkout: HTMLDivElement = document.createElement('div')
-    // TODO: rename leftPanel
-    const leftPanel: HTMLDivElement = document.createElement('div')
-    leftPanel.classList.add('checkout-focus')
+    const topPanel: HTMLDivElement = document.createElement('div')
+    topPanel.classList.add('checkout-focus')
     const bottomPanel: HTMLDivElement = document.createElement('div')
     bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between')
-    //const rightPanel: HTMLDivElement = document.createElement('div')
-    //rightPanel.classList.add('col', 'checkout-focus')
 
     const purchaseList: HTMLDivElement = document.createElement('div')
 
@@ -124,13 +106,26 @@ function makeCheckoutPage(): HTMLDivElement {
         message.innerHTML = "Nothing here yet!"
     }
 
-    leftPanel.appendChild(purchaseList)
+    topPanel.appendChild(purchaseList)
     bottomPanel.appendChild(message)
     bottomPanel.appendChild(purchaseButton)
-    checkout.appendChild(leftPanel)
+    checkout.appendChild(topPanel)
     checkout.appendChild(bottomPanel)
-    //checkout.appendChild(rightPanel)
 
     return checkout
 }
 
+function showToast(message: string): void {
+    const toast: HTMLDivElement = document.createElement('div')
+    toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
+
+    const toastMessage: HTMLParagraphElement = document.createElement('p')
+    toastMessage.innerHTML = message
+
+    toast.appendChild(toastMessage)
+    document.body.appendChild(toast)
+
+    setTimeout(() => {
+        document.getElementsByClassName('my-toast')[0].remove()
+    }, 1250)
+}

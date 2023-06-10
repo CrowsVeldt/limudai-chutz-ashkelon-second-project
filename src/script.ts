@@ -78,7 +78,7 @@ function toggleCart(): void {
     }
 }
 
-function toggleCheckout() {
+function toggleCheckout(): void {
     const checkout: HTMLElement | null = document.getElementById('checkout-page')
     const children = document.body.children as HTMLCollectionOf<HTMLElement>
 
@@ -114,7 +114,7 @@ function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     })
 }
 
-function displayShoppingCart() {
+function displayShoppingCart(): void {
     const cartRendered: HTMLElement | null = document.getElementById('cart')
     const storedCartData: BookDetails[] = getStoredData('cart')
 
