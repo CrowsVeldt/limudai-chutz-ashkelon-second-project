@@ -48,17 +48,6 @@ function makeCartItem(deetz) {
     item.appendChild(remove);
     return item;
 }
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark');
-    const toastMessage = document.createElement('p');
-    toastMessage.innerHTML = message;
-    toast.appendChild(toastMessage);
-    document.body.appendChild(toast);
-    setTimeout(() => {
-        document.getElementsByClassName('my-toast')[0].remove();
-    }, 1250);
-}
 function makeCheckoutItem(deetz) {
     const item = document.createElement('div');
     item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus');
@@ -74,13 +63,10 @@ function makeCheckoutItem(deetz) {
 }
 function makeCheckoutPage() {
     const checkout = document.createElement('div');
-    // TODO: rename leftPanel
-    const leftPanel = document.createElement('div');
-    leftPanel.classList.add('checkout-focus');
+    const topPanel = document.createElement('div');
+    topPanel.classList.add('checkout-focus');
     const bottomPanel = document.createElement('div');
     bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between');
-    //const rightPanel: HTMLDivElement = document.createElement('div')
-    //rightPanel.classList.add('col', 'checkout-focus')
     const purchaseList = document.createElement('div');
     const message = document.createElement('h2');
     message.classList.add('ms-5', 'checkout-focus');
@@ -99,11 +85,21 @@ function makeCheckoutPage() {
     else {
         message.innerHTML = "Nothing here yet!";
     }
-    leftPanel.appendChild(purchaseList);
+    topPanel.appendChild(purchaseList);
     bottomPanel.appendChild(message);
     bottomPanel.appendChild(purchaseButton);
-    checkout.appendChild(leftPanel);
+    checkout.appendChild(topPanel);
     checkout.appendChild(bottomPanel);
-    //checkout.appendChild(rightPanel)
     return checkout;
+}
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark');
+    const toastMessage = document.createElement('p');
+    toastMessage.innerHTML = message;
+    toast.appendChild(toastMessage);
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        document.querySelectorAll('.my-toast')[0].remove();
+    }, 1250);
 }

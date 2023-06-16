@@ -126,6 +126,6 @@ function showToast(message: string): void {
     document.body.appendChild(toast)
 
     setTimeout(() => {
-        document.getElementsByClassName('my-toast')[0].remove()
+        document.querySelectorAll('.my-toast')[0].remove()
     }, 1250)
 }

@@ -10,7 +10,7 @@ document.addEventListener('click', (event) => {
     // Close shopping cart if click outside of it
     const target = event.target as HTMLElement
 
-    const cartElement: HTMLElement | null = document.getElementById('cart')
+    const cartElement: HTMLElement | null = document.querySelector('#cart')
     if (cartElement) {
         if (target && !target.classList.contains('cart-focus')) {
             toggleCart()
@@ -18,7 +18,7 @@ document.addEventListener('click', (event) => {
     }
 
     // close checkout page if click outside of it
-    const checkout: HTMLElement | null = document.getElementById('checkout-page')
+    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
     if (checkout && checkout.style.display !== 'none') {
         if (target && !target.classList.contains('checkout-focus')) {
             toggleCheckout()
@@ -26,7 +26,7 @@ document.addEventListener('click', (event) => {
     }
 
     // if filter dropdown is open fade out catalog
-    const dropButton: HTMLElement | null = document.getElementById('dropdown-button')
+    const dropButton: HTMLElement | null = document.querySelector('#dropdown-button')
     const cards: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.card')
     if (dropButton && dropButton.ariaExpanded === 'true') {
 
@@ -70,7 +70,7 @@ function fetchCatalog(): void {
 }
 
 function toggleCart(): void {
-    const cartElement: HTMLElement | null = document.getElementById('cart')
+    const cartElement: HTMLElement | null = document.querySelector('#cart')
     if (cartElement) {
         cartElement.remove()
     } else {
@@ -79,7 +79,7 @@ function toggleCart(): void {
 }
 
 function toggleCheckout(): void {
-    const checkout: HTMLElement | null = document.getElementById('checkout-page')
+    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
     const children = document.body.children as HTMLCollectionOf<HTMLElement>
 
     if (checkout && checkout.style.display !== 'none') {
@@ -103,7 +103,7 @@ function toggleCheckout(): void {
 
 function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     sortMethod?: string): void {
-    const catalog: HTMLElement | null = document.getElementById('catalog')
+    const catalog: HTMLElement | null = document.querySelector('#catalog')
     if (catalog && catalog.hasChildNodes()) {
         catalog.innerHTML = ''
     }
@@ -115,7 +115,7 @@ function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
 }
 
 function displayShoppingCart(): void {
-    const cartRendered: HTMLElement | null = document.getElementById('cart')
+    const cartRendered: HTMLElement | null = document.querySelector('#cart')
     const storedCartData: BookDetails[] = getStoredData('cart')
 
     if (cartRendered) {
@@ -155,7 +155,7 @@ function displayShoppingCart(): void {
 
 function sortCatalogBy(method: string = 'titleFirst'): Sort {
     let sortFunction: Sort = (a: BookDetails, b: BookDetails) => 1 // <- placeholder function for type checking
-    const dropdownButton: HTMLElement | null = document.getElementById('dropdown-button')
+    const dropdownButton: HTMLElement | null = document.querySelector('#dropdown-button')
 
     if (dropdownButton) {
         switch (method) {
@@ -200,7 +200,7 @@ function sortCatalogBy(method: string = 'titleFirst'): Sort {
 }
 
 function updateCartNumber(): void {
-    const cartNum: HTMLElement | null = document.getElementById('cart-number')
+    const cartNum: HTMLElement | null = document.querySelector('#cart-number')
     const cart: BookDetails[] = getStoredData('cart')
     if (cart && cartNum) {
         const cartLength: number = cart.length
@@ -226,7 +226,7 @@ function addItemToCart(deetz: BookDetails): void {
         showToast(`Added ${deetz.title} to cart`)
     }
 
-    if (document.getElementById('cart')) {
+    if (document.querySelector('#cart')) {
         displayShoppingCart()
     }
     updateCartNumber()
