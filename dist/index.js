@@ -1,7 +1,16 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
+var _a, _b;
 import { makeProductCard, makeCartItem, makeCheckoutPage, showToast } from './components.js';
 import { getStoredData, priceFormat } from './util.js';
+(_a = document.querySelector('#cart-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', toggleCart);
+(_b = document.querySelector('#search')) === null || _b === void 0 ? void 0 : _b.addEventListener('input', (ev) => {
+    if (ev.target) {
+        const target = ev.target;
+        const value = target.value;
+        searchProducts(value);
+    }
+});
 document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber();
     fetchCatalog();

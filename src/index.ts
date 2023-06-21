@@ -4,6 +4,15 @@
 import { makeProductCard, makeCartItem, makeCheckoutPage, showToast } from './components.js'
 import { BookDetails, getStoredData, Sort, priceFormat } from './util.js'
 
+document.querySelector('#cart-button')?.addEventListener('click', toggleCart)
+document.querySelector('#search')?.addEventListener('input', (ev: Event) => {
+    if (ev.target) {
+        const target = ev.target as HTMLInputElement
+        const value: string = target.value
+        searchProducts(value)
+    }
+})
+
 document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber()
     fetchCatalog()
@@ -277,4 +286,4 @@ function searchProducts(input: string): void {
     displayCatalog(itemsToDisplay)
 }
 
-export {addItemToCart, removeItemFromCart}
+export { addItemToCart, removeItemFromCart }
