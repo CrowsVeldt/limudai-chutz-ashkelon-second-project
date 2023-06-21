@@ -129,3 +129,5 @@ function showToast(message: string): void {
         document.querySelectorAll('.my-toast')[0].remove()
     }, 1250)
 }
+
+export {makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, showToast}

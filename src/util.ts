@@ -22,3 +22,5 @@ type BookDetails = {
 }
 
 type Sort = (a: BookDetails, b: BookDetails) => number
+
+export {priceFormat, getStoredData, BookDetails, Sort}

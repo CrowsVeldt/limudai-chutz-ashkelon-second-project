@@ -1,6 +1,9 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 
+import { makeProductCard, makeCartItem, makeCheckoutPage, showToast } from './components'
+import { BookDetails, getStoredData, Sort, priceFormat } from './util'
+
 document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber()
     fetchCatalog()
