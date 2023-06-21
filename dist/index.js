@@ -1,9 +1,7 @@
-"use strict";
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
-Object.defineProperty(exports, "__esModule", { value: true });
-const components_1 = require("./components");
-const util_1 = require("./util");
+import { makeProductCard, makeCartItem, makeCheckoutPage, showToast } from './components.js';
+import { getStoredData, priceFormat } from './util.js';
 document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber();
     fetchCatalog();
@@ -56,7 +54,7 @@ function fetchCatalog() {
         });
     }
     else {
-        const storedCat = (0, util_1.getStoredData)('catalog');
+        const storedCat = getStoredData('catalog');
         storedCat.forEach(key => {
             if (key != null) {
                 catalog.push(key);
@@ -95,23 +93,23 @@ function toggleCheckout() {
                 children[child].style.filter = 'blur(5px)';
             }
         }
-        checkout.appendChild((0, components_1.makeCheckoutPage)());
+        checkout.appendChild(makeCheckoutPage());
     }
 }
-function displayCatalog(list = (0, util_1.getStoredData)('catalog'), sortMethod) {
+function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     const catalog = document.querySelector('#catalog');
     if (catalog && catalog.hasChildNodes()) {
         catalog.innerHTML = '';
     }
     list.sort(sortCatalogBy(sortMethod)).forEach((item) => {
         if (catalog) {
-            catalog.appendChild((0, components_1.makeProductCard)(item));
+            catalog.appendChild(makeProductCard(item));
         }
     });
 }
 function displayShoppingCart() {
     const cartRendered = document.querySelector('#cart');
-    const storedCartData = (0, util_1.getStoredData)('cart');
+    const storedCartData = getStoredData('cart');
     if (cartRendered) {
         cartRendered.remove();
     }
@@ -128,8 +126,8 @@ function displayShoppingCart() {
         let price = 0;
         storedCartData.forEach((item) => {
             price += item.pages;
-            message.innerHTML = `Total: ${util_1.priceFormat.format(price)}`;
-            cart.appendChild((0, components_1.makeCartItem)(item));
+            message.innerHTML = `Total: ${priceFormat.format(price)}`;
+            cart.appendChild(makeCartItem(item));
         });
         checkout.style.display = 'inline-block';
     }
@@ -187,7 +185,7 @@ function sortCatalogBy(method = 'titleFirst') {
 }
 function updateCartNumber() {
     const cartNum = document.querySelector('#cart-number');
-    const cart = (0, util_1.getStoredData)('cart');
+    const cart = getStoredData('cart');
     if (cart && cartNum) {
         const cartLength = cart.length;
         cartNum.className = 'round-white-border';
@@ -199,17 +197,17 @@ function updateCartNumber() {
     }
 }
 function addItemToCart(deetz) {
-    let cart = (0, util_1.getStoredData)('cart');
+    let cart = getStoredData('cart');
     if (cart != null) {
         if (!cart.some((e) => e.title === deetz.title)) {
             cart.push(deetz);
             localStorage.setItem('cart', JSON.stringify(cart));
-            (0, components_1.showToast)(`Added ${deetz.title} to cart`);
+            showToast(`Added ${deetz.title} to cart`);
         }
     }
     else {
         localStorage.setItem('cart', JSON.stringify([deetz]));
-        (0, components_1.showToast)(`Added ${deetz.title} to cart`);
+        showToast(`Added ${deetz.title} to cart`);
     }
     if (document.querySelector('#cart')) {
         displayShoppingCart();
@@ -217,11 +215,11 @@ function addItemToCart(deetz) {
     updateCartNumber();
 }
 function removeItemFromCart(title) {
-    let cart = (0, util_1.getStoredData)('cart');
+    let cart = getStoredData('cart');
     const index = cart.findIndex((i) => i.title === title);
     if (index >= 0) {
         cart.splice(index, 1);
-        (0, components_1.showToast)(`Removed ${title} from cart`);
+        showToast(`Removed ${title} from cart`);
         localStorage.setItem('cart', JSON.stringify(cart));
     }
     if (cart.length === 0) {
@@ -233,7 +231,7 @@ function removeItemFromCart(title) {
 function searchProducts(input) {
     const term = input.toUpperCase();
     const regex = new RegExp(`^${term}`);
-    const storedCatalog = (0, util_1.getStoredData)('catalog');
+    const storedCatalog = getStoredData('catalog');
     const itemsToDisplay = [];
     if (storedCatalog) {
         storedCatalog.forEach((item) => {
@@ -249,3 +247,4 @@ function searchProducts(input) {
     }
     displayCatalog(itemsToDisplay);
 }
+export { addItemToCart, removeItemFromCart };

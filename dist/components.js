@@ -1,6 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.showToast = exports.makeCheckoutPage = exports.makeCheckoutItem = exports.makeCartItem = exports.makeProductCard = void 0;
+import { priceFormat, getStoredData } from './util.js';
+import { removeItemFromCart, addItemToCart } from './index.js';
 function makeProductCard(deetz) {
     const card = document.createElement('div');
     card.classList.add('card', 'border-secondary');
@@ -36,7 +35,6 @@ function makeProductCard(deetz) {
     card.appendChild(cardBody);
     return card;
 }
-exports.makeProductCard = makeProductCard;
 function makeCartItem(deetz) {
     const item = document.createElement('div');
     item.classList.add('d-flex', 'flex-column', 'align-items-start', 'shadow-sm', 'cart-focus', 'p-2');
@@ -51,7 +49,6 @@ function makeCartItem(deetz) {
     item.appendChild(remove);
     return item;
 }
-exports.makeCartItem = makeCartItem;
 function makeCheckoutItem(deetz) {
     const item = document.createElement('div');
     item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus');
@@ -65,7 +62,6 @@ function makeCheckoutItem(deetz) {
     item.appendChild(price);
     return item;
 }
-exports.makeCheckoutItem = makeCheckoutItem;
 function makeCheckoutPage() {
     const checkout = document.createElement('div');
     const topPanel = document.createElement('div');
@@ -97,7 +93,6 @@ function makeCheckoutPage() {
     checkout.appendChild(bottomPanel);
     return checkout;
 }
-exports.makeCheckoutPage = makeCheckoutPage;
 function showToast(message) {
     const toast = document.createElement('div');
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark');
@@ -109,4 +104,4 @@ function showToast(message) {
         document.querySelectorAll('.my-toast')[0].remove();
     }, 1250);
 }
-exports.showToast = showToast;
+export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, showToast };

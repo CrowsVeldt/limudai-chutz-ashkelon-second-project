@@ -1,3 +1,6 @@
+import {priceFormat, BookDetails, getStoredData} from './util.js'
+import { removeItemFromCart, addItemToCart } from './index.js'
+
 function makeProductCard(deetz: BookDetails): HTMLDivElement {
     const card: HTMLDivElement = document.createElement('div')
     card.classList.add('card', 'border-secondary')
