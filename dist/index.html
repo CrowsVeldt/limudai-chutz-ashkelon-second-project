@@ -22,7 +22,7 @@
     <nav id="nav" class="navbar container-fluid bg-primary fixed-top">
         <span class="navbar-brand mx-4 text-light">Bookstore</span>
         <!-- shopping cart here -->
-        <div id="cart-button" onclick="toggleCart()" class="cart-focus pe-1 py-1" role="button">
+        <div id="cart-button" class="cart-focus pe-1 py-1" role="button">
             <span id="cart-icon" class="material-symbols-outlined mx-4 text-light cart-focus">
                 shopping_cart
                 <span id="cart-number" class="cart-focus"></span>
@@ -42,25 +42,12 @@
 
     <!-- catalog container -->
     <div class="container d-flex align-items-center justify-content-center">
-        <input type="text" name="search" id="search" oninput="searchProducts(this.value)" placeholder="Search by title"
+        <input type="text" name="search" id="search" placeholder="Search by title"
             class="m-4 w-50 rounded" />
-        <div class="dropdown" id="filter-dropdown">
+        <div class="dropdown" id="sort-dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 id="dropdown-button" aria-expanded="false"></button>
-            <ul class="dropdown-menu">
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleFirst')">Title:
-                        A to Z</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleLast')">Title:
-                        Z to A</button></li>
-                <li><button class="dropdown-item" type="button"
-                        onclick="displayCatalog(undefined, 'authorFirst')">Author's name: A to Z</button></li>
-                <li><button class="dropdown-item" type="button"
-                        onclick="displayCatalog(undefined, 'authorLast')">Author's name: Z to A</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceLow')">Price:
-                        Lowest to Highest</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceHigh')">Price:
-                        Highest to Lowest</button></li>
-            </ul>
+            <ul id='sort' class="dropdown-menu"> </ul>
         </div>
     </div>
     <div class="container-fluid d-flex flex-wrap justify-content-center gap-3" id="catalog">
@@ -108,9 +95,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-        <script src="util.js"></script>
-    <script src="components.js"></script>
-    <script src="script.js"></script>
+    <script type='module' src="index.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,6 @@
+import { priceFormat, BookDetails, getStoredData, SortMethod, sortMethodList } from './util.js'
+import { removeItemFromCart, addItemToCart, displayCatalog } from './index.js'
+
 function makeProductCard(deetz: BookDetails): HTMLDivElement {
     const card: HTMLDivElement = document.createElement('div')
     card.classList.add('card', 'border-secondary')
@@ -38,7 +41,7 @@ function makeProductCard(deetz: BookDetails): HTMLDivElement {
     cardBody.appendChild(addButton)
     card.appendChild(img)
     card.appendChild(cardBody)
-    
+
     return card
 }
 
@@ -115,6 +118,33 @@ function makeCheckoutPage(): HTMLDivElement {
     return checkout
 }
 
+function makeSortDropdownItem(method: SortMethod): HTMLLIElement {
+    const item: HTMLLIElement = document.createElement('li')
+
+    const button: HTMLButtonElement = document.createElement('button')
+    button.classList.add('dropdown-item')
+    button.type = 'button'
+    button.innerText = method.title
+    button.addEventListener('click', () => {
+        displayCatalog(undefined, method.method)
+    })
+
+    item.appendChild(button)
+    return item
+}
+
+function makeSortDropdownList(): HTMLLIElement[]{
+    const sort: HTMLUListElement | null = document.querySelector('#sort')
+    let list: HTMLLIElement[] = []
+
+    if (sort) {
+        list = sortMethodList.map((method: SortMethod) => {
+            return makeSortDropdownItem(method)
+        })
+    }
+    return list
+}
+
 function showToast(message: string): void {
     const toast: HTMLDivElement = document.createElement('div')
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
@@ -129,3 +159,5 @@ function showToast(message: string): void {
         document.querySelectorAll('.my-toast')[0].remove()
     }, 1250)
 }
+
+export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownList, showToast }
