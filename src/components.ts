@@ -1,5 +1,13 @@
-import { priceFormat, BookDetails, getStoredData, SortMethod, sortMethodList } from './util.js'
-import { removeItemFromCart, addItemToCart, displayCatalog } from './index.js'
+import { 
+    priceFormat, 
+    BookDetails, 
+    getStoredData, 
+    SortMethod, 
+    sortMethodList } from './util.js'
+import { 
+    removeItemFromCart, 
+    addItemToCart, 
+    displayCatalog } from './index.js'
 
 function makeProductCard(deetz: BookDetails): HTMLDivElement {
     const card: HTMLDivElement = document.createElement('div')
@@ -160,4 +168,10 @@ function showToast(message: string): void {
     }, 1250)
 }
 
-export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownList, showToast }
+export { 
+    makeProductCard, 
+    makeCartItem, 
+    makeCheckoutItem, 
+    makeCheckoutPage, 
+    makeSortDropdownList, 
+    showToast }

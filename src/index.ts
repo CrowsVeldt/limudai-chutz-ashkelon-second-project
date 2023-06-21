@@ -1,9 +1,17 @@
-// make checkoutItem function to populate checkout
-// show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 // if search returns no results display a message to that effect
+// make github deploy from dist, or equivelent
 
-import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js'
-import { BookDetails, getStoredData, Sort, priceFormat } from './util.js'
+import { 
+    makeProductCard, 
+    makeCartItem, 
+    makeCheckoutPage, 
+    makeSortDropdownList, 
+    showToast } from './components.js'
+import { 
+    BookDetails, 
+    getStoredData, 
+    Sort, 
+    priceFormat } from './util.js'
 
 const cb = document.querySelector('#cart-button')
 if (cb) {
@@ -301,4 +309,7 @@ function searchProducts(input: string): void {
     displayCatalog(itemsToDisplay)
 }
 
-export { addItemToCart, removeItemFromCart, displayCatalog }
+export { 
+    addItemToCart, 
+    removeItemFromCart, 
+    displayCatalog }

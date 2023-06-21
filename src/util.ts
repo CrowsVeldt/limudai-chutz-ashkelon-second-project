@@ -42,4 +42,10 @@ const sortMethodList: SortMethod[] = [
 
 type Sort = (a: BookDetails, b: BookDetails) => number
 
-export { priceFormat, sortMethodList, getStoredData, BookDetails, SortMethod, Sort }
+export { 
+    priceFormat, 
+    sortMethodList, 
+    getStoredData, 
+    BookDetails, 
+    SortMethod, 
+    Sort }
