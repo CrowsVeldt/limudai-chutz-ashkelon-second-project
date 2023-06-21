@@ -47,20 +47,7 @@
         <div class="dropdown" id="filter-dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                 id="dropdown-button" aria-expanded="false"></button>
-            <ul class="dropdown-menu">
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleFirst')">Title:
-                        A to Z</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'titleLast')">Title:
-                        Z to A</button></li>
-                <li><button class="dropdown-item" type="button"
-                        onclick="displayCatalog(undefined, 'authorFirst')">Author's name: A to Z</button></li>
-                <li><button class="dropdown-item" type="button"
-                        onclick="displayCatalog(undefined, 'authorLast')">Author's name: Z to A</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceLow')">Price:
-                        Lowest to Highest</button></li>
-                <li><button class="dropdown-item" type="button" onclick="displayCatalog(undefined, 'priceHigh')">Price:
-                        Highest to Lowest</button></li>
-            </ul>
+            <ul id='sort' class="dropdown-menu"> </ul>
         </div>
     </div>
     <div class="container-fluid d-flex flex-wrap justify-content-center gap-3" id="catalog">

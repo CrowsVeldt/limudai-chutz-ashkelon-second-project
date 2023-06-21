@@ -1,10 +1,12 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
+// create dropdown items in components.ts, add event listeners there
 
-import { makeProductCard, makeCartItem, makeCheckoutPage, showToast } from './components.js'
-import { BookDetails, getStoredData, Sort, priceFormat } from './util.js'
+import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownButton, showToast } from './components.js'
+import { BookDetails, getStoredData, SortMethod, Sort, priceFormat } from './util.js'
 
 document.querySelector('#cart-button')?.addEventListener('click', toggleCart)
+
 document.querySelector('#search')?.addEventListener('input', (ev: Event) => {
     if (ev.target) {
         const target = ev.target as HTMLInputElement
@@ -286,4 +288,49 @@ function searchProducts(input: string): void {
     displayCatalog(itemsToDisplay)
 }
 
-export { addItemToCart, removeItemFromCart }
+function displaySortDropdown(): void {
+    const sortMethods: SortMethod[] = [
+        {
+            method: 'titleFirst',
+            title: 'Title: A to Z'
+        },
+        {
+            method: 'titleLast',
+            title: 'Title: Z to A'
+        },
+        {
+            method: 'authorFirst',
+            title: 'Author: A to Z'
+        },
+        {
+            method: 'authorLast',
+            title: 'Author: Z to A'
+        },
+        {
+            method: 'priceLow',
+            title: 'Price: Low to High'
+        },
+        {
+            method: 'priceHigh',
+            title: 'Price: High to Low'
+        },
+    ]
+
+    let sort: HTMLUListElement
+    const sortExist: HTMLUListElement | null = document.querySelector('#sort')
+
+    
+    if (sortExist) {
+        sort = sortExist
+
+        sortMethods.map((method: SortMethod) => {
+            const button =  makeSortDropdownButton(method)
+            sort.appendChild(button)
+        })
+
+    }
+}
+
+displaySortDropdown()
+
+export { addItemToCart, removeItemFromCart, displayCatalog }

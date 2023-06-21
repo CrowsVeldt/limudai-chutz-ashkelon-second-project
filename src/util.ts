@@ -21,6 +21,11 @@ type BookDetails = {
     year: number
 }
 
+type SortMethod = {
+    method: string
+    title: string
+}
+
 type Sort = (a: BookDetails, b: BookDetails) => number
 
-export {priceFormat, getStoredData, BookDetails, Sort}
+export {priceFormat, getStoredData, BookDetails, SortMethod, Sort}

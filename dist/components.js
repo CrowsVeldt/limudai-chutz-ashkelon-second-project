@@ -1,5 +1,5 @@
 import { priceFormat, getStoredData } from './util.js';
-import { removeItemFromCart, addItemToCart } from './index.js';
+import { removeItemFromCart, addItemToCart, displayCatalog } from './index.js';
 function makeProductCard(deetz) {
     const card = document.createElement('div');
     card.classList.add('card', 'border-secondary');
@@ -93,6 +93,18 @@ function makeCheckoutPage() {
     checkout.appendChild(bottomPanel);
     return checkout;
 }
+function makeSortDropdownButton(method) {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    button.classList.add('dropdown-item');
+    button.type = 'button';
+    button.innerText = method.title;
+    button.addEventListener('click', () => {
+        displayCatalog(undefined, method.method);
+    });
+    li.appendChild(button);
+    return li;
+}
 function showToast(message) {
     const toast = document.createElement('div');
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark');
@@ -104,4 +116,4 @@ function showToast(message) {
         document.querySelectorAll('.my-toast')[0].remove();
     }, 1250);
 }
-export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, showToast };
+export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownButton, showToast };
