@@ -1,26 +1,30 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
-// create dropdown items in components.ts, add event listeners there
+// if search returns no results display a message to that effect
 
 import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js'
 import { BookDetails, getStoredData, Sort, priceFormat } from './util.js'
 
-document.querySelector('#cart-button')?.addEventListener('click', toggleCart)
+const cb = document.querySelector('#cart-button')
+if (cb) {
+    cb.addEventListener('click', toggleCart)
+}
 
-document.querySelector('#search')?.addEventListener('input', (ev: Event) => {
-    if (ev.target) {
-        const target = ev.target as HTMLInputElement
-        const value: string = target.value
-        searchProducts(value)
-    }
-})
+const s = document.querySelector('#search')
+if (s) {
+    s.addEventListener('input', (ev: Event) => {
+        if (ev.target) {
+            const target = ev.target as HTMLInputElement
+            const value: string = target.value
+            searchProducts(value)
+        }
+    })
+}
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const sort: HTMLUListElement | null = document.querySelector('#sort')
-
     if (sort) {
-
-        makeSortDropdownList()?.forEach((item) => {
+        makeSortDropdownList().forEach((item) => {
             sort.appendChild(item)
         })
     }

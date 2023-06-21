@@ -1,22 +1,26 @@
 // make checkoutItem function to populate checkout
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
-// create dropdown items in components.ts, add event listeners there
-var _a, _b;
+// if search returns no results display a message to that effect
 import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js';
 import { getStoredData, priceFormat } from './util.js';
-(_a = document.querySelector('#cart-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', toggleCart);
-(_b = document.querySelector('#search')) === null || _b === void 0 ? void 0 : _b.addEventListener('input', (ev) => {
-    if (ev.target) {
-        const target = ev.target;
-        const value = target.value;
-        searchProducts(value);
-    }
-});
+const cb = document.querySelector('#cart-button');
+if (cb) {
+    cb.addEventListener('click', toggleCart);
+}
+const s = document.querySelector('#search');
+if (s) {
+    s.addEventListener('input', (ev) => {
+        if (ev.target) {
+            const target = ev.target;
+            const value = target.value;
+            searchProducts(value);
+        }
+    });
+}
 document.addEventListener('DOMContentLoaded', (event) => {
-    var _a;
     const sort = document.querySelector('#sort');
     if (sort) {
-        (_a = makeSortDropdownList()) === null || _a === void 0 ? void 0 : _a.forEach((item) => {
+        makeSortDropdownList().forEach((item) => {
             sort.appendChild(item);
         });
     }

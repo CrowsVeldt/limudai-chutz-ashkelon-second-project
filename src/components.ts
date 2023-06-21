@@ -118,8 +118,8 @@ function makeCheckoutPage(): HTMLDivElement {
     return checkout
 }
 
-function makeSortDropdownButton(method: SortMethod): HTMLLIElement {
-    const li: HTMLLIElement = document.createElement('li') 
+function makeSortDropdownItem(method: SortMethod): HTMLLIElement {
+    const item: HTMLLIElement = document.createElement('li')
 
     const button: HTMLButtonElement = document.createElement('button')
     button.classList.add('dropdown-item')
@@ -129,20 +129,18 @@ function makeSortDropdownButton(method: SortMethod): HTMLLIElement {
         displayCatalog(undefined, method.method)
     })
 
-    li.appendChild(button)
-    return li
+    item.appendChild(button)
+    return item
 }
 
-function makeSortDropdownList(): HTMLLIElement[] | null {
+function makeSortDropdownList(): HTMLLIElement[]{
     const sort: HTMLUListElement | null = document.querySelector('#sort')
-    let list: HTMLLIElement[] | null = null
-    
+    let list: HTMLLIElement[] = []
+
     if (sort) {
-
         list = sortMethodList.map((method: SortMethod) => {
-            return makeSortDropdownButton(method)
+            return makeSortDropdownItem(method)
         })
-
     }
     return list
 }

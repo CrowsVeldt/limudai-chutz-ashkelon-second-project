@@ -93,8 +93,8 @@ function makeCheckoutPage() {
     checkout.appendChild(bottomPanel);
     return checkout;
 }
-function makeSortDropdownButton(method) {
-    const li = document.createElement('li');
+function makeSortDropdownItem(method) {
+    const item = document.createElement('li');
     const button = document.createElement('button');
     button.classList.add('dropdown-item');
     button.type = 'button';
@@ -102,15 +102,15 @@ function makeSortDropdownButton(method) {
     button.addEventListener('click', () => {
         displayCatalog(undefined, method.method);
     });
-    li.appendChild(button);
-    return li;
+    item.appendChild(button);
+    return item;
 }
 function makeSortDropdownList() {
     const sort = document.querySelector('#sort');
-    let list = null;
+    let list = [];
     if (sort) {
         list = sortMethodList.map((method) => {
-            return makeSortDropdownButton(method);
+            return makeSortDropdownItem(method);
         });
     }
     return list;
