@@ -10,4 +10,18 @@ function getStoredData(key) {
     }
     return data;
 }
-export { priceFormat, getStoredData };
+const sortMethodList = [
+    { method: 'titleFirst',
+        title: 'Title: A to Z' },
+    { method: 'titleLast',
+        title: 'Title: Z to A' },
+    { method: 'authorFirst',
+        title: 'Author: A to Z' },
+    { method: 'authorLast',
+        title: 'Author: Z to A' },
+    { method: 'priceLow',
+        title: 'Price: Low to High' },
+    { method: 'priceHigh',
+        title: 'Price: High to Low' },
+];
+export { priceFormat, sortMethodList, getStoredData };

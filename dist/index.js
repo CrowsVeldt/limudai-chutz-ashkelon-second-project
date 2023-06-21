@@ -2,7 +2,7 @@
 // show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 // create dropdown items in components.ts, add event listeners there
 var _a, _b;
-import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownButton, showToast } from './components.js';
+import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js';
 import { getStoredData, priceFormat } from './util.js';
 (_a = document.querySelector('#cart-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', toggleCart);
 (_b = document.querySelector('#search')) === null || _b === void 0 ? void 0 : _b.addEventListener('input', (ev) => {
@@ -13,6 +13,13 @@ import { getStoredData, priceFormat } from './util.js';
     }
 });
 document.addEventListener('DOMContentLoaded', (event) => {
+    var _a;
+    const sort = document.querySelector('#sort');
+    if (sort) {
+        (_a = makeSortDropdownList()) === null || _a === void 0 ? void 0 : _a.forEach((item) => {
+            sort.appendChild(item);
+        });
+    }
     updateCartNumber();
     fetchCatalog();
 });
@@ -257,42 +264,4 @@ function searchProducts(input) {
     }
     displayCatalog(itemsToDisplay);
 }
-function displaySortDropdown() {
-    const sortMethods = [
-        {
-            method: 'titleFirst',
-            title: 'Title: A to Z'
-        },
-        {
-            method: 'titleLast',
-            title: 'Title: Z to A'
-        },
-        {
-            method: 'authorFirst',
-            title: 'Author: A to Z'
-        },
-        {
-            method: 'authorLast',
-            title: 'Author: Z to A'
-        },
-        {
-            method: 'priceLow',
-            title: 'Price: Low to High'
-        },
-        {
-            method: 'priceHigh',
-            title: 'Price: High to Low'
-        },
-    ];
-    let sort;
-    const sortExist = document.querySelector('#sort');
-    if (sortExist) {
-        sort = sortExist;
-        sortMethods.map((method) => {
-            const button = makeSortDropdownButton(method);
-            sort.appendChild(button);
-        });
-    }
-}
-displaySortDropdown();
 export { addItemToCart, removeItemFromCart, displayCatalog };

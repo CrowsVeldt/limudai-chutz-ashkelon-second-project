@@ -8,7 +8,7 @@ function getStoredData(key: string): BookDetails[] {
     const storedData: BookDetails[] | null = JSON.parse(localStorage.getItem(key)!)
     if (storedData) {
         data = storedData
-    } 
+    }
     return data
 }
 
@@ -20,12 +20,26 @@ type BookDetails = {
     title: string
     year: number
 }
-
 type SortMethod = {
     method: string
     title: string
 }
 
+const sortMethodList: SortMethod[] = [
+    { method: 'titleFirst',
+        title: 'Title: A to Z' },
+    { method: 'titleLast',
+        title: 'Title: Z to A' },
+    { method: 'authorFirst',
+        title: 'Author: A to Z' },
+    { method: 'authorLast',
+        title: 'Author: Z to A' },
+    { method: 'priceLow',
+        title: 'Price: Low to High' },
+    { method: 'priceHigh',
+        title: 'Price: High to Low' },
+]
+
 type Sort = (a: BookDetails, b: BookDetails) => number
 
-export {priceFormat, getStoredData, BookDetails, SortMethod, Sort}
+export { priceFormat, sortMethodList, getStoredData, BookDetails, SortMethod, Sort }

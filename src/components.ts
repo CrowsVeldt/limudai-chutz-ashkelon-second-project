@@ -1,4 +1,4 @@
-import { priceFormat, BookDetails, getStoredData, SortMethod } from './util.js'
+import { priceFormat, BookDetails, getStoredData, SortMethod, sortMethodList } from './util.js'
 import { removeItemFromCart, addItemToCart, displayCatalog } from './index.js'
 
 function makeProductCard(deetz: BookDetails): HTMLDivElement {
@@ -133,6 +133,20 @@ function makeSortDropdownButton(method: SortMethod): HTMLLIElement {
     return li
 }
 
+function makeSortDropdownList(): HTMLLIElement[] | null {
+    const sort: HTMLUListElement | null = document.querySelector('#sort')
+    let list: HTMLLIElement[] | null = null
+    
+    if (sort) {
+
+        list = sortMethodList.map((method: SortMethod) => {
+            return makeSortDropdownButton(method)
+        })
+
+    }
+    return list
+}
+
 function showToast(message: string): void {
     const toast: HTMLDivElement = document.createElement('div')
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark')
@@ -148,4 +162,4 @@ function showToast(message: string): void {
     }, 1250)
 }
 
-export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownButton, showToast }
+export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownList, showToast }

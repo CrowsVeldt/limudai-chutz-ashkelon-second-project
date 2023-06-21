@@ -1,4 +1,4 @@
-import { priceFormat, getStoredData } from './util.js';
+import { priceFormat, getStoredData, sortMethodList } from './util.js';
 import { removeItemFromCart, addItemToCart, displayCatalog } from './index.js';
 function makeProductCard(deetz) {
     const card = document.createElement('div');
@@ -105,6 +105,16 @@ function makeSortDropdownButton(method) {
     li.appendChild(button);
     return li;
 }
+function makeSortDropdownList() {
+    const sort = document.querySelector('#sort');
+    let list = null;
+    if (sort) {
+        list = sortMethodList.map((method) => {
+            return makeSortDropdownButton(method);
+        });
+    }
+    return list;
+}
 function showToast(message) {
     const toast = document.createElement('div');
     toast.classList.add('my-toast', 'rounded-pill', 'px-2', 'pt-3', 'bg-primary', 'text-light', 'border', 'border-dark');
@@ -116,4 +126,4 @@ function showToast(message) {
         document.querySelectorAll('.my-toast')[0].remove();
     }, 1250);
 }
-export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownButton, showToast };
+export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownList, showToast };
