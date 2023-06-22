@@ -1,6 +1,5 @@
-// make checkoutItem function to populate checkout
-// show translation of lorem ipsum on hover (comes out gibberish, looks ugly)
 // if search returns no results display a message to that effect
+// make github deploy from dist, or equivelent
 import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js';
 import { getStoredData, priceFormat } from './util.js';
 const cb = document.querySelector('#cart-button');
@@ -140,7 +139,12 @@ function displayShoppingCart() {
     cart.style.overflow = 'scroll';
     cart.style.maxHeight = '90%';
     const checkout = document.createElement('span');
-    const checkoutButton = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`;
+    const checkoutButton = document.createElement('button');
+    checkoutButton.innerText = 'Go to checkout';
+    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus');
+    checkoutButton.addEventListener('click', () => {
+        toggleCheckout();
+    });
     const message = document.createElement('h5');
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3');
     if ((storedCartData)) {
@@ -157,7 +161,7 @@ function displayShoppingCart() {
         checkout.style.display = 'none';
     }
     cart.appendChild(message);
-    checkout.innerHTML = checkoutButton;
+    checkout.appendChild(checkoutButton);
     cart.appendChild(checkout);
     document.body.appendChild(cart);
 }

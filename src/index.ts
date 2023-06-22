@@ -164,7 +164,12 @@ function displayShoppingCart(): void {
     cart.style.maxHeight = '90%'
 
     const checkout: HTMLSpanElement = document.createElement('span')
-    const checkoutButton: string = `<button class="btn btn-danger mb-3 checkout-focus" onclick="toggleCheckout()">Go to Checkout</button>`
+    const checkoutButton: HTMLButtonElement = document.createElement('button')
+    checkoutButton.innerText = 'Go to checkout'
+    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus')
+    checkoutButton.addEventListener('click', () => {
+        toggleCheckout()
+    })
 
     const message: HTMLHeadingElement = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
@@ -183,7 +188,7 @@ function displayShoppingCart(): void {
     }
 
     cart.appendChild(message)
-    checkout.innerHTML = checkoutButton
+    checkout.appendChild(checkoutButton)
     cart.appendChild(checkout)
     document.body.appendChild(cart)
 }
