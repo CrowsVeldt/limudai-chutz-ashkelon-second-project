@@ -42,7 +42,7 @@ document.addEventListener('click', (event) => {
             toggleCheckout();
         }
     }
-    // if filter dropdown is open fade out catalog
+    // if filter dropdown is open, fade out catalog
     const dropButton = document.querySelector('#dropdown-button');
     const cards = document.querySelectorAll('.card');
     if (dropButton && dropButton.ariaExpanded === 'true') {

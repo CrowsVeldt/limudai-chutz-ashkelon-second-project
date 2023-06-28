@@ -60,7 +60,7 @@ document.addEventListener('click', (event) => {
         }
     }
 
-    // if filter dropdown is open fade out catalog
+    // if filter dropdown is open, fade out catalog
     const dropButton: HTMLElement | null = document.querySelector('#dropdown-button')
     const cards: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.card')
     if (dropButton && dropButton.ariaExpanded === 'true') {

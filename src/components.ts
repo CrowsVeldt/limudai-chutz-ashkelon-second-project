@@ -73,7 +73,7 @@ function makeCartItem(deetz: BookDetails): HTMLDivElement {
 
 function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     const item: HTMLDivElement = document.createElement('div')
-    item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus')
+    item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus', 'mb-3')
 
     const title: HTMLParagraphElement = document.createElement('p')
     title.innerHTML = deetz.title
@@ -83,16 +83,20 @@ function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     price.innerHTML = priceFormat.format(deetz.pages)
     price.classList.add('checkout-focus')
 
+    const rule: HTMLHRElement = document.createElement('hr')
+    rule.classList.add('checkout-focus')
+
     item.appendChild(title)
     item.appendChild(price)
+    item.appendChild(rule)
     return item
 }
 
 function makeCheckoutPage(): HTMLDivElement {
 
     const checkout: HTMLDivElement = document.createElement('div')
+    checkout.classList.add('checkout-focus')
     const topPanel: HTMLDivElement = document.createElement('div')
-    topPanel.classList.add('checkout-focus')
     const bottomPanel: HTMLDivElement = document.createElement('div')
     bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between')
 
