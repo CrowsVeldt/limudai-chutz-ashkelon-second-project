@@ -5,6 +5,7 @@ import {
     SortMethod, 
     sortMethodList } from './util.js'
 import { 
+    removeItemFromCheckout,
     removeItemFromCart, 
     addItemToCart, 
     displayCatalog } from './index.js'
@@ -86,6 +87,10 @@ function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     const remove: HTMLButtonElement = document.createElement('button')
     remove.innerText = 'x'
     remove.classList.add('checkout-focus', 'col', 'checkout-remove-button')
+
+    // remove.onclick(evt => {
+    //     removeItemFromCart(evt)
+    // })
 
     item.appendChild(title)
     item.appendChild(price)

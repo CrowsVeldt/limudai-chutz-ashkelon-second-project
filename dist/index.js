@@ -1,7 +1,18 @@
 // if search returns no results display a message to that effect
-// make github deploy from dist, or equivelent
+// change 'dist' to 'root/docs' for deployment to Github Pages?
+// make checkout item remove buttons work
+// make checkout page buy button work
+// make seperate checkout entry in storage, add and subtract from there
+// add to checkout when user presses 'go to checkout'
+// remove from checkout when remove button is pressed
+// seperate displayShoppingCart into two functions:
+// 1. to create a shoppingCart element to render, move to components.tst 
+// 2. to render it(?)
 import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js';
 import { getStoredData, priceFormat } from './util.js';
+// !!!!!! ONLY FOR DEVELOPMENT !!!!!!
+const ch = document.querySelector('#checkout-page');
+ch === null || ch === void 0 ? void 0 : ch.appendChild(makeCheckoutPage());
 // toggle cart
 const cb = document.querySelector('#cart-button');
 if (cb) {
@@ -225,6 +236,10 @@ function updateCartNumber() {
         cartNum.innerHTML = '';
     }
 }
+function removeItemFromCheckout() {
+    let checkout = getStoredData('checkout');
+    console.log(checkout);
+}
 function addItemToCart(deetz) {
     let cart = getStoredData('cart');
     if (cart != null) {
@@ -276,4 +291,4 @@ function searchProducts(input) {
     }
     displayCatalog(itemsToDisplay);
 }
-export { addItemToCart, removeItemFromCart, displayCatalog };
+export { addItemToCart, removeItemFromCart, removeItemFromCheckout, displayCatalog };

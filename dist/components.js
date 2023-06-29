@@ -61,6 +61,9 @@ function makeCheckoutItem(deetz) {
     const remove = document.createElement('button');
     remove.innerText = 'x';
     remove.classList.add('checkout-focus', 'col', 'checkout-remove-button');
+    remove.onclick(evt => {
+        removeItemFromCart(evt);
+    });
     item.appendChild(title);
     item.appendChild(price);
     item.appendChild(remove);

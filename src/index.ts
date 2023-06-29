@@ -1,6 +1,3 @@
-// if search returns no results display a message to that effect
-// make github deploy from dist, or equivelent
-
 import { 
     makeProductCard, 
     makeCartItem, 
@@ -12,6 +9,10 @@ import {
     getStoredData, 
     Sort, 
     priceFormat } from './util.js'
+
+// // !!!!!! ONLY FOR DEVELOPMENT !!!!!!
+// const ch = document.querySelector('#checkout-page')
+// ch?.appendChild(makeCheckoutPage())
 
 // toggle cart
 const cb: HTMLDivElement | null = document.querySelector('#cart-button')
@@ -256,6 +257,11 @@ function updateCartNumber(): void {
     }
 }
 
+function removeItemFromCheckout () {
+    let checkout: BookDetails[] = getStoredData('checkout')
+    console.log(checkout)
+}
+
 function addItemToCart(deetz: BookDetails): void {
     let cart: BookDetails[] = getStoredData('cart')
 
@@ -321,4 +327,5 @@ function searchProducts(input: string): void {
 export { 
     addItemToCart, 
     removeItemFromCart, 
+    removeItemFromCheckout,
     displayCatalog }

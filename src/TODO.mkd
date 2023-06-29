@@ -1,0 +1,10 @@
+// if search returns no results display a message to that effect
+// change 'dist' to 'root/docs' for deployment to Github Pages?
+// make checkout item remove buttons work
+// make checkout page buy button work
+// make seperate checkout entry in storage, add and subtract from there
+// add to checkout when user presses 'go to checkout'
+// remove from checkout when remove button is pressed
+// seperate displayShoppingCart into two functions:
+// 1. to create a shoppingCart element to render, move to components.tst 
+// 2. to render it(?)
