@@ -3,12 +3,12 @@ import {
     makeCartItem, 
     makeCheckoutPage,
     makeSortDropdownList, 
+    makeShoppingCart,
     showToast } from './components.js'
 import { 
     BookDetails, 
     getStoredData, 
-    Sort, 
-    priceFormat } from './util.js'
+    Sort, } from './util.js'
 
 // // !!!!!! ONLY FOR DEVELOPMENT !!!!!!
 // const ch = document.querySelector('#checkout-page')
@@ -156,46 +156,12 @@ function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
 
 function displayShoppingCart(): void {
     const cartRendered: HTMLElement | null = document.querySelector('#cart')
-    const storedCartData: BookDetails[] = getStoredData('cart')
 
     if (cartRendered) {
         cartRendered.remove()
     }
 
-    const cart: HTMLDivElement = document.createElement('div')
-    cart.id = 'cart'
-    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus')
-    cart.style.overflow = 'scroll'
-    cart.style.maxHeight = '90%'
-
-    const checkout: HTMLSpanElement = document.createElement('span')
-    const checkoutButton: HTMLButtonElement = document.createElement('button')
-    checkoutButton.innerText = 'Go to checkout'
-    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus')
-    checkoutButton.addEventListener('click', () => {
-        toggleCheckout()
-    })
-
-    const message: HTMLHeadingElement = document.createElement('h5')
-    message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
-    if ((storedCartData)) {
-        let price = 0
-        storedCartData.forEach((item: BookDetails) => {
-            price += item.pages
-            message.innerHTML = `Total: ${priceFormat.format(price)}`
-            cart.appendChild(makeCartItem(item))
-
-        })
-        checkout.style.display = 'inline-block'
-    } else {
-        message.innerHTML = "Nothing here yet!"
-        checkout.style.display = 'none'
-    }
-
-    cart.appendChild(message)
-    checkout.appendChild(checkoutButton)
-    cart.appendChild(checkout)
-    document.body.appendChild(cart)
+    document.body.appendChild(makeShoppingCart())
 }
 
 function sortCatalogBy(method: string = 'titleFirst'): Sort {
@@ -326,6 +292,8 @@ function searchProducts(input: string): void {
 
 export { 
     addItemToCart, 
+    displayCatalog,
     removeItemFromCart, 
     removeItemFromCheckout,
-    displayCatalog }
+    toggleCheckout
+}

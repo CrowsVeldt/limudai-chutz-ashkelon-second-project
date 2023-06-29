@@ -1,5 +1,5 @@
 import { priceFormat, getStoredData, sortMethodList } from './util.js';
-import { removeItemFromCart, addItemToCart, displayCatalog } from './index.js';
+import { removeItemFromCart, addItemToCart, displayCatalog, toggleCheckout } from './index.js';
 function makeProductCard(deetz) {
     const card = document.createElement('div');
     card.classList.add('card', 'border-secondary');
@@ -49,6 +49,40 @@ function makeCartItem(deetz) {
     item.appendChild(remove);
     return item;
 }
+function makeShoppingCart() {
+    const storedCartData = getStoredData('cart');
+    const cart = document.createElement('div');
+    cart.id = 'cart';
+    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus');
+    cart.style.overflow = 'scroll';
+    cart.style.maxHeight = '90%';
+    const checkoutSpan = document.createElement('span');
+    const checkoutButton = document.createElement('button');
+    checkoutButton.innerText = 'Go to checkout';
+    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus');
+    checkoutButton.addEventListener('click', () => {
+        toggleCheckout();
+    });
+    const message = document.createElement('h5');
+    message.classList.add('cart-focus', 'text-decoration-underline', 'my-3');
+    if ((storedCartData)) {
+        let price = 0;
+        storedCartData.forEach((item) => {
+            price += item.pages;
+            message.innerHTML = `Total: ${priceFormat.format(price)}`;
+            cart.appendChild(makeCartItem(item));
+        });
+        checkoutSpan.style.display = 'inline-block';
+    }
+    else {
+        message.innerHTML = "Nothing here yet!";
+        checkoutSpan.style.display = 'none';
+    }
+    cart.appendChild(message);
+    checkoutSpan.appendChild(checkoutButton);
+    cart.appendChild(checkoutSpan);
+    return cart;
+}
 function makeCheckoutItem(deetz) {
     const item = document.createElement('div');
     item.classList.add('text-center', 'row', 'w-100', 'checkout-focus', 'border-bottom', 'py-2');
@@ -61,9 +95,9 @@ function makeCheckoutItem(deetz) {
     const remove = document.createElement('button');
     remove.innerText = 'x';
     remove.classList.add('checkout-focus', 'col', 'checkout-remove-button');
-    remove.onclick(evt => {
-        removeItemFromCart(evt);
-    });
+    // remove.onclick(evt => {
+    //     removeItemFromCart(evt)
+    // })
     item.appendChild(title);
     item.appendChild(price);
     item.appendChild(remove);
@@ -141,4 +175,4 @@ function showToast(message) {
         document.querySelectorAll('.my-toast')[0].remove();
     }, 1250);
 }
-export { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast };
+export { makeCartItem, makeCheckoutPage, makeProductCard, makeSortDropdownList, makeShoppingCart, showToast };

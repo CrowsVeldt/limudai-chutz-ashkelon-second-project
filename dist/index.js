@@ -1,18 +1,8 @@
-// if search returns no results display a message to that effect
-// change 'dist' to 'root/docs' for deployment to Github Pages?
-// make checkout item remove buttons work
-// make checkout page buy button work
-// make seperate checkout entry in storage, add and subtract from there
-// add to checkout when user presses 'go to checkout'
-// remove from checkout when remove button is pressed
-// seperate displayShoppingCart into two functions:
-// 1. to create a shoppingCart element to render, move to components.tst 
-// 2. to render it(?)
-import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js';
-import { getStoredData, priceFormat } from './util.js';
-// !!!!!! ONLY FOR DEVELOPMENT !!!!!!
-const ch = document.querySelector('#checkout-page');
-ch === null || ch === void 0 ? void 0 : ch.appendChild(makeCheckoutPage());
+import { makeProductCard, makeCheckoutPage, makeSortDropdownList, makeShoppingCart, showToast } from './components.js';
+import { getStoredData } from './util.js';
+// // !!!!!! ONLY FOR DEVELOPMENT !!!!!!
+// const ch = document.querySelector('#checkout-page')
+// ch?.appendChild(makeCheckoutPage())
 // toggle cart
 const cb = document.querySelector('#cart-button');
 if (cb) {
@@ -143,42 +133,7 @@ function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     });
 }
 function displayShoppingCart() {
-    const cartRendered = document.querySelector('#cart');
-    const storedCartData = getStoredData('cart');
-    if (cartRendered) {
-        cartRendered.remove();
-    }
-    const cart = document.createElement('div');
-    cart.id = 'cart';
-    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus');
-    cart.style.overflow = 'scroll';
-    cart.style.maxHeight = '90%';
-    const checkout = document.createElement('span');
-    const checkoutButton = document.createElement('button');
-    checkoutButton.innerText = 'Go to checkout';
-    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus');
-    checkoutButton.addEventListener('click', () => {
-        toggleCheckout();
-    });
-    const message = document.createElement('h5');
-    message.classList.add('cart-focus', 'text-decoration-underline', 'my-3');
-    if ((storedCartData)) {
-        let price = 0;
-        storedCartData.forEach((item) => {
-            price += item.pages;
-            message.innerHTML = `Total: ${priceFormat.format(price)}`;
-            cart.appendChild(makeCartItem(item));
-        });
-        checkout.style.display = 'inline-block';
-    }
-    else {
-        message.innerHTML = "Nothing here yet!";
-        checkout.style.display = 'none';
-    }
-    cart.appendChild(message);
-    checkout.appendChild(checkoutButton);
-    cart.appendChild(checkout);
-    document.body.appendChild(cart);
+    document.body.appendChild(makeShoppingCart());
 }
 function sortCatalogBy(method = 'titleFirst') {
     let sortFunction = (a, b) => 1; // <- placeholder function for type checking
@@ -291,4 +246,4 @@ function searchProducts(input) {
     }
     displayCatalog(itemsToDisplay);
 }
-export { addItemToCart, removeItemFromCart, removeItemFromCheckout, displayCatalog };
+export { addItemToCart, displayCatalog, removeItemFromCart, removeItemFromCheckout, toggleCheckout };

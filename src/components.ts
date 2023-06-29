@@ -5,10 +5,11 @@ import {
     SortMethod, 
     sortMethodList } from './util.js'
 import { 
-    removeItemFromCheckout,
+    // removeItemFromCheckout,
     removeItemFromCart, 
     addItemToCart, 
-    displayCatalog } from './index.js'
+    displayCatalog, 
+    toggleCheckout} from './index.js'
 
 function makeProductCard(deetz: BookDetails): HTMLDivElement {
     const card: HTMLDivElement = document.createElement('div')
@@ -70,6 +71,44 @@ function makeCartItem(deetz: BookDetails): HTMLDivElement {
 
     item.appendChild(remove)
     return item
+}
+
+function makeShoppingCart(): HTMLDivElement {
+    const storedCartData: BookDetails[] = getStoredData('cart')
+    const cart: HTMLDivElement = document.createElement('div')
+    cart.id = 'cart'
+    cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus')
+    cart.style.overflow = 'scroll'
+    cart.style.maxHeight = '90%'
+
+    const checkoutSpan: HTMLSpanElement = document.createElement('span')
+    const checkoutButton: HTMLButtonElement = document.createElement('button')
+    checkoutButton.innerText = 'Go to checkout'
+    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus')
+    checkoutButton.addEventListener('click', () => {
+        toggleCheckout()
+    })
+
+    const message: HTMLHeadingElement = document.createElement('h5')
+    message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
+    if ((storedCartData)) {
+        let price = 0
+        storedCartData.forEach((item: BookDetails) => {
+            price += item.pages
+            message.innerHTML = `Total: ${priceFormat.format(price)}`
+            cart.appendChild(makeCartItem(item))
+
+        })
+        checkoutSpan.style.display = 'inline-block'
+    } else {
+        message.innerHTML = "Nothing here yet!"
+        checkoutSpan.style.display = 'none'
+    }
+
+    cart.appendChild(message)
+    checkoutSpan.appendChild(checkoutButton)
+    cart.appendChild(checkoutSpan)
+    return cart
 }
 
 function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
@@ -189,8 +228,9 @@ function showToast(message: string): void {
 }
 
 export { 
-    makeProductCard, 
     makeCartItem, 
     makeCheckoutPage,
+    makeProductCard, 
     makeSortDropdownList, 
+    makeShoppingCart,
     showToast }
