@@ -1,13 +1,18 @@
 // if search returns no results display a message to that effect
 // make github deploy from dist, or equivelent
-import { makeProductCard, makeCartItem, 
-// makeCheckoutPage, 
-makeSortDropdownList, showToast } from './components.js';
+import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js';
 import { getStoredData, priceFormat } from './util.js';
+// Display checkout constantly for development
+const checkout = document.querySelector('#checkout-page');
+if (checkout) {
+    checkout.appendChild(makeCheckoutPage());
+}
+// toggle cart
 const cb = document.querySelector('#cart-button');
 if (cb) {
     cb.addEventListener('click', toggleCart);
 }
+// search
 const s = document.querySelector('#search');
 if (s) {
     s.addEventListener('input', (ev) => {
@@ -18,6 +23,7 @@ if (s) {
         }
     });
 }
+// Run when content is finished loading
 document.addEventListener('DOMContentLoaded', (event) => {
     const sort = document.querySelector('#sort');
     if (sort) {
@@ -28,8 +34,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     updateCartNumber();
     fetchCatalog();
 });
+// If page is clicked: 
 document.addEventListener('click', (event) => {
-    // Close shopping cart if click outside of it
+    // Close shopping cart if click outside
     const target = event.target;
     const cartElement = document.querySelector('#cart');
     if (cartElement) {
@@ -37,7 +44,7 @@ document.addEventListener('click', (event) => {
             toggleCart();
         }
     }
-    // close checkout page if click outside of it
+    // close checkout page if click outside
     // const checkout: HTMLElement | null = document.querySelector('#checkout-page')
     // if (checkout && checkout.style.display !== 'none') {
     //     if (target && !target.classList.contains('checkout-focus')) {
