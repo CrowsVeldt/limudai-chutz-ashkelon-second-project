@@ -95,9 +95,9 @@ function makeCheckoutItem(deetz) {
     const remove = document.createElement('button');
     remove.innerText = 'x';
     remove.classList.add('checkout-focus', 'col', 'checkout-remove-button');
-    // remove.onclick(evt => {
-    //     removeItemFromCart(evt)
-    // })
+    remove.addEventListener('click', () => {
+        removeItemFromCart(deetz.title);
+    });
     item.appendChild(title);
     item.appendChild(price);
     item.appendChild(remove);
@@ -106,7 +106,7 @@ function makeCheckoutItem(deetz) {
 function makeCheckoutPage() {
     const checkout = document.createElement('div');
     checkout.id = 'checkout';
-    checkout.classList.add('checkout-focus');
+    checkout.classList.add('checkout-focus', 'container');
     const topPanel = document.createElement('div');
     topPanel.id = 'top-panel';
     topPanel.classList.add('checkout-focus');

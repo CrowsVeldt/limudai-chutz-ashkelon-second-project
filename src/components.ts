@@ -5,7 +5,7 @@ import {
     SortMethod, 
     sortMethodList } from './util.js'
 import { 
-    // removeItemFromCheckout,
+    removeItemFromCheckout,
     removeItemFromCart, 
     addItemToCart, 
     displayCatalog, 
@@ -127,9 +127,9 @@ function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     remove.innerText = 'x'
     remove.classList.add('checkout-focus', 'col', 'checkout-remove-button')
 
-    // remove.onclick(evt => {
-    //     removeItemFromCart(evt)
-    // })
+    remove.addEventListener('click', () => {
+        removeItemFromCart(deetz.title)
+    })
 
     item.appendChild(title)
     item.appendChild(price)
@@ -141,7 +141,7 @@ function makeCheckoutPage(): HTMLDivElement {
 
     const checkout: HTMLDivElement = document.createElement('div')
     checkout.id = 'checkout'
-    checkout.classList.add('checkout-focus')
+    checkout.classList.add('checkout-focus', 'container')
 
     const topPanel: HTMLDivElement = document.createElement('div')
     topPanel.id = 'top-panel'

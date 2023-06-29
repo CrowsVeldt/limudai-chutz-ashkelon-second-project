@@ -1,5 +1,5 @@
 import { makeProductCard, makeCheckoutPage, makeSortDropdownList, makeShoppingCart, showToast } from './components.js';
-import { getStoredData } from './util.js';
+import { getStoredData, } from './util.js';
 // // !!!!!! ONLY FOR DEVELOPMENT !!!!!!
 // const ch = document.querySelector('#checkout-page')
 // ch?.appendChild(makeCheckoutPage())
@@ -121,6 +121,13 @@ function toggleCheckout() {
         checkout.appendChild(makeCheckoutPage());
     }
 }
+function displayCheckout() {
+    const checkoutRendered = document.querySelector('#checkout');
+    if (checkoutRendered) {
+        checkoutRendered.remove();
+    }
+    document.body.appendChild(makeCheckoutPage());
+}
 function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     const catalog = document.querySelector('#catalog');
     if (catalog && catalog.hasChildNodes()) {
@@ -133,6 +140,10 @@ function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     });
 }
 function displayShoppingCart() {
+    const cartRendered = document.querySelector('#cart');
+    if (cartRendered) {
+        cartRendered.remove();
+    }
     document.body.appendChild(makeShoppingCart());
 }
 function sortCatalogBy(method = 'titleFirst') {
@@ -191,9 +202,19 @@ function updateCartNumber() {
         cartNum.innerHTML = '';
     }
 }
-function removeItemFromCheckout() {
-    let checkout = getStoredData('checkout');
-    console.log(checkout);
+function removeItemFromCheckout(title) {
+    let checkout = getStoredData('cart');
+    const index = checkout.findIndex((i) => i.title === title);
+    if (index >= 0) {
+        checkout.splice(index, 1);
+        showToast(`Removed ${title} from cart`);
+        localStorage.setItem('cart', JSON.stringify(checkout));
+    }
+    if (checkout.length === 0) {
+        localStorage.removeItem('cart');
+    }
+    updateCartNumber();
+    displayCheckout();
 }
 function addItemToCart(deetz) {
     let cart = getStoredData('cart');

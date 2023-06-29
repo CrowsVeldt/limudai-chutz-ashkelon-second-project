@@ -1,6 +1,5 @@
 import { 
     makeProductCard, 
-    makeCartItem, 
     makeCheckoutPage,
     makeSortDropdownList, 
     makeShoppingCart,
@@ -141,6 +140,16 @@ function toggleCheckout(): void {
     }
 }
 
+function displayCheckout(): void{
+    const checkoutRendered: HTMLElement | null = document.querySelector('#checkout')
+
+    if (checkoutRendered) {
+        checkoutRendered.remove()
+    }
+
+    document.body.appendChild(makeCheckoutPage())
+}
+
 function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     sortMethod?: string): void {
     const catalog: HTMLElement | null = document.querySelector('#catalog')
@@ -223,9 +232,22 @@ function updateCartNumber(): void {
     }
 }
 
-function removeItemFromCheckout () {
-    let checkout: BookDetails[] = getStoredData('checkout')
-    console.log(checkout)
+function removeItemFromCheckout (title: String): void {
+    let checkout: BookDetails[] = getStoredData('cart')
+    const index: number = checkout.findIndex((i: BookDetails) => i.title === title)
+
+    if (index >= 0) {
+        checkout.splice(index, 1)
+        showToast(`Removed ${title} from cart`)
+        localStorage.setItem('cart', JSON.stringify(checkout))
+    }
+
+    if (checkout.length === 0) {
+        localStorage.removeItem('cart')
+    }
+
+    updateCartNumber()
+    displayCheckout()
 }
 
 function addItemToCart(deetz: BookDetails): void {
@@ -246,6 +268,7 @@ function addItemToCart(deetz: BookDetails): void {
         displayShoppingCart()
     }
     updateCartNumber()
+    
 }
 
 function removeItemFromCart(title: string): void {
