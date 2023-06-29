@@ -51,30 +51,39 @@ function makeCartItem(deetz) {
 }
 function makeCheckoutItem(deetz) {
     const item = document.createElement('div');
-    item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus', 'mb-3');
+    item.classList.add('text-center', 'row', 'w-100', 'checkout-focus', 'border-bottom', 'py-2');
     const title = document.createElement('p');
     title.innerHTML = deetz.title;
-    title.classList.add('checkout-focus');
+    title.classList.add('checkout-focus', 'col', 'mb-0');
     const price = document.createElement('p');
     price.innerHTML = priceFormat.format(deetz.pages);
-    price.classList.add('checkout-focus');
-    const rule = document.createElement('hr');
-    rule.classList.add('checkout-focus');
+    price.classList.add('checkout-focus', 'col', 'mb-0');
+    const remove = document.createElement('button');
+    remove.innerText = 'x';
+    remove.classList.add('checkout-focus', 'col', 'checkout-remove-button');
     item.appendChild(title);
     item.appendChild(price);
-    item.appendChild(rule);
+    item.appendChild(remove);
     return item;
 }
 function makeCheckoutPage() {
     const checkout = document.createElement('div');
+    checkout.id = 'checkout';
     checkout.classList.add('checkout-focus');
     const topPanel = document.createElement('div');
+    topPanel.id = 'top-panel';
+    topPanel.classList.add('checkout-focus');
     const bottomPanel = document.createElement('div');
-    bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between');
+    bottomPanel.id = 'bottom-panel';
+    bottomPanel.classList.add('checkout-focus', 'd-flex', 'flex-column', 'text-center');
     const purchaseList = document.createElement('div');
+    purchaseList.id = 'purchase-list';
+    purchaseList.classList.add('checkout-focus', 'container', 'align-center');
     const message = document.createElement('h2');
-    message.classList.add('ms-5', 'checkout-focus');
+    message.id = 'checkout-total';
+    message.classList.add('checkout-focus', 'my-1');
     const purchaseButton = document.createElement('button');
+    purchaseButton.id = 'purchase-button';
     purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success');
     purchaseButton.innerText = 'Buy now!';
     const cart = getStoredData('cart');
