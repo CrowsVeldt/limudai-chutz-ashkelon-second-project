@@ -13,12 +13,6 @@ import {
     Sort, 
     priceFormat } from './util.js'
 
-// Display checkout constantly for development
-const checkout: HTMLDivElement | null = document.querySelector('#checkout-page')
-if (checkout) {
-    checkout.appendChild(makeCheckoutPage())
-}
-
 // toggle cart
 const cb: HTMLDivElement | null = document.querySelector('#cart-button')
 if (cb) {
@@ -62,13 +56,13 @@ document.addEventListener('click', (event) => {
         }
     }
 
-    // close checkout page if click outside
-    // const checkout: HTMLElement | null = document.querySelector('#checkout-page')
-    // if (checkout && checkout.style.display !== 'none') {
-    //     if (target && !target.classList.contains('checkout-focus')) {
-    //         toggleCheckout()
-    //     }
-    // }
+//  close checkout page if click outside
+    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
+    if (checkout && checkout.style.display !== 'none') {
+        if (target && !target.classList.contains('checkout-focus')) {
+            toggleCheckout()
+        }
+    }
 
     // if filter dropdown is open, fade out catalog
     const dropButton: HTMLElement | null = document.querySelector('#dropdown-button')
@@ -123,28 +117,28 @@ function toggleCart(): void {
     }
 }
 
-// function toggleCheckout(): void {
-//     const checkout: HTMLElement | null = document.querySelector('#checkout-page')
-//     const children = document.body.children as HTMLCollectionOf<HTMLElement>
+function toggleCheckout(): void {
+    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
+    const children = document.body.children as HTMLCollectionOf<HTMLElement>
 
-//     if (checkout && checkout.style.display !== 'none') {
-//         checkout.style.display = 'none'
-//         checkout.innerHTML = ''
-//         for (let child in children) {
-//             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
-//                 children[child].style.filter = ''
-//             }
-//         }
-//     } else if (checkout) {
-//         checkout.style.display = 'flex'
-//         for (let child in children) {
-//             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
-//                 children[child].style.filter = 'blur(5px)'
-//             }
-//         }
-//         checkout.appendChild(makeCheckoutPage())
-//     }
-// }
+    if (checkout && checkout.style.display !== 'none') {
+        checkout.style.display = 'none'
+        checkout.innerHTML = ''
+        for (let child in children) {
+            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
+                children[child].style.filter = ''
+            }
+        }
+    } else if (checkout) {
+        checkout.style.display = 'flex'
+        for (let child in children) {
+            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
+                children[child].style.filter = 'blur(5px)'
+            }
+        }
+        checkout.appendChild(makeCheckoutPage())
+    }
+}
 
 function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     sortMethod?: string): void {
@@ -173,13 +167,13 @@ function displayShoppingCart(): void {
     cart.style.overflow = 'scroll'
     cart.style.maxHeight = '90%'
 
-    // const checkout: HTMLSpanElement = document.createElement('span')
-    // const checkoutButton: HTMLButtonElement = document.createElement('button')
-    // checkoutButton.innerText = 'Go to checkout'
-    // checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus')
-    // checkoutButton.addEventListener('click', () => {
-    //     toggleCheckout()
-    // })
+    const checkout: HTMLSpanElement = document.createElement('span')
+    const checkoutButton: HTMLButtonElement = document.createElement('button')
+    checkoutButton.innerText = 'Go to checkout'
+    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus')
+    checkoutButton.addEventListener('click', () => {
+        toggleCheckout()
+    })
 
     const message: HTMLHeadingElement = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
@@ -191,15 +185,15 @@ function displayShoppingCart(): void {
             cart.appendChild(makeCartItem(item))
 
         })
-        // checkout.style.display = 'inline-block'
+        checkout.style.display = 'inline-block'
     } else {
         message.innerHTML = "Nothing here yet!"
-        // checkout.style.display = 'none'
+        checkout.style.display = 'none'
     }
 
     cart.appendChild(message)
-    // checkout.appendChild(checkoutButton)
-    // cart.appendChild(checkout)
+    checkout.appendChild(checkoutButton)
+    cart.appendChild(checkout)
     document.body.appendChild(cart)
 }
 
