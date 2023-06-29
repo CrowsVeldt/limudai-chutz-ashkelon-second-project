@@ -1,7 +1,6 @@
 import { 
     priceFormat, 
     BookDetails, 
-    getStoredData, 
     SortMethod, 
     sortMethodList } from './util.js'
 import { 
@@ -71,65 +70,6 @@ function makeCartItem(deetz: BookDetails): HTMLDivElement {
     return item
 }
 
-function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
-    const item: HTMLDivElement = document.createElement('div')
-    item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus', 'mb-3')
-
-    const title: HTMLParagraphElement = document.createElement('p')
-    title.innerHTML = deetz.title
-    title.classList.add('checkout-focus')
-
-    const price: HTMLParagraphElement = document.createElement('p')
-    price.innerHTML = priceFormat.format(deetz.pages)
-    price.classList.add('checkout-focus')
-
-    const rule: HTMLHRElement = document.createElement('hr')
-    rule.classList.add('checkout-focus')
-
-    item.appendChild(title)
-    item.appendChild(price)
-    item.appendChild(rule)
-    return item
-}
-
-function makeCheckoutPage(): HTMLDivElement {
-
-    const checkout: HTMLDivElement = document.createElement('div')
-    checkout.classList.add('checkout-focus')
-    const topPanel: HTMLDivElement = document.createElement('div')
-    const bottomPanel: HTMLDivElement = document.createElement('div')
-    bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between')
-
-    const purchaseList: HTMLDivElement = document.createElement('div')
-
-    const message: HTMLHeadingElement = document.createElement('h2')
-    message.classList.add('ms-5', 'checkout-focus')
-
-    const purchaseButton: HTMLButtonElement = document.createElement('button')
-    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success')
-    purchaseButton.innerText = 'Buy now!'
-
-    const cart: BookDetails[] = getStoredData('cart')
-    if (cart) {
-        let amount: number = 0
-        cart.forEach((item: BookDetails) => {
-            amount += item.pages
-            message.innerHTML = `Total: ${priceFormat.format(amount)}`
-            purchaseList.append(makeCheckoutItem(item))
-        })
-    } else {
-        message.innerHTML = "Nothing here yet!"
-    }
-
-    topPanel.appendChild(purchaseList)
-    bottomPanel.appendChild(message)
-    bottomPanel.appendChild(purchaseButton)
-    checkout.appendChild(topPanel)
-    checkout.appendChild(bottomPanel)
-
-    return checkout
-}
-
 function makeSortDropdownItem(method: SortMethod): HTMLLIElement {
     const item: HTMLLIElement = document.createElement('li')
 
@@ -175,7 +115,5 @@ function showToast(message: string): void {
 export { 
     makeProductCard, 
     makeCartItem, 
-    makeCheckoutItem, 
-    makeCheckoutPage, 
     makeSortDropdownList, 
     showToast }

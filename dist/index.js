@@ -1,6 +1,8 @@
 // if search returns no results display a message to that effect
 // make github deploy from dist, or equivelent
-import { makeProductCard, makeCartItem, makeCheckoutPage, makeSortDropdownList, showToast } from './components.js';
+import { makeProductCard, makeCartItem, 
+// makeCheckoutPage, 
+makeSortDropdownList, showToast } from './components.js';
 import { getStoredData, priceFormat } from './util.js';
 const cb = document.querySelector('#cart-button');
 if (cb) {
@@ -36,12 +38,12 @@ document.addEventListener('click', (event) => {
         }
     }
     // close checkout page if click outside of it
-    const checkout = document.querySelector('#checkout-page');
-    if (checkout && checkout.style.display !== 'none') {
-        if (target && !target.classList.contains('checkout-focus')) {
-            toggleCheckout();
-        }
-    }
+    // const checkout: HTMLElement | null = document.querySelector('#checkout-page')
+    // if (checkout && checkout.style.display !== 'none') {
+    //     if (target && !target.classList.contains('checkout-focus')) {
+    //         toggleCheckout()
+    //     }
+    // }
     // if filter dropdown is open, fade out catalog
     const dropButton = document.querySelector('#dropdown-button');
     const cards = document.querySelectorAll('.card');
@@ -94,28 +96,27 @@ function toggleCart() {
         displayShoppingCart();
     }
 }
-function toggleCheckout() {
-    const checkout = document.querySelector('#checkout-page');
-    const children = document.body.children;
-    if (checkout && checkout.style.display !== 'none') {
-        checkout.style.display = 'none';
-        checkout.innerHTML = '';
-        for (let child in children) {
-            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
-                children[child].style.filter = '';
-            }
-        }
-    }
-    else if (checkout) {
-        checkout.style.display = 'flex';
-        for (let child in children) {
-            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
-                children[child].style.filter = 'blur(5px)';
-            }
-        }
-        checkout.appendChild(makeCheckoutPage());
-    }
-}
+// function toggleCheckout(): void {
+//     const checkout: HTMLElement | null = document.querySelector('#checkout-page')
+//     const children = document.body.children as HTMLCollectionOf<HTMLElement>
+//     if (checkout && checkout.style.display !== 'none') {
+//         checkout.style.display = 'none'
+//         checkout.innerHTML = ''
+//         for (let child in children) {
+//             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
+//                 children[child].style.filter = ''
+//             }
+//         }
+//     } else if (checkout) {
+//         checkout.style.display = 'flex'
+//         for (let child in children) {
+//             if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
+//                 children[child].style.filter = 'blur(5px)'
+//             }
+//         }
+//         checkout.appendChild(makeCheckoutPage())
+//     }
+// }
 function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     const catalog = document.querySelector('#catalog');
     if (catalog && catalog.hasChildNodes()) {
@@ -138,13 +139,13 @@ function displayShoppingCart() {
     cart.classList.add('bg-light', 'text-center', 'border', 'border-secondary', 'rounded-bottom-2', 'd-flex', 'flex-column', 'pt-1', 'text-dark', 'cart-focus');
     cart.style.overflow = 'scroll';
     cart.style.maxHeight = '90%';
-    const checkout = document.createElement('span');
-    const checkoutButton = document.createElement('button');
-    checkoutButton.innerText = 'Go to checkout';
-    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus');
-    checkoutButton.addEventListener('click', () => {
-        toggleCheckout();
-    });
+    // const checkout: HTMLSpanElement = document.createElement('span')
+    // const checkoutButton: HTMLButtonElement = document.createElement('button')
+    // checkoutButton.innerText = 'Go to checkout'
+    // checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus')
+    // checkoutButton.addEventListener('click', () => {
+    //     toggleCheckout()
+    // })
     const message = document.createElement('h5');
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3');
     if ((storedCartData)) {
@@ -154,15 +155,15 @@ function displayShoppingCart() {
             message.innerHTML = `Total: ${priceFormat.format(price)}`;
             cart.appendChild(makeCartItem(item));
         });
-        checkout.style.display = 'inline-block';
+        // checkout.style.display = 'inline-block'
     }
     else {
         message.innerHTML = "Nothing here yet!";
-        checkout.style.display = 'none';
+        // checkout.style.display = 'none'
     }
     cart.appendChild(message);
-    checkout.appendChild(checkoutButton);
-    cart.appendChild(checkout);
+    // checkout.appendChild(checkoutButton)
+    // cart.appendChild(checkout)
     document.body.appendChild(cart);
 }
 function sortCatalogBy(method = 'titleFirst') {

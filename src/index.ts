@@ -4,7 +4,6 @@
 import { 
     makeProductCard, 
     makeCartItem, 
-    makeCheckoutPage, 
     makeSortDropdownList, 
     showToast } from './components.js'
 import { 
@@ -49,14 +48,6 @@ document.addEventListener('click', (event) => {
     if (cartElement) {
         if (target && !target.classList.contains('cart-focus')) {
             toggleCart()
-        }
-    }
-
-    // close checkout page if click outside of it
-    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
-    if (checkout && checkout.style.display !== 'none') {
-        if (target && !target.classList.contains('checkout-focus')) {
-            toggleCheckout()
         }
     }
 
@@ -113,28 +104,6 @@ function toggleCart(): void {
     }
 }
 
-function toggleCheckout(): void {
-    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
-    const children = document.body.children as HTMLCollectionOf<HTMLElement>
-
-    if (checkout && checkout.style.display !== 'none') {
-        checkout.style.display = 'none'
-        checkout.innerHTML = ''
-        for (let child in children) {
-            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
-                children[child].style.filter = ''
-            }
-        }
-    } else if (checkout) {
-        checkout.style.display = 'flex'
-        for (let child in children) {
-            if (typeof children[child] === 'object' && !children[child].classList.contains('checkout-focus')) {
-                children[child].style.filter = 'blur(5px)'
-            }
-        }
-        checkout.appendChild(makeCheckoutPage())
-    }
-}
 
 function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     sortMethod?: string): void {
@@ -163,14 +132,6 @@ function displayShoppingCart(): void {
     cart.style.overflow = 'scroll'
     cart.style.maxHeight = '90%'
 
-    const checkout: HTMLSpanElement = document.createElement('span')
-    const checkoutButton: HTMLButtonElement = document.createElement('button')
-    checkoutButton.innerText = 'Go to checkout'
-    checkoutButton.classList.add('btn', 'btn-danger', 'mb-3', 'checkout-focus')
-    checkoutButton.addEventListener('click', () => {
-        toggleCheckout()
-    })
-
     const message: HTMLHeadingElement = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
     if ((storedCartData)) {
@@ -181,15 +142,11 @@ function displayShoppingCart(): void {
             cart.appendChild(makeCartItem(item))
 
         })
-        checkout.style.display = 'inline-block'
     } else {
         message.innerHTML = "Nothing here yet!"
-        checkout.style.display = 'none'
     }
 
     cart.appendChild(message)
-    checkout.appendChild(checkoutButton)
-    cart.appendChild(checkout)
     document.body.appendChild(cart)
 }
 

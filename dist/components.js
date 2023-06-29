@@ -1,4 +1,4 @@
-import { priceFormat, getStoredData, sortMethodList } from './util.js';
+import { priceFormat, sortMethodList } from './util.js';
 import { removeItemFromCart, addItemToCart, displayCatalog } from './index.js';
 function makeProductCard(deetz) {
     const card = document.createElement('div');
@@ -49,53 +49,52 @@ function makeCartItem(deetz) {
     item.appendChild(remove);
     return item;
 }
-function makeCheckoutItem(deetz) {
-    const item = document.createElement('div');
-    item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus', 'mb-3');
-    const title = document.createElement('p');
-    title.innerHTML = deetz.title;
-    title.classList.add('checkout-focus');
-    const price = document.createElement('p');
-    price.innerHTML = priceFormat.format(deetz.pages);
-    price.classList.add('checkout-focus');
-    const rule = document.createElement('hr');
-    rule.classList.add('checkout-focus');
-    item.appendChild(title);
-    item.appendChild(price);
-    item.appendChild(rule);
-    return item;
-}
-function makeCheckoutPage() {
-    const checkout = document.createElement('div');
-    checkout.classList.add('checkout-focus');
-    const topPanel = document.createElement('div');
-    const bottomPanel = document.createElement('div');
-    bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between');
-    const purchaseList = document.createElement('div');
-    const message = document.createElement('h2');
-    message.classList.add('ms-5', 'checkout-focus');
-    const purchaseButton = document.createElement('button');
-    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success');
-    purchaseButton.innerText = 'Buy now!';
-    const cart = getStoredData('cart');
-    if (cart) {
-        let amount = 0;
-        cart.forEach((item) => {
-            amount += item.pages;
-            message.innerHTML = `Total: ${priceFormat.format(amount)}`;
-            purchaseList.append(makeCheckoutItem(item));
-        });
-    }
-    else {
-        message.innerHTML = "Nothing here yet!";
-    }
-    topPanel.appendChild(purchaseList);
-    bottomPanel.appendChild(message);
-    bottomPanel.appendChild(purchaseButton);
-    checkout.appendChild(topPanel);
-    checkout.appendChild(bottomPanel);
-    return checkout;
-}
+// function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
+//     const item: HTMLDivElement = document.createElement('div')
+//     item.classList.add('d-flex', 'justify-content-between', 'text-start', 'w-100', 'checkout-focus', 'mb-3')
+//     const title: HTMLParagraphElement = document.createElement('p')
+//     title.innerHTML = deetz.title
+//     title.classList.add('checkout-focus')
+//     const price: HTMLParagraphElement = document.createElement('p')
+//     price.innerHTML = priceFormat.format(deetz.pages)
+//     price.classList.add('checkout-focus')
+//     const rule: HTMLHRElement = document.createElement('hr')
+//     rule.classList.add('checkout-focus')
+//     item.appendChild(title)
+//     item.appendChild(price)
+//     item.appendChild(rule)
+//     return item
+// }
+// function makeCheckoutPage(): HTMLDivElement {
+//     const checkout: HTMLDivElement = document.createElement('div')
+//     checkout.classList.add('checkout-focus')
+//     const topPanel: HTMLDivElement = document.createElement('div')
+//     const bottomPanel: HTMLDivElement = document.createElement('div')
+//     bottomPanel.classList.add('checkout-focus', 'd-flex', 'space-between')
+//     const purchaseList: HTMLDivElement = document.createElement('div')
+//     const message: HTMLHeadingElement = document.createElement('h2')
+//     message.classList.add('ms-5', 'checkout-focus')
+//     const purchaseButton: HTMLButtonElement = document.createElement('button')
+//     purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success')
+//     purchaseButton.innerText = 'Buy now!'
+//     const cart: BookDetails[] = getStoredData('cart')
+//     if (cart) {
+//         let amount: number = 0
+//         cart.forEach((item: BookDetails) => {
+//             amount += item.pages
+//             message.innerHTML = `Total: ${priceFormat.format(amount)}`
+//             purchaseList.append(makeCheckoutItem(item))
+//         })
+//     } else {
+//         message.innerHTML = "Nothing here yet!"
+//     }
+//     topPanel.appendChild(purchaseList)
+//     bottomPanel.appendChild(message)
+//     bottomPanel.appendChild(purchaseButton)
+//     checkout.appendChild(topPanel)
+//     checkout.appendChild(bottomPanel)
+//     return checkout
+// }
 function makeSortDropdownItem(method) {
     const item = document.createElement('li');
     const button = document.createElement('button');
@@ -129,4 +128,7 @@ function showToast(message) {
         document.querySelectorAll('.my-toast')[0].remove();
     }, 1250);
 }
-export { makeProductCard, makeCartItem, makeCheckoutItem, makeCheckoutPage, makeSortDropdownList, showToast };
+export { makeProductCard, makeCartItem, 
+// makeCheckoutItem, 
+// makeCheckoutPage, 
+makeSortDropdownList, showToast };
