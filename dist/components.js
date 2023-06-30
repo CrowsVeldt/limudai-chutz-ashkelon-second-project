@@ -121,7 +121,7 @@ function makeCheckoutPage() {
     message.classList.add('checkout-focus', 'my-1');
     const purchaseButton = document.createElement('button');
     purchaseButton.id = 'purchase-button';
-    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success');
+    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success', 'mb-2');
     purchaseButton.innerText = 'Buy now!';
     const cart = getStoredData('cart');
     if (cart.length > 0) {

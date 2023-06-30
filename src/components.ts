@@ -161,7 +161,7 @@ function makeCheckoutPage(): HTMLDivElement {
 
     const purchaseButton: HTMLButtonElement = document.createElement('button')
     purchaseButton.id = 'purchase-button'
-    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success')
+    purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success', 'mb-2')
     purchaseButton.innerText = 'Buy now!'
 
     const cart: BookDetails[] = getStoredData('cart')
