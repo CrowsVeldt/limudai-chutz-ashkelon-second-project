@@ -128,7 +128,7 @@ function makeCheckoutItem(deetz: BookDetails): HTMLDivElement {
     remove.classList.add('checkout-focus', 'col', 'checkout-remove-button')
 
     remove.addEventListener('click', () => {
-        removeItemFromCart(deetz.title)
+        removeItemFromCheckout(deetz.title)
     })
 
     item.appendChild(title)
@@ -165,7 +165,7 @@ function makeCheckoutPage(): HTMLDivElement {
     purchaseButton.innerText = 'Buy now!'
 
     const cart: BookDetails[] = getStoredData('cart')
-    if (cart) {
+    if (cart.length > 0) {
         let amount: number = 0
         cart.forEach((item: BookDetails) => {
             amount += item.pages
@@ -173,6 +173,7 @@ function makeCheckoutPage(): HTMLDivElement {
             purchaseList.append(makeCheckoutItem(item))
         })
     } else {
+        purchaseButton.style.display = 'none'
         message.innerHTML = "Nothing here yet!"
     }
 

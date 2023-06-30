@@ -1,8 +1,5 @@
 import { makeProductCard, makeCheckoutPage, makeSortDropdownList, makeShoppingCart, showToast } from './components.js';
 import { getStoredData, } from './util.js';
-// // !!!!!! ONLY FOR DEVELOPMENT !!!!!!
-// const ch = document.querySelector('#checkout-page')
-// ch?.appendChild(makeCheckoutPage())
 // toggle cart
 const cb = document.querySelector('#cart-button');
 if (cb) {
@@ -121,13 +118,6 @@ function toggleCheckout() {
         checkout.appendChild(makeCheckoutPage());
     }
 }
-function displayCheckout() {
-    const checkoutRendered = document.querySelector('#checkout');
-    if (checkoutRendered) {
-        checkoutRendered.remove();
-    }
-    document.body.appendChild(makeCheckoutPage());
-}
 function displayCatalog(list = getStoredData('catalog'), sortMethod) {
     const catalog = document.querySelector('#catalog');
     if (catalog && catalog.hasChildNodes()) {
@@ -138,6 +128,16 @@ function displayCatalog(list = getStoredData('catalog'), sortMethod) {
             catalog.appendChild(makeProductCard(item));
         }
     });
+}
+function displayCheckout() {
+    const checkoutRendered = document.querySelector('#checkout');
+    const checkout = document.querySelector('#checkout-page');
+    if (checkoutRendered) {
+        checkoutRendered.remove();
+    }
+    if (checkout) {
+        checkout.appendChild(makeCheckoutPage());
+    }
 }
 function displayShoppingCart() {
     const cartRendered = document.querySelector('#cart');

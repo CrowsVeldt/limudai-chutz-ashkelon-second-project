@@ -1,5 +1,5 @@
 import { priceFormat, getStoredData, sortMethodList } from './util.js';
-import { removeItemFromCart, addItemToCart, displayCatalog, toggleCheckout } from './index.js';
+import { removeItemFromCheckout, removeItemFromCart, addItemToCart, displayCatalog, toggleCheckout } from './index.js';
 function makeProductCard(deetz) {
     const card = document.createElement('div');
     card.classList.add('card', 'border-secondary');
@@ -96,7 +96,7 @@ function makeCheckoutItem(deetz) {
     remove.innerText = 'x';
     remove.classList.add('checkout-focus', 'col', 'checkout-remove-button');
     remove.addEventListener('click', () => {
-        removeItemFromCart(deetz.title);
+        removeItemFromCheckout(deetz.title);
     });
     item.appendChild(title);
     item.appendChild(price);
@@ -124,7 +124,7 @@ function makeCheckoutPage() {
     purchaseButton.classList.add('checkout-focus', 'btn', 'btn-success');
     purchaseButton.innerText = 'Buy now!';
     const cart = getStoredData('cart');
-    if (cart) {
+    if (cart.length > 0) {
         let amount = 0;
         cart.forEach((item) => {
             amount += item.pages;
@@ -133,6 +133,7 @@ function makeCheckoutPage() {
         });
     }
     else {
+        purchaseButton.style.display = 'none';
         message.innerHTML = "Nothing here yet!";
     }
     topPanel.appendChild(purchaseList);

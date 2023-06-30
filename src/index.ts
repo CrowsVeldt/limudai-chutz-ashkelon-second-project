@@ -9,10 +9,6 @@ import {
     getStoredData, 
     Sort, } from './util.js'
 
-// // !!!!!! ONLY FOR DEVELOPMENT !!!!!!
-// const ch = document.querySelector('#checkout-page')
-// ch?.appendChild(makeCheckoutPage())
-
 // toggle cart
 const cb: HTMLDivElement | null = document.querySelector('#cart-button')
 if (cb) {
@@ -140,16 +136,6 @@ function toggleCheckout(): void {
     }
 }
 
-function displayCheckout(): void{
-    const checkoutRendered: HTMLElement | null = document.querySelector('#checkout')
-
-    if (checkoutRendered) {
-        checkoutRendered.remove()
-    }
-
-    document.body.appendChild(makeCheckoutPage())
-}
-
 function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     sortMethod?: string): void {
     const catalog: HTMLElement | null = document.querySelector('#catalog')
@@ -161,6 +147,19 @@ function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
             catalog.appendChild(makeProductCard(item))
         }
     })
+}
+
+function displayCheckout(): void{
+    const checkoutRendered: HTMLElement | null = document.querySelector('#checkout')
+    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
+
+    if (checkoutRendered) {
+        checkoutRendered.remove()
+    }
+
+    if (checkout) {
+        checkout.appendChild(makeCheckoutPage())
+    }
 }
 
 function displayShoppingCart(): void {
