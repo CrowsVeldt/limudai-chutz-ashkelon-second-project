@@ -1,13 +1,15 @@
-import { 
-    makeProductCard, 
+import {
+    makeProductCard,
     makeCheckoutPage,
-    makeSortDropdownList, 
+    makeSortDropdownList,
     makeShoppingCart,
-    showToast } from './components.js'
-import { 
-    BookDetails, 
-    getStoredData, 
-    Sort, } from './util.js'
+    showToast
+} from './components.js'
+import {
+    BookDetails,
+    getStoredData,
+    Sort,
+} from './util.js'
 
 // toggle cart
 const cb: HTMLDivElement | null = document.querySelector('#cart-button')
@@ -52,7 +54,7 @@ document.addEventListener('click', (event) => {
         }
     }
 
-//  close checkout page if click outside
+    // close checkout page if click outside
     const checkout: HTMLElement | null = document.querySelector('#checkout-page')
     if (checkout && checkout.style.display !== 'none') {
         if (target && !target.classList.contains('checkout-focus')) {
@@ -138,27 +140,34 @@ function toggleCheckout(): void {
 
 function displayCatalog(list: BookDetails[] = getStoredData('catalog'),
     sortMethod?: string): void {
-    const catalog: HTMLElement | null = document.querySelector('#catalog')
-    if (catalog && catalog.hasChildNodes()) {
-        catalog.innerHTML = ''
-    }
-    list.sort(sortCatalogBy(sortMethod)).forEach((item: BookDetails) => {
-        if (catalog) {
-            catalog.appendChild(makeProductCard(item))
+    const catalogElement: HTMLElement | null = document.querySelector('#catalog')
+
+    if (catalogElement) {
+        if (catalogElement.hasChildNodes()) {
+            catalogElement.innerHTML = ''
         }
-    })
+
+        if (list.length === 0) {
+            catalogElement.innerHTML = `<h2>Nothing found</h2>`
+        } else {
+            list.sort(sortCatalogBy(sortMethod)).forEach((item: BookDetails) => {
+                catalogElement.appendChild(makeProductCard(item))
+            })
+        }
+    }
+
 }
 
-function displayCheckout(): void{
-    const checkoutRendered: HTMLElement | null = document.querySelector('#checkout')
-    const checkout: HTMLElement | null = document.querySelector('#checkout-page')
-
-    if (checkoutRendered) {
-        checkoutRendered.remove()
-    }
+function displayCheckout(): void {
+    const checkout: HTMLElement | null = document.querySelector('#checkout')
+    const checkoutPage: HTMLElement | null = document.querySelector('#checkout-page')
 
     if (checkout) {
-        checkout.appendChild(makeCheckoutPage())
+        checkout.remove()
+    }
+
+    if (checkoutPage) {
+        checkoutPage.appendChild(makeCheckoutPage())
     }
 }
 
@@ -231,7 +240,7 @@ function updateCartNumber(): void {
     }
 }
 
-function removeItemFromCheckout (title: String): void {
+function removeItemFromCheckout(title: String): void {
     let checkout: BookDetails[] = getStoredData('cart')
     const index: number = checkout.findIndex((i: BookDetails) => i.title === title)
 
@@ -267,7 +276,7 @@ function addItemToCart(deetz: BookDetails): void {
         displayShoppingCart()
     }
     updateCartNumber()
-    
+
 }
 
 function removeItemFromCart(title: string): void {
@@ -312,10 +321,10 @@ function searchProducts(input: string): void {
     displayCatalog(itemsToDisplay)
 }
 
-export { 
-    addItemToCart, 
+export {
+    addItemToCart,
     displayCatalog,
-    removeItemFromCart, 
+    removeItemFromCart,
     removeItemFromCheckout,
     toggleCheckout
 }

@@ -1,3 +1,2 @@
-// if search returns no results display a message to that effect
 // change 'dist' to 'root|docs' for deployment to Github Pages?
 // make checkout page buy button work
