@@ -91,8 +91,8 @@ function makeShoppingCart(): HTMLDivElement {
 
     const message: HTMLHeadingElement = document.createElement('h5')
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3')
-    if ((storedCartData)) {
-        let price = 0
+    if (storedCartData.length > 0) {
+        let price: number = 0
         storedCartData.forEach((item: BookDetails) => {
             price += item.pages
             message.innerHTML = `Total: ${priceFormat.format(price)}`

@@ -65,7 +65,7 @@ function makeShoppingCart() {
     });
     const message = document.createElement('h5');
     message.classList.add('cart-focus', 'text-decoration-underline', 'my-3');
-    if ((storedCartData)) {
+    if (storedCartData.length > 0) {
         let price = 0;
         storedCartData.forEach((item) => {
             price += item.pages;
