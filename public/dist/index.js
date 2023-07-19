@@ -63,7 +63,7 @@ document.addEventListener('click', (event) => {
 function fetchCatalog() {
     let catalog = [];
     if (localStorage.length === 0) {
-        fetch('/catalog.json')
+        fetch('http://localhost:3000/catalog')
             .then(response => response.json())
             .then(data => {
             data.forEach((entry) => {
@@ -73,6 +73,8 @@ function fetchCatalog() {
             // For developement:
             // displayCatalog(catalog.slice(0, 10))
             displayCatalog(catalog);
+        }).catch(err => {
+            console.error(err);
         });
     }
     else {

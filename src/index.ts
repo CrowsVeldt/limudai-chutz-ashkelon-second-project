@@ -82,7 +82,7 @@ document.addEventListener('click', (event) => {
 function fetchCatalog(): void {
     let catalog: BookDetails[] = []
     if (localStorage.length === 0) {
-        fetch('/catalog.json')
+        fetch('http://localhost:3000/catalog')
             .then(response => response.json())
             .then(data => {
                 data.forEach((entry: BookDetails) => {
@@ -92,6 +92,8 @@ function fetchCatalog(): void {
                 // For developement:
                 // displayCatalog(catalog.slice(0, 10))
                 displayCatalog(catalog)
+            }).catch(err => {
+                console.error(err)
             })
     } else {
         const storedCat: BookDetails[] = getStoredData('catalog')
