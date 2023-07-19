@@ -82,7 +82,6 @@ document.addEventListener('click', (event) => {
 function fetchCatalog(): void {
     let catalog: BookDetails[] = []
     if (localStorage.length === 0) {
-        // make this work with Render
         fetch('../catalog.json')
             .then(response => response.json())
             .then(data => {
