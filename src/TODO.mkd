@@ -1,2 +1,3 @@
 // change 'dist' to 'root|docs' for deployment to Github Pages?
 // make checkout page buy button work
+// make checkout responsive to screen size
