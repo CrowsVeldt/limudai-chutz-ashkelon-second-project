@@ -6,7 +6,7 @@ function makeProductCard(deetz) {
     card.style.width = '18rem';
     const img = document.createElement('img');
     img.className = 'card-img-top';
-    img.src = 'res/images/default.jpeg';
+    img.src = '../res/images/default.jpeg';
     img.alt = 'book';
     const cardBody = document.createElement('div');
     cardBody.className = 'card-body';
