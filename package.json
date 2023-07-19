@@ -1,5 +1,13 @@
 {
   "devDependencies": {
     "typescript": "^5.0.4"
+  },
+  "name": "second-project",
+  "description": "Second project for the Full-stack course at Limudai Chutz Ashkelon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx tsc --watch"
   }
 }
