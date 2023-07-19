@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     fetchCatalog()
 })
 
-// If page is clicked: 
+// If page is clicked:
 document.addEventListener('click', (event) => {
     // Close shopping cart if click outside
     const target = event.target as HTMLElement
@@ -82,6 +82,7 @@ document.addEventListener('click', (event) => {
 function fetchCatalog(): void {
     let catalog: BookDetails[] = []
     if (localStorage.length === 0) {
+        // make this work with Render
         fetch('../catalog.json')
             .then(response => response.json())
             .then(data => {

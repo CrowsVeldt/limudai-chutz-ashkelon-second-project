@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.6"
   },
   "name": "second-project",
   "description": "Second project for the Full-stack course at Limudai Chutz Ashkelon",
