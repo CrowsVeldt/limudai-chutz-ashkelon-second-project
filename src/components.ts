@@ -18,7 +18,7 @@ function makeProductCard(deetz: BookDetails): HTMLDivElement {
 
     const img: HTMLImageElement = document.createElement('img')
     img.className = 'card-img-top'
-    img.src = '../res/images/default.jpeg'
+    img.src = 'res/images/default.jpeg'
     img.alt = 'book'
 
     const cardBody: HTMLDivElement = document.createElement('div')
