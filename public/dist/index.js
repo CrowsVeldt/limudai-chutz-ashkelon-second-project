@@ -63,7 +63,7 @@ document.addEventListener('click', (event) => {
 function fetchCatalog() {
     let catalog = [];
     if (localStorage.length === 0) {
-        fetch('../catalog.json')
+        fetch('/catalog.json')
             .then(response => response.json())
             .then(data => {
             data.forEach((entry) => {
